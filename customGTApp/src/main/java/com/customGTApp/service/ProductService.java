@@ -1,5 +1,6 @@
 package com.customGTApp.service;
 
+import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public interface ProductService {
      * @param id the id of the product we want to delete
      */
     void deleteProductById(Long id);
+
+    List<Photo> findPhotosByProductId(Long productId);
 }

@@ -1,5 +1,6 @@
 package com.customGTApp.controller;
 
+import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,15 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.findAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    /**
+     * Method to get all the photos of a product based on method added in PhotoRepo
+     */
+    @GetMapping("/{productId}/photos")
+    public ResponseEntity<List<Photo>> getAllPhotosByProductId(@PathVariable("productId") Long productId) {
+        List<Photo> photos = this.productService.findPhotosByProductId(productId);
+        return new ResponseEntity<>(photos, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")

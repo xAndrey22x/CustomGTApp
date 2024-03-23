@@ -2,6 +2,9 @@ package com.customGTApp.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Product model which will show how we keep information about our products.
  */
@@ -24,7 +27,8 @@ public class Product {
     private float price;
     @Column(nullable = false)
     private String carModel;
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Photo> photos = new ArrayList<>();
 
     public Product(){
 
@@ -72,4 +76,20 @@ public class Product {
     public void setCarModel(String carModel) {
         this.carModel = carModel;
     }
+
+
+    public void addPhoto(Photo photo) {
+        this.photos.add(photo);
+        photo.setProduct(this);
+    }
+
+    public void removePhoto(Photo photo) {
+        this.photos.remove(photo);
+        photo.setProduct(null);
+    }
+
+    public List<Photo> getPhotos(){
+        return this.photos;
+    }
+
 }
