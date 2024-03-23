@@ -2,9 +2,16 @@ package com.customGTApp.model;
 
 import jakarta.persistence.*;
 
+/**
+ * Product model which will show how we keep information about our products.
+ */
 @Entity
 public class Product {
 
+    /**
+     * 'name' for then name of the product we have also 'description', 'price' and 'carModel' which will hold the name
+     * for the car this product it's designed.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

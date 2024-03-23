@@ -8,9 +8,15 @@ import com.customGTApp.service.ProductService;
 
 import java.util.List;
 
+/**
+ * The implementation of all the methods described in the interface 'ProductService'
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    /**
+     * We are using the ProductRepo interface for having all the basic CRUD operations in a DataBase.
+     */
     private final ProductRepo productRepo;
 
     @Autowired
