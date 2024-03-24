@@ -56,7 +56,9 @@ public class ProductController {
     @GetMapping("/find/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
         Product product = this.productService.findProductById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        if(product != null)
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
@@ -68,7 +70,9 @@ public class ProductController {
     @PutMapping("/update")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productReceived) {
         Product product = this.productService.updateProduct(productReceived);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        if (product != null)
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete/{id}")

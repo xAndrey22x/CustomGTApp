@@ -1,5 +1,6 @@
 package com.customGTApp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class Product {
     private float price;
     @Column(nullable = false)
     private String carModel;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
     private List<Photo> photos = new ArrayList<>();
 
     public Product(){

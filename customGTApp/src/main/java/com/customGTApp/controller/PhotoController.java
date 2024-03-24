@@ -29,27 +29,25 @@ public class PhotoController {
     @PostMapping("/add/{productId}")
     public ResponseEntity<Photo> addPhoto(@PathVariable("productId") Long productId, @RequestBody Photo photo) {
         Photo photo1 = photoService.addPhotoToProduct(productId, photo);
-        if (photo1 != null) {
-            return ResponseEntity.ok(photo1);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        if (photo1 != null)
+            return new ResponseEntity<>(photo1, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/update")
     public ResponseEntity<Photo> updatePhoto(@RequestBody Photo photo){
         Photo photo1 = photoService.updatePhoto(photo);
-        if (photo1 != null) {
-            return ResponseEntity.ok(photo1);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        if (photo1 != null)
+            return new ResponseEntity<>(photo1, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete/{photoId}")
     public ResponseEntity<?> deletePhoto(@PathVariable Long photoId) {
         photoService.deletePhoto(photoId);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

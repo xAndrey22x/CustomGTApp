@@ -3,6 +3,7 @@ package com.customGTApp.service.impl;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.repository.PhotoRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.customGTApp.repository.ProductRepo;
@@ -52,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
      * @return the updated product or null
      */
     @Override
+    @Transactional
     public Product updateProduct(Product p) {
         Long id = p.getId();
         Optional<Product> productOptional = productRepo.findById(id);

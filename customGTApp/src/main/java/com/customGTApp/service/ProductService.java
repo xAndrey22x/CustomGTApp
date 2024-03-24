@@ -43,5 +43,10 @@ public interface ProductService {
      */
     void deleteProductById(Long id);
 
+    /**
+     * Method to list all the photos of a product
+     * @param productId the id of a product we want to list his photos
+     * @return the photos list of the product
+     */
     List<Photo> findPhotosByProductId(Long productId);
 }

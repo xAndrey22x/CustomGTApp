@@ -1,5 +1,6 @@
 package com.customGTApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -13,11 +14,11 @@ public class Photo {
     private String url;
     /**
      * The functionality of ManyToOne implemented between Photo and Product
-     * The column productId acts as foreign key to the product primary key id
+     * The column productId acts as foreign key to the product primary key 'id'
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
-    @JsonIgnore
+    @JsonBackReference
     private Product product;
 
     public Photo() {
