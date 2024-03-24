@@ -23,7 +23,7 @@ public class ServiceProd {
     private float price;
 
     @OneToMany(mappedBy = "serviceProd", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "serviceProd-photo")
     private List<Photo> photos = new ArrayList<>();
 
     public ServiceProd(){

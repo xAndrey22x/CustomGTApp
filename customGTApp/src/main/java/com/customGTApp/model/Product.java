@@ -28,6 +28,8 @@ public class Product {
     private float price;
     @Column(nullable = false)
     private String carModel;
+    @Column(nullable = false)
+    private int quantity;
     /**
      * OneToMany connection between the product and photos. In the photos list we will hold all the photos connected
      * between the primary key of a product 'id' and the foreign key of photo 'productId'.
@@ -35,18 +37,19 @@ public class Product {
      * product, so the JSON will know this is the parent.
      */
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value = "product-photo")
     private List<Photo> photos = new ArrayList<>();
 
     public Product(){
 
     }
 
-    public Product(String name, String description, float price, String carModel) {
+    public Product(String name, String description, float price, String carModel, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.carModel = carModel;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -111,4 +114,11 @@ public class Product {
         return this.photos;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

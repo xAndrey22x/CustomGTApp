@@ -24,7 +24,7 @@ public class Photo {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
-    @JsonBackReference
+    @JsonBackReference(value = "product-photo")
     private Product product;
 
     /**
@@ -32,7 +32,7 @@ public class Photo {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "serviceId")
-    @JsonBackReference
+    @JsonBackReference(value = "serviceProd-photo")
     private ServiceProd serviceProd;
 
     public Photo() {

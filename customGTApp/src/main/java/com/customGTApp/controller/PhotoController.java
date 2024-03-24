@@ -13,8 +13,8 @@ import java.util.List;
 
 /**
  * /photo/all - list all the photos
- * /photo/add/{productId} - add a photo to a product based on his id
- * /photo/add/{serviceId} - add a photo to a service based on his id
+ * /photo/addProduct/{productId} - add a photo to a product based on his id
+ * /photo/addService/{serviceId} - add a photo to a service based on his id
  * /photo/updateProduct - update photo of a product
  * /photo/updateService - update photo of a service
  * /photo/delete/{photoId} - delete photo based on the photo id
@@ -34,7 +34,7 @@ public class PhotoController {
         return new ResponseEntity<>(photos, HttpStatus.OK);
     }
 
-    @PostMapping("/add/{productId}")
+    @PostMapping("/addProduct/{productId}")
     public ResponseEntity<Photo> addPhotoProduct(@PathVariable("productId") Long productId, @RequestBody Photo photo) {
         Photo photo1 = photoService.addPhotoToProduct(productId, photo);
         if (photo1 != null)
@@ -43,7 +43,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/add/{serviceId}")
+    @PostMapping("/addService/{serviceId}")
     public ResponseEntity<Photo> addPhotoService(@PathVariable("serviceId") Long productId, @RequestBody Photo photo) {
         Photo photo1 = photoService.addPhotoToService(productId, photo);
         if (photo1 != null)

@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     /**
-     * Method to get all the photos of a product based on method added in PhotoRepo
+     * Method to get all the photos of a product based on the list of photos from a product
      */
     @GetMapping("/{productId}/photos")
     public ResponseEntity<List<Photo>> getAllPhotosByProductId(@PathVariable("productId") Long productId) {

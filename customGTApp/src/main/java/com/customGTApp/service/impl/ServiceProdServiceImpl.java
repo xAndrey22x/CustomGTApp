@@ -16,12 +16,10 @@ import java.util.Optional;
 public class ServiceProdServiceImpl implements ServiceProdService {
 
     private final ServiceProdRepo serviceProdRepo;
-    private final PhotoRepo photoRepo;
 
     @Autowired
     public ServiceProdServiceImpl(ServiceProdRepo serviceProdRepo, PhotoRepo photoRepo) {
         this.serviceProdRepo = serviceProdRepo;
-        this.photoRepo = photoRepo;
     }
 
     @Override
@@ -57,10 +55,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     @Transactional
     public List<Photo> getAllServicePhotos(Long serviceId) {
         Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
-        if(serviceProd.isPresent()){
-            return this.photoRepo.findByServiceProdId(serviceId);
-        }
-        return null;
+        return serviceProd.map(ServiceProd::getPhotos).orElse(null);
     }
 
 }

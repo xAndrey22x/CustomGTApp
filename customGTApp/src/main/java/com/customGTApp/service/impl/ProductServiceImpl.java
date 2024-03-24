@@ -22,12 +22,10 @@ public class ProductServiceImpl implements ProductService {
      * We are using the ProductRepo interface for having all the basic CRUD operations in a DataBase.
      */
     private final ProductRepo productRepo;
-    private final PhotoRepo photoRepo;
 
     @Autowired
     public ProductServiceImpl(ProductRepo productRepo, PhotoRepo photoRepo) {
         this.productRepo = productRepo;
-        this.photoRepo = photoRepo;
     }
 
 
@@ -58,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         Long id = p.getId();
         Optional<Product> productOptional = productRepo.findById(id);
         if(productOptional.isPresent()){
-            productRepo.save(p);
+            return this.productRepo.save(p);
         }
         return null;
     }
@@ -72,8 +70,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public List<Photo> findPhotosByProductId(Long productId) {
         Optional<Product> product = this.productRepo.findById(productId);
-        if(product.isPresent())
-            return this.photoRepo.findByProductId(productId);
-        return null;
+        return product.map(Product::getPhotos).orElse(null);
     }
 }
