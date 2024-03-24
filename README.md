@@ -7,10 +7,8 @@
 - Detailing interior and exterior with different materials.
 - Several additional things.
 
-## Data Base Diagram
-
 <p aling="center">
-  <img src = "https://github.com/xAndrey22x/CustomGTApp/assets/126805939/78dfbf06-dcd1-47b2-bb83-417c82106934" width = "600">
+  <img src = "https://github.com/xAndrey22x/CustomGTApp/assets/126805939/7d021867-a434-4ccf-be2e-22091f9d2e7f" width = "600">
 </p>
 
 ### Relantionships between tables:
