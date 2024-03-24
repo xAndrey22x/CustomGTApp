@@ -11,6 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * /photo/all - list all the photos
+ * /photo/add/{productId} - add a photo to a product based on his id
+ * /photo/add/{serviceId} - add a photo to a service based on his id
+ * /photo/updateProduct - update photo of a product
+ * /photo/updateService - update photo of a service
+ * /photo/delete/{photoId} - delete photo based on the photo id
+ */
 @RestController
 @RequestMapping("/photo")
 public class PhotoController {

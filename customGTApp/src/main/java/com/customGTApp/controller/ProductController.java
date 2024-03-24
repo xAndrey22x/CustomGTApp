@@ -13,6 +13,12 @@ import java.util.List;
 /**
  * Implementation of the controller which will hold the bridge between our backend part and frontend part of the project.
  * Using HTTP mapping annotations, so we can create a link for a wanted operation.
+ * /product/all - list all the products.
+ * /product/{productId}/photos - list all the photos of a product based on the product id.
+ * /product/find/{id} - find a product based on the id provided
+ * /product/add - add a product
+ * /product/update - update a product
+ * /product/delete/{id} - delete a product based on the id provided
  */
 
 @RestController
