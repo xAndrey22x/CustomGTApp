@@ -50,7 +50,9 @@ public class ProductController {
     @GetMapping("/{productId}/photos")
     public ResponseEntity<List<Photo>> getAllPhotosByProductId(@PathVariable("productId") Long productId) {
         List<Photo> photos = this.productService.findPhotosByProductId(productId);
-        return new ResponseEntity<>(photos, HttpStatus.OK);
+        if (photos != null)
+            return new ResponseEntity<>(photos, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/find/{id}")

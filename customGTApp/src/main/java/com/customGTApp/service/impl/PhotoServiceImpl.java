@@ -2,8 +2,10 @@ package com.customGTApp.service.impl;
 
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
+import com.customGTApp.model.ServiceProd;
 import com.customGTApp.repository.PhotoRepo;
 import com.customGTApp.repository.ProductRepo;
+import com.customGTApp.repository.ServiceProdRepo;
 import com.customGTApp.service.PhotoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ public class PhotoServiceImpl implements PhotoService {
 
     private final PhotoRepo photoRepo;
     private final ProductRepo productRepo;
+    private final ServiceProdRepo serviceProdRepo;
 
     @Autowired
-    public PhotoServiceImpl(PhotoRepo photoRepo, ProductRepo productRepo){
+    public PhotoServiceImpl(PhotoRepo photoRepo, ProductRepo productRepo, ServiceProdRepo serviceProdRepo){
         this.photoRepo = photoRepo;
         this.productRepo = productRepo;
+        this.serviceProdRepo = serviceProdRepo;
     }
 
     @Override
@@ -48,16 +52,38 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     /**
-     * Update the photo information only if the photo already exists in dataBase
+     * Same as the method for adding to Product
      */
     @Override
     @Transactional
-    public Photo updatePhoto(Photo photo) {
+    public Photo addPhotoToService(Long serviceProdId, Photo photo) {
+        Optional<ServiceProd> serviceProd = serviceProdRepo.findById(serviceProdId);
+        if(serviceProd.isPresent()){
+            photo.setServiceProd(serviceProd.get());
+            return this.photoRepo.save(photo);
+        }
+
+        return null;
+    }
+
+    /**
+     * Update the photo information only if the photo already exists in dataBase and also don't forget the reference
+     * for product or service id.
+     */
+    @Override
+    @Transactional
+    public Photo updatePhoto(Photo photo, boolean isProduct) {
         long photoId = photo.getId();
         Optional<Photo> photoOptional = photoRepo.findById(photoId);
         if(photoOptional.isPresent()) {
-            Product product = photoOptional.get().getProduct();
-            photo.setProduct(product);
+            if(isProduct) {
+                Product product = photoOptional.get().getProduct();
+                photo.setProduct(product);
+            }
+            else {
+                ServiceProd serviceProd = photoOptional.get().getServiceProd();
+                photo.setServiceProd(serviceProd);
+            }
             return photoRepo.save(photo);
         }
         return null;

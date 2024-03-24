@@ -69,7 +69,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<Photo> findPhotosByProductId(Long productId) {
-        return this.photoRepo.findByProductId(productId);
+        Optional<Product> product = this.productRepo.findById(productId);
+        if(product.isPresent())
+            return this.photoRepo.findByProductId(productId);
+        return null;
     }
 }

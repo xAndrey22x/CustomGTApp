@@ -12,4 +12,9 @@ public interface PhotoRepo extends JpaRepository<Photo, Long> {
      * @return the photos of the product
      */
     List<Photo> findByProductId(Long productId);
+
+    /**
+     * Also to find the photos of a service.
+     */
+    List<Photo> findByServiceProdId(Long serviceId);
 }
