@@ -16,7 +16,7 @@ The application has a wide range of features aimed at reaching to every aspect o
 - **Additional Accessories**: Explore a wealth of extra accessories to further personalize and highlight your car's originality.
 
 <p align="center">
-  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/c37b99d0-18f5-4720-8286-b87252ee5532" width="600">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/29a4ec74-7dd5-4cc1-9d8f-b17314d291a5" width="600">
 </p>
 
 ### Relationships between Tables
@@ -26,8 +26,8 @@ A deep understanding of our application's data model is essential to grasp the i
 - **Product to Photo**: One-to-Many. This relationship allows a single product to be linked with multiple photos, showcasing it from various perspectives and details.
 - **Service to Photo**: One-to-Many. In a similar vein, a single service can be represented by multiple photos, providing a visual narrative of the service process or its outcomes.
 - **OrderItem to Order**: Many-to-One. This facilitates the inclusion of multiple items within a single order, enabling a comprehensive customization package in one transaction.
-- **OrderItem to Product**: One-to-One. Each order item corresponds to a distinct product, ensuring specificity in purchases.
-- **OrderItem to Service**: One-to-One. Likewise, each order item can also represent a distinct service, allowing for detailed customization services.
+- **OrderItem to Product**: One-to-Many. Each order item corresponds to a distinct product, ensuring specificity in purchases, also multiple products can correspond to different order items.
+- **OrderItem to Service**: One-to-Many. Likewise, each order item can also represent a distinct service, allowing for detailed customization services, also multiple services can correspond to different order items.
 
 ## Implementation Plan
 
