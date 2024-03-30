@@ -26,6 +26,13 @@ public class ServiceProd {
     @JsonManagedReference(value = "serviceProd-photo")
     private List<Photo> photos = new ArrayList<>();
 
+    /**
+     * OneToOne relation between a product and an item that was chosen to buy
+     */
+    @OneToOne(mappedBy = "serviceProd", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference(value = "serviceProd-orderItem")
+    private OrderItem orderItem;
+
     public ServiceProd(){
 
     }
@@ -76,5 +83,13 @@ public class ServiceProd {
     public void removePhoto(Photo photo){
         this.photos.remove(photo);
         photo.setServiceProd(null);
+    }
+
+    public OrderItem getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
     }
 }

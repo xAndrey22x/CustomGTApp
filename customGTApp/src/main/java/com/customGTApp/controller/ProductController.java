@@ -2,6 +2,7 @@ package com.customGTApp.controller;
 
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
+import com.customGTApp.service.ProductService;
 import com.customGTApp.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ProductController {
     /**
      * The service which holds our logic for the Products.
      */
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     @Autowired
     public ProductController(ProductServiceImpl productService) {

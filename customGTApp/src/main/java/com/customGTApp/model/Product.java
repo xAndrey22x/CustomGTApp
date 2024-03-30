@@ -40,6 +40,13 @@ public class Product {
     @JsonManagedReference(value = "product-photo")
     private List<Photo> photos = new ArrayList<>();
 
+    /**
+     * OneToOne relation between a product and an item that was chosen for buy
+     */
+    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "product-orderItem")
+    private OrderItem orderItem;
+
     public Product(){
 
     }
@@ -120,5 +127,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public OrderItem getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
     }
 }

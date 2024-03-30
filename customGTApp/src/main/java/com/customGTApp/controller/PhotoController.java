@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/photo")
 public class PhotoController {
-    private final PhotoServiceImpl photoService;
+    private final PhotoService photoService;
 
     public PhotoController(PhotoServiceImpl photoService) {
         this.photoService = photoService;

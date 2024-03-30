@@ -2,6 +2,7 @@ package com.customGTApp.controller;
 
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.ServiceProd;
+import com.customGTApp.service.ServiceProdService;
 import com.customGTApp.service.impl.ServiceProdServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/service")
 public class ServiceProdController {
 
-    private final ServiceProdServiceImpl serviceProdService;
+    private final ServiceProdService serviceProdService;
 
     @Autowired
     public ServiceProdController(ServiceProdServiceImpl serviceProdService) {

@@ -1,4 +1,4 @@
-# Custom GT Application
+# Custom GT Application ![GitHub](https://img.shields.io/github/license/xAndrey22x/CustomGTApp) ![GitHub stars](https://img.shields.io/github/stars/xAndrey22x/CustomGTApp) ![GitHub forks](https://img.shields.io/github/forks/xAndrey22x/CustomGTApp)
 
 ## Introduction
 
@@ -16,7 +16,7 @@ The application has a wide range of features aimed at reaching to every aspect o
 - **Additional Accessories**: Explore a wealth of extra accessories to further personalize and highlight your car's originality.
 
 <p align="center">
-  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/7d021867-a434-4ccf-be2e-22091f9d2e7f" width="600">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/c37b99d0-18f5-4720-8286-b87252ee5532" width="600">
 </p>
 
 ### Relationships between Tables
