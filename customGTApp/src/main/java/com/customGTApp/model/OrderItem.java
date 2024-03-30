@@ -1,19 +1,20 @@
 package com.customGTApp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 /**
  * Implement the table for keeping the items that were ordered
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    @Column(nullable = false)
     private int quantity;
     @Column(nullable = false)
     private float price;
@@ -21,26 +22,24 @@ public class OrderItem {
     /**
      * Relation between the product table and this table
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId")
-    @JsonBackReference(value = "product-orderItem")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "productId", referencedColumnName = "id")
     private Product product;
 
     /**
      * Relation between services table.
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "serviceId")
-    @JsonBackReference(value = "serviceProd-orderItem")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "serviceId", referencedColumnName = "id")
     private ServiceProd serviceProd;
 
     /**
      * Relation between an Order and this item
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderId", nullable = false)
-    @JsonBackReference(value = "orderClient-orderItem")
+    @JoinColumn(name = "orderId")
     private OrderClient orderClient;
+
 
     public OrderItem(){ }
 

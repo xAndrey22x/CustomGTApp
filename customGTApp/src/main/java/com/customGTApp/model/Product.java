@@ -1,6 +1,7 @@
 package com.customGTApp.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
  * Product model which will show how we keep information about our products.
  */
 @Entity
+// Resolve the bidirectional problem
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
 
     /**
@@ -37,15 +40,7 @@ public class Product {
      * product, so the JSON will know this is the parent.
      */
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference(value = "product-photo")
     private List<Photo> photos = new ArrayList<>();
-
-    /**
-     * OneToOne relation between a product and an item that was chosen for buy
-     */
-    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "product-orderItem")
-    private OrderItem orderItem;
 
     public Product(){
 
@@ -129,11 +124,4 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public OrderItem getOrderItem() {
-        return orderItem;
-    }
-
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
-    }
 }

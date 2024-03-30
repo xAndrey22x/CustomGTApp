@@ -1,6 +1,8 @@
 package com.customGTApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
  * Service model of our database who will hold information about our services.
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ServiceProd {
 
     @Id
@@ -23,15 +26,7 @@ public class ServiceProd {
     private float price;
 
     @OneToMany(mappedBy = "serviceProd", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference(value = "serviceProd-photo")
     private List<Photo> photos = new ArrayList<>();
-
-    /**
-     * OneToOne relation between a product and an item that was chosen to buy
-     */
-    @OneToOne(mappedBy = "serviceProd", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference(value = "serviceProd-orderItem")
-    private OrderItem orderItem;
 
     public ServiceProd(){
 
@@ -85,11 +80,4 @@ public class ServiceProd {
         photo.setServiceProd(null);
     }
 
-    public OrderItem getOrderItem() {
-        return orderItem;
-    }
-
-    public void setOrderItem(OrderItem orderItem) {
-        this.orderItem = orderItem;
-    }
 }

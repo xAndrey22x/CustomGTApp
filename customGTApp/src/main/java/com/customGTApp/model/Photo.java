@@ -1,14 +1,13 @@
 package com.customGTApp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 /**
  * Photo model of our database
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,6 @@ public class Photo {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
-    @JsonBackReference(value = "product-photo")
     private Product product;
 
     /**
@@ -32,7 +30,6 @@ public class Photo {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "serviceId")
-    @JsonBackReference(value = "serviceProd-photo")
     private ServiceProd serviceProd;
 
     public Photo() {
