@@ -3,7 +3,10 @@ package com.customGTApp.service;
 import com.customGTApp.model.Photo;
 
 import java.util.List;
-
+/**
+ * PhotoService interface that will be implemented by PhotoServiceImpl and other classes,
+ * making it easier to manage the Photo model. Also, making the code more readable and easier to maintain.
+ */
 public interface PhotoService {
     List<Photo> findAllPhotos();
 

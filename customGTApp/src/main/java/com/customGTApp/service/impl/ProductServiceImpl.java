@@ -24,22 +24,33 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
 
     @Autowired
-    public ProductServiceImpl(ProductRepo productRepo, PhotoRepo photoRepo) {
+    public ProductServiceImpl(ProductRepo productRepo) {
         this.productRepo = productRepo;
     }
 
-
+    /**
+     * Method to get all the products
+     * @return list of all products
+     */
     @Override
     public List<Product> findAllProducts() {
         return this.productRepo.findAll();
     }
-
+    /**
+     * Method to get a product based on the id
+     * @param id the product id
+     * @return the product
+     */
     @Override
     public Product findProductById(Long id) {
         return this.productRepo.findById(id).orElse(null);
     }
 
-
+    /**
+     * Method to add a new product
+     * @param p the product we want to add
+     * @return the added product
+     */
     @Override
     public Product addProduct(Product p) {
         return this.productRepo.save(p);
@@ -60,12 +71,19 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
-
+    /**
+     * Method to delete a product based on the id
+     * @param id the product id
+     */
     @Override
     public void deleteProductById(Long id) {
         this.productRepo.deleteById(id);
     }
-
+    /**
+     * Method to get all the photos of a product
+     * @param productId the product id
+     * @return list of all photos of the product
+     */
     @Override
     @Transactional
     public List<Photo> findPhotosByProductId(Long productId) {

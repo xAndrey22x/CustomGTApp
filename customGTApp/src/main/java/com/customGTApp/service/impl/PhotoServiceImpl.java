@@ -17,6 +17,9 @@ import java.util.Optional;
 @Service
 public class PhotoServiceImpl implements PhotoService {
 
+    /**
+     * All the repositories needed to handle the CRUD operations.
+     */
     private final PhotoRepo photoRepo;
     private final ProductRepo productRepo;
     private final ServiceProdRepo serviceProdRepo;
@@ -28,6 +31,10 @@ public class PhotoServiceImpl implements PhotoService {
         this.serviceProdRepo = serviceProdRepo;
     }
 
+    /**
+     * Method to get all the photos
+     * @return list of all photos
+     */
     @Override
     public List<Photo> findAllPhotos() {
         return this.photoRepo.findAll();
@@ -88,7 +95,10 @@ public class PhotoServiceImpl implements PhotoService {
         }
         return null;
     }
-
+    /**
+     * Method to delete a photo based on the id
+     * @param photoId the photo id
+     */
     @Override
     public void deletePhoto(Long photoId) {
         photoRepo.deleteById(photoId);

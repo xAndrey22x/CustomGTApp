@@ -1,10 +1,8 @@
 package com.customGTApp.controller;
 
 import com.customGTApp.model.Photo;
-import com.customGTApp.model.Product;
 import com.customGTApp.service.PhotoService;
 import com.customGTApp.service.impl.PhotoServiceImpl;
-import com.customGTApp.service.impl.ProductServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +20,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/photo")
 public class PhotoController {
+
+    /**
+     * PhotoService object to handle the photo operations and to be able to use the methods in
+     * the service layer
+     */
     private final PhotoService photoService;
 
     public PhotoController(PhotoServiceImpl photoService) {
         this.photoService = photoService;
     }
-
+    /**
+     * Method to get all the photos
+     * @return list of all photos
+     */
     @GetMapping("/all")
     public ResponseEntity<List<Photo>> getAllPhotos() {
         List<Photo> photos = photoService.findAllPhotos();
         return new ResponseEntity<>(photos, HttpStatus.OK);
     }
-
+    /**
+     * Method to add a photo to a product
+     * @param productId the product id
+     * @param photo the photo we want to add
+     * @return the added photo
+     */
     @PostMapping("/addProduct/{productId}")
     public ResponseEntity<Photo> addPhotoProduct(@PathVariable("productId") Long productId, @RequestBody Photo photo) {
         Photo photo1 = photoService.addPhotoToProduct(productId, photo);
@@ -42,7 +53,11 @@ public class PhotoController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to add a photo to a service
+     * @param photo the photo we want to add
+     * @return the added photo
+     */
     @PostMapping("/addService/{serviceId}")
     public ResponseEntity<Photo> addPhotoService(@PathVariable("serviceId") Long productId, @RequestBody Photo photo) {
         Photo photo1 = photoService.addPhotoToService(productId, photo);
@@ -51,7 +66,11 @@ public class PhotoController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to update the photo of a product
+     * @param photo the photo we want to update
+     * @return the updated photo
+     */
     @PutMapping("/updateProduct")
     public ResponseEntity<Photo> updatePhotoProduct(@RequestBody Photo photo){
         Photo photo1 = photoService.updatePhoto(photo, true);
@@ -60,7 +79,11 @@ public class PhotoController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to update the photo of a service
+     * @param photo the photo we want to update
+     * @return the updated photo
+     */
     @PutMapping("/updateService")
     public ResponseEntity<Photo> updatePhotoService(@RequestBody Photo photo){
         Photo photo1 = photoService.updatePhoto(photo, false);
@@ -69,7 +92,11 @@ public class PhotoController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to delete a photo
+     * @param photoId the photo id
+     * @return status of the operation
+     */
     @DeleteMapping("/delete/{photoId}")
     public ResponseEntity<?> deletePhoto(@PathVariable Long photoId) {
         photoService.deletePhoto(photoId);

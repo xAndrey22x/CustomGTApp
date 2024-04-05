@@ -19,6 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/order")
 public class OrderClientController {
+    /**
+     * OrderClientService object to handle the orderClient operations and to be able to use the methods in
+     * the service layer
+     */
     private final OrderClientService orderClientService;
 
     @Autowired
@@ -26,16 +30,30 @@ public class OrderClientController {
         this.orderClientService = orderClientService;
     }
 
+    /**
+     * Method to get all the orders
+     * @return list of all orders
+     */
     @GetMapping("/all")
     public ResponseEntity<List<OrderClient>> findAllOrder(){
         return new ResponseEntity<>(this.orderClientService.findAllOrders(), HttpStatus.OK);
     }
 
+    /**
+     * Method to add a new order
+     * @param orderClient the order we want to add
+     * @return the added order
+     */
     @PostMapping("/add")
     public ResponseEntity<OrderClient> addOrder(@RequestBody OrderClient orderClient){
         return new ResponseEntity<>(this.orderClientService.addOrder(orderClient), HttpStatus.OK);
     }
 
+    /**
+     * Method to update an order
+     * @param orderClient the order we want to update
+     * @return the updated order
+     */
     @PutMapping("/update")
     public ResponseEntity<OrderClient> updateOder(@RequestBody OrderClient orderClient){
         OrderClient orderClient1 = this.orderClientService.updateOrder(orderClient);
@@ -43,7 +61,11 @@ public class OrderClientController {
             return new ResponseEntity<>(orderClient1, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to delete an order
+     * @param id the id of the order we want to delete
+     * @return status of the operation
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteOrder(@PathVariable("id") Long id){
         this.orderClientService.deleteOrder(id);
