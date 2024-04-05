@@ -15,13 +15,23 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orderItem")
 public class OrderItemController {
+    /**
+     * OrderItemService object to handle the orderItem operations and to be able to use the methods in
+     * the service layer
+     */
     private final OrderItemService orderItemService;
 
     @Autowired
     public OrderItemController(OrderItemServiceImpl orderItemService) {
         this.orderItemService = orderItemService;
     }
-
+    /**
+     * Method to add a product to an order
+     * @param productId the product id
+     * @param orderId the order id
+     * @param orderItem the order item
+     * @return the order item
+     */
     @PostMapping("/addProduct/{productId}/{orderId}")
     public ResponseEntity<OrderItem> addProductToOrder(@PathVariable("productId") Long productId, @PathVariable("orderId")
                                                        Long orderId, @RequestBody OrderItem orderItem){
@@ -30,7 +40,13 @@ public class OrderItemController {
             return new ResponseEntity<>(orderItem, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to add a service to an order
+     * @param serviceId the service id
+     * @param orderId the order id
+     * @param orderItem the order item
+     * @return the order item
+     */
     @PostMapping("addService/{serviceId}/{orderId}")
     public ResponseEntity<OrderItem> addServiceToOrder(@PathVariable("serviceId") Long serviceId, @PathVariable("orderId")
     Long orderId, @RequestBody OrderItem orderItem){

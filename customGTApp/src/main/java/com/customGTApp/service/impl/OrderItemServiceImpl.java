@@ -16,6 +16,9 @@ import java.util.Optional;
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
+    /**
+     * All the repositories needed to handle the CRUD operations.
+     */
     private final OrderItemRepo orderItemRepo;
     private final ProductRepo productRepo;
     private final OrderClientRepo orderClientRepo;
@@ -27,7 +30,13 @@ public class OrderItemServiceImpl implements OrderItemService {
         this.orderClientRepo = orderClientRepo;
         this.serviceProdRepo = serviceProdRepo;
     }
-
+    /**
+     * Method to add a product to an order item in the database only if the product and the order exist.
+     * @param productId the product id
+     * @param orderId the order id
+     * @param orderItem the order item
+     * @return the order item
+     */
     @Override
     public OrderItem addProductToOrder(Long productId, Long orderId, OrderItem orderItem) {
         Optional<Product> product = this.productRepo.findById(productId);
@@ -41,7 +50,13 @@ public class OrderItemServiceImpl implements OrderItemService {
         }
         return null;
     }
-
+    /**
+     * Method to add a service to an order item in the database only if the service and the order exist.
+     * @param serviceId the service id
+     * @param orderId the order id
+     * @param orderItem the order item
+     * @return the order item
+     */
     @Override
     public OrderItem addServiceToOrder(Long serviceId, Long orderId, OrderItem orderItem) {
         Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);

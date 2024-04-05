@@ -11,7 +11,10 @@ import java.util.List;
  * Product model which will show how we keep information about our products.
  */
 @Entity
-// Resolve the bidirectional problem
+/**
+ * Resolve the bidirectional problem between the product and the photo. The JsonIdentityInfo will fix the problem where
+ * we will have an infinite recursion between the product and the photo.
+ */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
 
@@ -36,8 +39,6 @@ public class Product {
     /**
      * OneToMany connection between the product and photos. In the photos list we will hold all the photos connected
      * between the primary key of a product 'id' and the foreign key of photo 'productId'.
-     * Also, JsonManaged fix the problem where from recursion we will have an infinite connection between a photo and a
-     * product, so the JSON will know this is the parent.
      */
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();

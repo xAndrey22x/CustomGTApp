@@ -27,7 +27,8 @@ import java.util.List;
 public class ProductController {
 
     /**
-     * The service which holds our logic for the Products.
+     * ProductService object to handle the product operations and to be able to use the methods in
+     * the service layer
      */
     private final ProductService productService;
 
@@ -61,7 +62,9 @@ public class ProductController {
             return new ResponseEntity<>(photos, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to find a product based on the id provided
+     */
     @GetMapping("/find/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
         Product product = this.productService.findProductById(id);
@@ -69,13 +72,17 @@ public class ProductController {
             return new ResponseEntity<>(product, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to add a product
+     */
     @PostMapping("/add")
     public ResponseEntity<Product> addProduct(@RequestBody Product productReceived) {
         Product product = this.productService.addProduct(productReceived);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
+    /**
+     * Method to update a product
+     */
     @PutMapping("/update")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productReceived) {
         Product product = this.productService.updateProduct(productReceived);
@@ -83,7 +90,9 @@ public class ProductController {
             return new ResponseEntity<>(product, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    /**
+     * Method to delete a product based on the id provided
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable("id") Long id) {
         this.productService.deleteProductById(id);

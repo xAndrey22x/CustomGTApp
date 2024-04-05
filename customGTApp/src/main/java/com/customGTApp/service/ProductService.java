@@ -6,7 +6,8 @@ import com.customGTApp.model.Product;
 import java.util.List;
 
 /**
- * The contract our product service need to implement so the application works correctly
+ * The contract our product service need to implement so the application works correctly and the code is more organized.
+ * This interface will be implemented by ProductServiceImpl and other classes.
  */
 
 public interface ProductService {
