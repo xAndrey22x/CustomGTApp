@@ -42,6 +42,13 @@ During this stage, we have only focused on developing the server-side logic by l
   - Updating details of the offerings as needed, ensuring the information remains current and accurate.
   - Deleting offerings that are no longer available or relevant.
 - **API Development**: Developing a comprehensive set of APIs to facilitate communication between the frontend and backend, ensuring data is transmitted securely and efficiently.
+- **New futures using the Observer Design Pattern**: Added a new table with the client's details, including whether or not the order has been confirmed and whether the client is registered to our newsletter. The Observer is used to implement all of this, and the clients will be informed via the appropriate actions in the DataBase.
+<p align="left">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/e9da2a4f-1672-4901-ab94-572ffd68cad1" width="250">
+</p>
+
+- **OrderOptions to OrderClient**: One-to-One. Every order of a client has the options for newsletter and order status.
+
 
 ### Frontend Development
 
