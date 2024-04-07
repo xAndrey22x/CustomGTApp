@@ -1,10 +1,12 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.observerService.ClientProductObserver;
 import com.customGTApp.observerService.impl.ClientNotificationService;
+import com.customGTApp.repository.OrderClientRepo;
 import com.customGTApp.repository.OrderItemRepo;
 import com.customGTApp.service.observerManagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
@@ -29,23 +31,19 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     private final ProductRepo productRepo;
     private final OrderItemRepo orderItemRepo;
+    private final OrderClientRepo orderClientRepo;
 
     /**
      * List of observers that will be notified when a new product is added
      */
     private final List<ClientProductObserver> observers = new ArrayList<>();
 
-    /**
-     * ClientNotificationService object to handle the observer operations and to be able to use the methods in
-     * the service layer
-     */
-    private final ClientNotificationService clientNotificationService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepo productRepo, OrderItemRepo orderItemRepo, ClientNotificationService clientNotificationService) {
+    public ProductServiceImpl(ProductRepo productRepo, OrderItemRepo orderItemRepo, OrderClientRepo orderClientRepo) {
         this.productRepo = productRepo;
         this.orderItemRepo = orderItemRepo;
-        this.clientNotificationService = clientNotificationService;
+        this.orderClientRepo = orderClientRepo;
     }
 
     /**
@@ -53,7 +51,13 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @PostConstruct
     public void setupObservers(){
-        addObserver(clientNotificationService);
+        List<OrderClient> orderClients = this.orderClientRepo.findByOrderOptionsNewsletterTrue();
+        for(OrderClient orderClient : orderClients){
+            ClientNotificationService clientNotificationService = new ClientNotificationService(null);
+            clientNotificationService.setEmail(orderClient.getEmail());
+            clientNotificationService.setClientId(orderClient.getId());
+            addObserver(clientNotificationService);
+        }
     }
 
     /**
@@ -174,11 +178,11 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
 
     /**
      * Method to remove an observer from the list of observers
-     * @param observer the observer to be removed
+     * @param id the id of the observer to be removed
      */
     @Override
-    public void removeObserver(ClientProductObserver observer) {
-        this.observers.remove(observer);
+    public void removeObserver(Long id) {
+        this.observers.removeIf(observer -> observer instanceof ClientNotificationService && ((ClientNotificationService) observer).getClientId().equals(id));
     }
 
     /**

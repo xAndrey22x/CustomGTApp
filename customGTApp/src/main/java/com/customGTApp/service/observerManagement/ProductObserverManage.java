@@ -11,9 +11,9 @@ public interface ProductObserverManage {
     void addObserver(ClientProductObserver observer);
     /**
      * Remove an observer from the list of observers
-     * @param observer the observer to be removed
+     * @param id the id of the observer to be removed
      */
-    void removeObserver(ClientProductObserver observer);
+    void removeObserver(Long id);
     /**
      * Notify all observers about the new added product
      * @param product the product that was added
