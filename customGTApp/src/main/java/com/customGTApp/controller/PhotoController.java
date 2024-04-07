@@ -11,10 +11,10 @@ import java.util.List;
 
 /**
  * /photo/all - list all the photos
- * /photo/addProduct/{productId} - add a photo to a product based on his id
- * /photo/addService/{serviceId} - add a photo to a service based on his id
- * /photo/updateProduct - update photo of a product
- * /photo/updateService - update photo of a service
+ * /photo/addProduct/{productId} - add a photo to a product based on his id, the photo will be received as a request body
+ * /photo/addService/{serviceId} - add a photo to a service based on his id, the photo will be received as a request body
+ * /photo/updateProduct - update photo of a product, the photo will be received as a request body
+ * /photo/updateService - update photo of a service, the photo will be received as a request body
  * /photo/delete/{photoId} - delete photo based on the photo id
  */
 @RestController

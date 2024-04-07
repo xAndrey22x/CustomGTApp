@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * /orderItem/addProduct/{productId}/{orderId}
- * /orderItem/addService/{serviceId}/{orderId}
+ * /orderItem/addProduct/{productId}/{orderId} - add a product to an order, the order item will be received as a request body
+ * /orderItem/addService/{serviceId}/{orderId} - add a service to an order, the order item will be received as a request body
  */
 @RestController
 @RequestMapping("/orderItem")

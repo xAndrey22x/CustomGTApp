@@ -90,4 +90,38 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> product = this.productRepo.findById(productId);
         return product.map(Product::getPhotos).orElse(null);
     }
+
+    /**
+     * Method to update the quantity of a product
+     * @param productId the product id
+     * @param quantity the new quantity
+     * @return the product with the updated quantity
+     */
+    @Override
+    public Product updateQuantity(Long productId, int quantity) {
+        Optional<Product> productOptional = productRepo.findById(productId);
+        if(productOptional.isPresent()){
+            Product product = productOptional.get();
+            product.setQuantity(quantity);
+            return productRepo.save(product);
+        }
+        return null;
+    }
+
+    /**
+     * Method to update the price of a product
+     * @param productId the product id
+     * @param price the new price
+     * @return the product with the updated price
+     */
+    @Override
+    public Product updatePrice(Long productId, float price) {
+        Optional<Product> productOptional = productRepo.findById(productId);
+        if(productOptional.isPresent()){
+            Product product = productOptional.get();
+            product.setPrice(price);
+            return productRepo.save(product);
+        }
+        return null;
+    }
 }

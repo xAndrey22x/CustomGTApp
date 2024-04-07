@@ -15,4 +15,5 @@ public interface ServiceProdService {
     ServiceProd updateService(ServiceProd serviceProd);
     void deleteServiceById(Long id);
     List<Photo> getAllServicePhotos(Long serviceId);
+    ServiceProd updatePrice(Long serviceId, float price);
 }

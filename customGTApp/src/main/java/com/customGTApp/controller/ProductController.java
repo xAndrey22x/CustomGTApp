@@ -17,9 +17,11 @@ import java.util.List;
  * /product/all - list all the products.
  * /product/{productId}/photos - list all the photos of a product based on the product id.
  * /product/find/{id} - find a product based on the id provided
- * /product/add - add a product
- * /product/update - update a product
+ * /product/add - add a product, the product will be received as a request body
+ * /product/update - update a product, the product will be received as a request body
  * /product/delete/{id} - delete a product based on the id provided
+ * /product/updateQuantity/{productId} - update the quantity of a product, quantity as a request parameter
+ * /product/updatePrice/{productId} - update the price of a product, price as a request parameter
  */
 
 @RestController
@@ -97,6 +99,28 @@ public class ProductController {
     public ResponseEntity<?> deleteProductById(@PathVariable("id") Long id) {
         this.productService.deleteProductById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * Method to update the quantity of a product with quantity as a request parameter
+     */
+    @PutMapping("/updateQuantity/{productId}")
+    public ResponseEntity<Product> updateQuantity(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity) {
+        Product product = this.productService.updateQuantity(productId, quantity);
+        if (product != null)
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Method to update the price of a product with price as a request parameter
+     */
+    @PutMapping("/updatePrice/{productId}")
+    public ResponseEntity<Product> updatePrice(@PathVariable("productId") Long productId, @RequestParam("price") float price) {
+        Product product = this.productService.updatePrice(productId, price);
+        if (product != null)
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

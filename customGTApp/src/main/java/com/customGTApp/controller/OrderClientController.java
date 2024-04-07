@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * /order/all
- * /order/add
- * /order/update
- * /order/delete/{id}
+ * /order/all - list all the orders.
+ * /order/add - add an order, the order will be received as a request body
+ * /order/update - update an order, the order will be received as a request body
+ * /order/delete/{id} - delete an order based on the id provided
  */
 @RestController
 @RequestMapping("/order")

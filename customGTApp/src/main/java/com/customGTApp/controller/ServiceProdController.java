@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 /**
- * /service/all
- * /service/find/{id}
- * /service/add
- * /service/update
- * /service/delete/{id}
- * /service/{serviceId}/photos
+ * /service/all - list all the services
+ * /service/find/{id} - find a service based on the id provided
+ * /service/add - add a service, the service will be received as a request body
+ * /service/update - update a service, the new service will be received as a request body
+ * /service/delete/{id} - delete a service based on the id provided
+ * /service/{serviceId}/photos - list all the photos of a service based on the service id
+ * /service/updatePrice/{serviceId} - update the price of a service based on the service id
  */
 @RestController
 @RequestMapping("/service")
@@ -85,6 +86,8 @@ public class ServiceProdController {
     }
     /**
      * Method to get all the photos of a service based on the list of photos from a service
+     * @param serviceId the service id
+     * @return list of all photos
      */
     @GetMapping("{serviceId}/photos")
     public ResponseEntity<List<Photo>> getAllPhotosByServiceId(@PathVariable("serviceId") Long serviceId){
@@ -93,5 +96,20 @@ public class ServiceProdController {
             return new ResponseEntity<>(photos, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * Method to update the price of a service
+     * @param serviceId the service id
+     * @param price the new price
+     * @return the updated service
+     */
+    @PutMapping("/updatePrice/{serviceId}")
+    public ResponseEntity<ServiceProd> updatePrice(@PathVariable("serviceId") Long serviceId, @RequestParam("price") float price){
+        ServiceProd serviceProd = this.serviceProdService.updatePrice(serviceId, price);
+        if (serviceProd != null)
+            return new ResponseEntity<>(serviceProd, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }

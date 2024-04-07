@@ -83,4 +83,21 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return serviceProd.map(ServiceProd::getPhotos).orElse(null);
     }
 
+    /**
+     * Method to update the price of a service
+     * @param serviceId the service id
+     * @param price the new price
+     * @return the updated service
+     */
+    @Override
+    public ServiceProd updatePrice(Long serviceId, float price) {
+        Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
+        if(serviceProd.isPresent()){
+            ServiceProd serviceProd1 = serviceProd.get();
+            serviceProd1.setPrice(price);
+            return this.serviceProdRepo.save(serviceProd1);
+        }
+        return null;
+    }
+
 }

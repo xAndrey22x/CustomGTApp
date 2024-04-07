@@ -50,4 +50,21 @@ public interface ProductService {
      * @return the photos list of the product
      */
     List<Photo> findPhotosByProductId(Long productId);
+
+    /**
+     * Method to update the quantity of a product
+     * @param productId the id of the product we want to update the quantity
+     * @param quantity the new quantity of the product
+     * @return the product with the updated quantity
+     */
+    Product updateQuantity(Long productId, int quantity);
+
+    /**
+     * Method to update the price of a product
+     * @param productId the id of the product we want to update the price
+     * @param price the new price of the product
+     * @return the product with the updated price
+     */
+    Product updatePrice(Long productId, float price);
+
 }
