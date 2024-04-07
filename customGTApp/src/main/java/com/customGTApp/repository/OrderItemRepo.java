@@ -16,4 +16,10 @@ public interface OrderItemRepo extends JpaRepository<OrderItem, Long> {
      * @return OrderItem
      */
     Optional<List<OrderItem>> findByProductId(Long productId);
+    /**
+     * Find OrderItem by serviceProdId
+     * @param serviceProdId the serviceProdId to search for
+     * @return OrderItem
+     */
+    Optional<List<OrderItem>> findByServiceProdId(Long serviceProdId);
 }

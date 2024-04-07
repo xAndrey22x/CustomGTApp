@@ -1,7 +1,9 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.ServiceProd;
+import com.customGTApp.repository.OrderItemRepo;
 import com.customGTApp.repository.PhotoRepo;
 import com.customGTApp.repository.ServiceProdRepo;
 import com.customGTApp.service.ServiceProdService;
@@ -19,10 +21,12 @@ public class ServiceProdServiceImpl implements ServiceProdService {
      * The ServiceProdRepo object to handle the CRUD operations.
      */
     private final ServiceProdRepo serviceProdRepo;
+    private final OrderItemRepo orderItemRepo;
 
     @Autowired
-    public ServiceProdServiceImpl(ServiceProdRepo serviceProdRepo) {
+    public ServiceProdServiceImpl(ServiceProdRepo serviceProdRepo, OrderItemRepo orderItemRepo) {
         this.serviceProdRepo = serviceProdRepo;
+        this.orderItemRepo = orderItemRepo;
     }
     /**
      * Method to get all the services
@@ -64,11 +68,13 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return null;
     }
     /**
-     * Method to delete a service based on the id
+     * Method to delete a service based on the id and all the order items that contain this service
      * @param id the service id
      */
     @Override
     public void deleteServiceById(Long id) {
+        Optional<List<OrderItem>> orderItems = this.orderItemRepo.findByServiceProdId(id);
+        orderItems.ifPresent(this.orderItemRepo::deleteAll);
         this.serviceProdRepo.deleteById(id);
     }
     /**

@@ -112,11 +112,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Transactional
     public void deleteProductById(Long id) {
         Optional<List<OrderItem>> orderItems = this.orderItemRepo.findByProductId(id);
-        if(orderItems.isPresent()){
-            for(OrderItem orderItem : orderItems.get()){
-                this.orderItemRepo.delete(orderItem);
-            }
-        }
+        orderItems.ifPresent(this.orderItemRepo::deleteAll);
         this.productRepo.deleteById(id);
     }
     /**
