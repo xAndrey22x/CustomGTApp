@@ -9,6 +9,7 @@ import com.customGTApp.repository.OrderItemRepo;
 import com.customGTApp.repository.ProductRepo;
 import com.customGTApp.repository.ServiceProdRepo;
 import com.customGTApp.service.OrderItemService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class OrderItemServiceImpl implements OrderItemService {
      * @return the order item
      */
     @Override
+    @Transactional
     public OrderItem addProductToOrder(Long productId, Long orderId, OrderItem orderItem) {
         Optional<Product> product = this.productRepo.findById(productId);
         if(product.isPresent()){
@@ -58,6 +60,7 @@ public class OrderItemServiceImpl implements OrderItemService {
      * @return the order item
      */
     @Override
+    @Transactional
     public OrderItem addServiceToOrder(Long serviceId, Long orderId, OrderItem orderItem) {
         Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
         if(serviceProd.isPresent()){

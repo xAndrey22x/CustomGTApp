@@ -21,15 +21,15 @@ public class Photo {
      * it's connected.
      * JsonBack it's fixing the recursion on this side so the JSON files will know this is the child.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId")
+    @ManyToOne
+    @JoinColumn(name = "productId", referencedColumnName = "id")
     private Product product;
 
     /**
      * Same as the product but for serviceProd now.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "serviceId")
+    @ManyToOne
+    @JoinColumn(name = "serviceId", referencedColumnName = "id")
     private ServiceProd serviceProd;
 
     public Photo() {

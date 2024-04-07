@@ -22,14 +22,14 @@ public class OrderItem {
     /**
      * Relation between the product table and this table
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "productId", referencedColumnName = "id")
     private Product product;
 
     /**
      * Relation between services table.
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "serviceId", referencedColumnName = "id")
     private ServiceProd serviceProd;
 
@@ -37,7 +37,7 @@ public class OrderItem {
      * Relation between an Order and this item
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "orderId", referencedColumnName = "id")
     private OrderClient orderClient;
 
 

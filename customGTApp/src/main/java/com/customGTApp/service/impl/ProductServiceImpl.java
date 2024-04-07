@@ -1,14 +1,20 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
-import com.customGTApp.repository.PhotoRepo;
+import com.customGTApp.observerService.ClientProductObserver;
+import com.customGTApp.observerService.impl.ClientNotificationService;
+import com.customGTApp.repository.OrderItemRepo;
+import com.customGTApp.service.observerManagement.ProductObserverManage;
+import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.customGTApp.repository.ProductRepo;
 import com.customGTApp.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,16 +22,38 @@ import java.util.Optional;
  * The implementation of all the methods described in the interface 'ProductService'
  */
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, ProductObserverManage {
 
     /**
      * We are using the ProductRepo interface for having all the basic CRUD operations in a DataBase.
      */
     private final ProductRepo productRepo;
+    private final OrderItemRepo orderItemRepo;
+
+    /**
+     * List of observers that will be notified when a new product is added
+     */
+    private final List<ClientProductObserver> observers = new ArrayList<>();
+
+    /**
+     * ClientNotificationService object to handle the observer operations and to be able to use the methods in
+     * the service layer
+     */
+    private final ClientNotificationService clientNotificationService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepo productRepo) {
+    public ProductServiceImpl(ProductRepo productRepo, OrderItemRepo orderItemRepo, ClientNotificationService clientNotificationService) {
         this.productRepo = productRepo;
+        this.orderItemRepo = orderItemRepo;
+        this.clientNotificationService = clientNotificationService;
+    }
+
+    /**
+     * Method to set up the observer for notifications about a product when it's added, when the class is created
+     */
+    @PostConstruct
+    public void setupObservers(){
+        addObserver(clientNotificationService);
     }
 
     /**
@@ -53,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Product addProduct(Product p) {
+        notifyObservers(p);
         return this.productRepo.save(p);
     }
 
@@ -72,11 +101,18 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
     /**
-     * Method to delete a product based on the id
+     * Method to delete a product based on the id and all the order items that contain this product
      * @param id the product id
      */
     @Override
+    @Transactional
     public void deleteProductById(Long id) {
+        Optional<List<OrderItem>> orderItems = this.orderItemRepo.findByProductId(id);
+        if(orderItems.isPresent()){
+            for(OrderItem orderItem : orderItems.get()){
+                this.orderItemRepo.delete(orderItem);
+            }
+        }
         this.productRepo.deleteById(id);
     }
     /**
@@ -98,6 +134,7 @@ public class ProductServiceImpl implements ProductService {
      * @return the product with the updated quantity
      */
     @Override
+    @Transactional
     public Product updateQuantity(Long productId, int quantity) {
         Optional<Product> productOptional = productRepo.findById(productId);
         if(productOptional.isPresent()){
@@ -115,6 +152,7 @@ public class ProductServiceImpl implements ProductService {
      * @return the product with the updated price
      */
     @Override
+    @Transactional
     public Product updatePrice(Long productId, float price) {
         Optional<Product> productOptional = productRepo.findById(productId);
         if(productOptional.isPresent()){
@@ -123,5 +161,34 @@ public class ProductServiceImpl implements ProductService {
             return productRepo.save(product);
         }
         return null;
+    }
+
+    /**
+     * Method to add an observer to the list of observers
+     * @param observer the observer to be added
+     */
+    @Override
+    public void addObserver(ClientProductObserver observer) {
+        this.observers.add(observer);
+    }
+
+    /**
+     * Method to remove an observer from the list of observers
+     * @param observer the observer to be removed
+     */
+    @Override
+    public void removeObserver(ClientProductObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    /**
+     * Method to notify all observers about the new added product
+     * @param product the product that was added
+     */
+    @Override
+    public void notifyObservers(Product product) {
+        for (ClientProductObserver observer : observers) {
+            observer.update(product);
+        }
     }
 }
