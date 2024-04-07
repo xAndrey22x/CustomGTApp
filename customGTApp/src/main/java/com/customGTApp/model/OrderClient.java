@@ -44,6 +44,13 @@ public class OrderClient {
     @OneToMany(mappedBy = "orderClient",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    /**
+     * The options for an order
+     */
+    @OneToOne(mappedBy = "orderClient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private OrderOptions orderOptions;
+
+
     public OrderClient() {}
 
 
@@ -143,4 +150,13 @@ public class OrderClient {
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
+
+    public OrderOptions getOrderOptions() {
+        return orderOptions;
+    }
+
+    public void setOrderOptions(OrderOptions orderOptions) {
+        this.orderOptions = orderOptions;
+    }
+
 }

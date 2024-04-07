@@ -90,6 +90,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
      * @return the updated service
      */
     @Override
+    @Transactional
     public ServiceProd updatePrice(Long serviceId, float price) {
         Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
         if(serviceProd.isPresent()){
