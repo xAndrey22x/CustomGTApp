@@ -4,7 +4,6 @@ import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.ServiceProd;
 import com.customGTApp.repository.OrderItemRepo;
-import com.customGTApp.repository.PhotoRepo;
 import com.customGTApp.repository.ServiceProdRepo;
 import com.customGTApp.service.ServiceProdService;
 import jakarta.transaction.Transactional;
