@@ -1,11 +1,11 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.data.PhotoContract;
+import com.customGTApp.data.ProductContract;
+import com.customGTApp.data.ServiceProdContract;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.model.ServiceProd;
-import com.customGTApp.repository.PhotoRepo;
-import com.customGTApp.repository.ProductRepo;
-import com.customGTApp.repository.ServiceProdRepo;
 import com.customGTApp.service.PhotoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +20,17 @@ public class PhotoServiceImpl implements PhotoService {
     /**
      * All the repositories needed to handle the CRUD operations.
      */
-    private final PhotoRepo photoRepo;
-    private final ProductRepo productRepo;
-    private final ServiceProdRepo serviceProdRepo;
+    private final PhotoContract photoContract;
+    private final ProductContract productContract;
+    private final ServiceProdContract serviceProdContract;
 
     @Autowired
-    public PhotoServiceImpl(PhotoRepo photoRepo, ProductRepo productRepo, ServiceProdRepo serviceProdRepo){
-        this.photoRepo = photoRepo;
-        this.productRepo = productRepo;
-        this.serviceProdRepo = serviceProdRepo;
+    public PhotoServiceImpl(PhotoContract photoContract, ProductContract productContract, ServiceProdContract serviceProdContract) {
+        this.photoContract = photoContract;
+        this.productContract = productContract;
+        this.serviceProdContract = serviceProdContract;
     }
+
 
     /**
      * Method to get all the photos
@@ -37,7 +38,7 @@ public class PhotoServiceImpl implements PhotoService {
      */
     @Override
     public List<Photo> findAllPhotos() {
-        return this.photoRepo.findAll();
+        return this.photoContract.findAll();
     }
 
     /**
@@ -50,10 +51,10 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     @Transactional
     public Photo addPhotoToProduct(Long productId, Photo photo) {
-        Optional<Product> productOptional = productRepo.findById(productId);
+        Optional<Product> productOptional = productContract.findById(productId);
         if (productOptional.isPresent()) {
             photo.setProduct(productOptional.get());
-            return photoRepo.save(photo);
+            return photoContract.save(photo);
         }
         return null;
     }
@@ -64,10 +65,10 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     @Transactional
     public Photo addPhotoToService(Long serviceProdId, Photo photo) {
-        Optional<ServiceProd> serviceProd = serviceProdRepo.findById(serviceProdId);
+        Optional<ServiceProd> serviceProd = serviceProdContract.findById(serviceProdId);
         if(serviceProd.isPresent()){
             photo.setServiceProd(serviceProd.get());
-            return this.photoRepo.save(photo);
+            return this.photoContract.save(photo);
         }
 
         return null;
@@ -81,7 +82,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Transactional
     public Photo updatePhoto(Photo photo, boolean isProduct) {
         long photoId = photo.getId();
-        Optional<Photo> photoOptional = photoRepo.findById(photoId);
+        Optional<Photo> photoOptional = photoContract.findById(photoId);
         if(photoOptional.isPresent()) {
             if(isProduct) {
                 Product product = photoOptional.get().getProduct();
@@ -91,7 +92,7 @@ public class PhotoServiceImpl implements PhotoService {
                 ServiceProd serviceProd = photoOptional.get().getServiceProd();
                 photo.setServiceProd(serviceProd);
             }
-            return photoRepo.save(photo);
+            return photoContract.save(photo);
         }
         return null;
     }
@@ -101,6 +102,6 @@ public class PhotoServiceImpl implements PhotoService {
      */
     @Override
     public void deletePhoto(Long photoId) {
-        photoRepo.deleteById(photoId);
+        photoContract.deleteById(photoId);
     }
 }

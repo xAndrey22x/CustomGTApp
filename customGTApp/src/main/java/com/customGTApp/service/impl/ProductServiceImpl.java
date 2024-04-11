@@ -1,19 +1,19 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.data.OrderClientContract;
+import com.customGTApp.data.OrderItemContract;
+import com.customGTApp.data.ProductContract;
 import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.observerService.ClientProductObserver;
 import com.customGTApp.observerService.impl.ClientNotificationService;
-import com.customGTApp.repository.OrderClientRepo;
-import com.customGTApp.repository.OrderItemRepo;
 import com.customGTApp.service.observerManagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.customGTApp.repository.ProductRepo;
 import com.customGTApp.service.ProductService;
 
 import java.util.ArrayList;
@@ -29,29 +29,29 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     /**
      * We are using the ProductRepo interface for having all the basic CRUD operations in a DataBase.
      */
-    private final ProductRepo productRepo;
-    private final OrderItemRepo orderItemRepo;
-    private final OrderClientRepo orderClientRepo;
+    private final ProductContract productContract;
+    private final OrderItemContract orderItemContract;
+    private final OrderClientContract orderClientContract;
 
     /**
      * List of observers that will be notified when a new product is added
      */
     private final List<ClientProductObserver> observers = new ArrayList<>();
 
-
     @Autowired
-    public ProductServiceImpl(ProductRepo productRepo, OrderItemRepo orderItemRepo, OrderClientRepo orderClientRepo) {
-        this.productRepo = productRepo;
-        this.orderItemRepo = orderItemRepo;
-        this.orderClientRepo = orderClientRepo;
+    public ProductServiceImpl(ProductContract productContract, OrderItemContract orderItemContract, OrderClientContract orderClientContract) {
+        this.productContract = productContract;
+        this.orderItemContract = orderItemContract;
+        this.orderClientContract = orderClientContract;
     }
+
 
     /**
      * Method to set up the observer for notifications about a product when it's added, when the class is created
      */
     @PostConstruct
     public void setupObservers(){
-        List<OrderClient> orderClients = this.orderClientRepo.findByOrderOptionsNewsletterTrue();
+        List<OrderClient> orderClients = this.orderClientContract.findByOrderOptionsNewsletterTrue();
         for(OrderClient orderClient : orderClients){
             ClientNotificationService clientNotificationService = new ClientNotificationService(null);
             clientNotificationService.setEmail(orderClient.getEmail());
@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @Override
     public List<Product> findAllProducts() {
-        return this.productRepo.findAll();
+        return this.productContract.findAll();
     }
     /**
      * Method to get a product based on the id
@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @Override
     public Product findProductById(Long id) {
-        return this.productRepo.findById(id).orElse(null);
+        return this.productContract.findById(id).orElse(null);
     }
 
     /**
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     public Product addProduct(Product p) {
         notifyObservers(p);
-        return this.productRepo.save(p);
+        return this.productContract.save(p);
     }
 
     /**
@@ -98,9 +98,9 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Transactional
     public Product updateProduct(Product p) {
         Long id = p.getId();
-        Optional<Product> productOptional = productRepo.findById(id);
+        Optional<Product> productOptional = productContract.findById(id);
         if(productOptional.isPresent()){
-            return this.productRepo.save(p);
+            return this.productContract.save(p);
         }
         return null;
     }
@@ -111,9 +111,9 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     @Transactional
     public void deleteProductById(Long id) {
-        Optional<List<OrderItem>> orderItems = this.orderItemRepo.findByProductId(id);
-        orderItems.ifPresent(this.orderItemRepo::deleteAll);
-        this.productRepo.deleteById(id);
+        Optional<List<OrderItem>> orderItems = this.orderItemContract.findByProductId(id);
+        orderItems.ifPresent(this.orderItemContract::deleteAll);
+        this.productContract.deleteById(id);
     }
     /**
      * Method to get all the photos of a product
@@ -123,7 +123,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     @Transactional
     public List<Photo> findPhotosByProductId(Long productId) {
-        Optional<Product> product = this.productRepo.findById(productId);
+        Optional<Product> product = this.productContract.findById(productId);
         return product.map(Product::getPhotos).orElse(null);
     }
 
@@ -136,11 +136,11 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     @Transactional
     public Product updateQuantity(Long productId, int quantity) {
-        Optional<Product> productOptional = productRepo.findById(productId);
+        Optional<Product> productOptional = productContract.findById(productId);
         if(productOptional.isPresent()){
             Product product = productOptional.get();
             product.setQuantity(quantity);
-            return productRepo.save(product);
+            return productContract.save(product);
         }
         return null;
     }
@@ -154,11 +154,11 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     @Transactional
     public Product updatePrice(Long productId, float price) {
-        Optional<Product> productOptional = productRepo.findById(productId);
+        Optional<Product> productOptional = productContract.findById(productId);
         if(productOptional.isPresent()){
             Product product = productOptional.get();
             product.setPrice(price);
-            return productRepo.save(product);
+            return productContract.save(product);
         }
         return null;
     }

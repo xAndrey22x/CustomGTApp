@@ -48,4 +48,11 @@ public class OrderItemData implements OrderItemContract {
     public Optional<List<OrderItem>> findByServiceProdId(Long serviceProdId) {
         return this.orderItemRepo.findByServiceProdId(serviceProdId);
     }
+
+    @Override
+    public void deleteAll(List<OrderItem> orderItems) {
+        this.orderItemRepo.deleteAll(orderItems);
+    }
+
+
 }

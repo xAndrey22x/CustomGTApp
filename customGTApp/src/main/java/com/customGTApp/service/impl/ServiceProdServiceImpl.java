@@ -1,5 +1,7 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.data.OrderItemContract;
+import com.customGTApp.data.ServiceProdContract;
 import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.ServiceProd;
@@ -19,21 +21,23 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     /**
      * The ServiceProdRepo object to handle the CRUD operations.
      */
-    private final ServiceProdRepo serviceProdRepo;
-    private final OrderItemRepo orderItemRepo;
+    private final ServiceProdContract serviceProdContract;
+    private final OrderItemContract orderItemContract;
 
     @Autowired
-    public ServiceProdServiceImpl(ServiceProdRepo serviceProdRepo, OrderItemRepo orderItemRepo) {
-        this.serviceProdRepo = serviceProdRepo;
-        this.orderItemRepo = orderItemRepo;
+    public ServiceProdServiceImpl(ServiceProdContract serviceProdContract, OrderItemContract orderItemContract) {
+        this.serviceProdContract = serviceProdContract;
+        this.orderItemContract = orderItemContract;
     }
+
+
     /**
      * Method to get all the services
      * @return list of all services
      */
     @Override
     public List<ServiceProd> getAllServices() {
-        return serviceProdRepo.findAll();
+        return serviceProdContract.findAll();
     }
     /**
      * Method to get a service based on the id
@@ -42,7 +46,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
      */
     @Override
     public ServiceProd getServiceById(Long id) {
-        return serviceProdRepo.findById(id).orElse(null);
+        return serviceProdContract.findById(id).orElse(null);
     }
     /**
      * Method to add a new service
@@ -51,7 +55,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
      */
     @Override
     public ServiceProd addService(ServiceProd serviceProd) {
-        return serviceProdRepo.save(serviceProd);
+        return serviceProdContract.save(serviceProd);
     }
     /**
      * Method to update a service only if it already exists in the database
@@ -61,9 +65,9 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     @Override
     @Transactional
     public ServiceProd updateService(ServiceProd serviceProd) {
-        Optional<ServiceProd> serviceProd1 = serviceProdRepo.findById(serviceProd.getId());
+        Optional<ServiceProd> serviceProd1 = serviceProdContract.findById(serviceProd.getId());
         if(serviceProd1.isPresent())
-            return this.serviceProdRepo.save(serviceProd);
+            return this.serviceProdContract.save(serviceProd);
         return null;
     }
     /**
@@ -72,9 +76,9 @@ public class ServiceProdServiceImpl implements ServiceProdService {
      */
     @Override
     public void deleteServiceById(Long id) {
-        Optional<List<OrderItem>> orderItems = this.orderItemRepo.findByServiceProdId(id);
-        orderItems.ifPresent(this.orderItemRepo::deleteAll);
-        this.serviceProdRepo.deleteById(id);
+        Optional<List<OrderItem>> orderItems = this.orderItemContract.findByServiceProdId(id);
+        orderItems.ifPresent(this.orderItemContract::deleteAll);
+        this.serviceProdContract.deleteById(id);
     }
     /**
      * Method to get all the photos of a service
@@ -84,7 +88,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     @Override
     @Transactional
     public List<Photo> getAllServicePhotos(Long serviceId) {
-        Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
+        Optional<ServiceProd> serviceProd = this.serviceProdContract.findById(serviceId);
         return serviceProd.map(ServiceProd::getPhotos).orElse(null);
     }
 
@@ -97,11 +101,11 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     @Override
     @Transactional
     public ServiceProd updatePrice(Long serviceId, float price) {
-        Optional<ServiceProd> serviceProd = this.serviceProdRepo.findById(serviceId);
+        Optional<ServiceProd> serviceProd = this.serviceProdContract.findById(serviceId);
         if(serviceProd.isPresent()){
             ServiceProd serviceProd1 = serviceProd.get();
             serviceProd1.setPrice(price);
-            return this.serviceProdRepo.save(serviceProd1);
+            return this.serviceProdContract.save(serviceProd1);
         }
         return null;
     }

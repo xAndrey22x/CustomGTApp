@@ -44,4 +44,11 @@ public interface OrderItemContract {
      * @return the list of order items
      */
     Optional<List<OrderItem>> findByServiceProdId(Long serviceProdId);
+
+    /**
+     * Method to delete all the order items
+     * @param orderItems the list of order items
+     */
+    void deleteAll(List<OrderItem> orderItems);
+
 }

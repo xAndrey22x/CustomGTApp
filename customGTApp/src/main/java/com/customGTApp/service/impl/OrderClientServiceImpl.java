@@ -1,7 +1,7 @@
 package com.customGTApp.service.impl;
 
+import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.model.OrderClient;
-import com.customGTApp.repository.OrderClientRepo;
 import com.customGTApp.service.OrderClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ public class OrderClientServiceImpl implements OrderClientService {
      * OrderClientRepo object to handle the CRUD operations and to be able to use the methods in
      * the repository layer.
      */
-    private final OrderClientRepo orderClientRepo;
+    private final OrderClientContract orderClientContract;
 
     @Autowired
-    public OrderClientServiceImpl(OrderClientRepo orderClientRepo) {
-        this.orderClientRepo = orderClientRepo;
+    public OrderClientServiceImpl(OrderClientContract orderClientContract) {
+        this.orderClientContract = orderClientContract;
     }
 
     /**
@@ -28,7 +28,7 @@ public class OrderClientServiceImpl implements OrderClientService {
      */
     @Override
     public List<OrderClient> findAllOrders() {
-        return this.orderClientRepo.findAll();
+        return this.orderClientContract.findAll();
     }
 
     /**
@@ -38,7 +38,7 @@ public class OrderClientServiceImpl implements OrderClientService {
      */
     @Override
     public OrderClient addOrder(OrderClient orderClient) {
-        return this.orderClientRepo.save(orderClient);
+        return this.orderClientContract.save(orderClient);
     }
     /**
      * Method to update an order
@@ -47,9 +47,9 @@ public class OrderClientServiceImpl implements OrderClientService {
      */
     @Override
     public OrderClient updateOrder(OrderClient orderClient) {
-        Optional<OrderClient> orderClient1 = this.orderClientRepo.findById(orderClient.getId());
+        Optional<OrderClient> orderClient1 = this.orderClientContract.findById(orderClient.getId());
         if(orderClient1.isPresent()){
-            return this.orderClientRepo.save(orderClient);
+            return this.orderClientContract.save(orderClient);
         }
         return null;
     }
@@ -59,6 +59,6 @@ public class OrderClientServiceImpl implements OrderClientService {
      */
     @Override
     public void deleteOrder(Long orderId) {
-        this.orderClientRepo.deleteById(orderId);
+        this.orderClientContract.deleteById(orderId);
     }
 }
