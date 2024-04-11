@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 /**
  * /addOrderOptions/{orderClientId} - add order options to an order, the order options will be received as a request body
  * /updateOrderNewsletter/{orderClientId} - update newsletter for an order, the newsletter will be received as a request parameter
+ *                                        - param newsletter
  * /updateOrderConfirmed/{orderClientId} - update order confirmation for an order, the order confirmation will be received as a request parameter
+ *                                       - param orderConfirmed
  */
 @RestController
 public class OrderOptionsController {

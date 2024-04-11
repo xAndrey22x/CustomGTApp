@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the ProductContract interface to provide the basic CRUD operations for the Product entity
+ */
 @Repository
 public class ProductData implements ProductContract {
 
+    /**
+     * Usage of JPA Repository to handle the database operations for the Product entity
+     */
     private final ProductRepo productRepo;
 
     @Autowired

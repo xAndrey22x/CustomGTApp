@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the OrderItemContract interface to provide the basic CRUD operations for the OrderItem entity
+ */
 @Repository
 public class OrderItemData implements OrderItemContract {
 
+    /**
+     * Usage of JPA Repository to handle the database operations for the OrderItem entity
+     */
     private final OrderItemRepo orderItemRepo;
 
     @Autowired

@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the PhotoContract interface to provide the basic CRUD operations for the Photo entity
+ */
 @Repository
 public class PhotoData implements PhotoContract {
 
+    /**
+     * Usage of JPA Repository to handle the database operations for the Photo entity
+     */
     private final PhotoRepo photoRepo;
 
     @Autowired

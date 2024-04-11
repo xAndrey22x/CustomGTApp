@@ -21,7 +21,9 @@ import java.util.List;
  * /product/update - update a product, the product will be received as a request body
  * /product/delete/{id} - delete a product based on the id provided
  * /product/updateQuantity/{productId} - update the quantity of a product, quantity as a request parameter
+ *                                     - param quantity
  * /product/updatePrice/{productId} - update the price of a product, price as a request parameter
+ *                                  - param price
  */
 
 @RestController

@@ -18,6 +18,7 @@ import java.util.List;
  * /service/delete/{id} - delete a service based on the id provided
  * /service/{serviceId}/photos - list all the photos of a service based on the service id
  * /service/updatePrice/{serviceId} - update the price of a service based on the service id
+ *                                  - param price
  */
 @RestController
 @RequestMapping("/service")

@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the OrderOptionsContract interface to provide the basic CRUD operations for the OrderOptions entity
+ */
 @Repository
 public class OrderOptionsData implements OrderOptionsContract {
 
+    /**
+     * Usage of JPA Repository to handle the database operations for the OrderOptions entity
+     */
     private final OrderOptionsRepo orderOptionsRepo;
 
     @Autowired

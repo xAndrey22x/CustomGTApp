@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the ServiceProdContract interface to provide the basic CRUD operations for the ServiceProd entity
+ */
 @Repository
 public class ServiceProdData implements ServiceProdContract {
 
+    /**
+     * Usage of JPA Repository to handle the database operations for the ServiceProd entity
+     */
     private final ServiceProdRepo serviceProdRepo;
 
     @Autowired
