@@ -40,18 +40,24 @@ public class OrderOptionsController {
     /**
      * Method to update newsletter for an order
      * @param orderClientId the order client id
-     * @param newsLetter the newsletter
+     * @param newsletter the newsletter
      * @return the order options
      */
     @PutMapping("/updateOrderNewsletter/{orderClientId}")
-    public ResponseEntity<OrderOptions> updateOrderNewsletter(@PathVariable("orderClientId") Long orderClientId, @RequestParam("newsLetter") Boolean newsLetter) {
-        OrderOptions orderOptions = orderOptionsService.updateNewsLetter(orderClientId, newsLetter);
+    public ResponseEntity<OrderOptions> updateOrderNewsletter(@PathVariable("orderClientId") Long orderClientId, @RequestParam("newsletter") Boolean newsletter) {
+        OrderOptions orderOptions = orderOptionsService.updateNewsLetter(orderClientId, newsletter);
         if (orderOptions != null)
             return new ResponseEntity<>(orderOptions, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Method to update order confirmation for an order
+     * @param orderClientId the order client id
+     * @param orderConfirmed the order confirmation
+     * @return the order options
+     */
     @PutMapping("/updateOrderConfirmed/{orderClientId}")
     public ResponseEntity<OrderOptions> updateOrderConfirmation(@PathVariable("orderClientId") Long orderClientId, @RequestParam("orderConfirmed") Boolean orderConfirmed) {
         OrderOptions orderOptions = orderOptionsService.updateOrderConfirmation(orderClientId, orderConfirmed);

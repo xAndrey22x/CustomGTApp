@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 
 @Service
 public class ClientNotificationService implements ClientProductObserver, ClientOrderOptionObserver {
@@ -59,10 +61,35 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
         emailSender.send(message);
     }
 
+    /**
+     * Update the observer about the order confirmation option
+     * @param email the email of the client that has the order confirmed
+     */
     @Override
     public void update(String email) {
         System.out.println("###################################################################################");
         System.out.println("Sending email to: " + email + " that the order has been confirmed!");
         System.out.println("###################################################################################\n");
+    }
+
+    /**
+     * Method to check if two ClientNotificationService objects are equal
+     * @param o the object to compare
+     * @return true if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClientNotificationService that)) return false;
+        return Objects.equals(clientId, that.clientId);
+    }
+
+    /**
+     * Method to get the hash code of the ClientNotificationService object
+     * @return the hash code of the object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(clientId);
     }
 }
