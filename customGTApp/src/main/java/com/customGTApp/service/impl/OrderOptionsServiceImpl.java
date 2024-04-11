@@ -113,7 +113,8 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
         if(orderOptions.isPresent()){
             orderOptions.get().setOrderConfirmed(orderConfirmed);
             if(orderConfirmed){
-                notifyObservers(this.orderClientContract.findById(orderClientId).get().getEmail());
+                Optional<OrderClient> orderClient = this.orderClientContract.findById(orderClientId);
+                orderClient.ifPresent(client -> notifyObservers(client.getEmail()));
             }
             return this.orderOptionsContract.save(orderOptions.get());
         }
