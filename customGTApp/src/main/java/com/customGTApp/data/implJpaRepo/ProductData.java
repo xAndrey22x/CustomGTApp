@@ -2,7 +2,7 @@ package com.customGTApp.data.implJpaRepo;
 
 import com.customGTApp.data.ProductContract;
 import com.customGTApp.model.Product;
-import com.customGTApp.repository.ProductRepo;
+import com.customGTApp.data.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

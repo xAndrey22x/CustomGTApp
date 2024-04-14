@@ -2,7 +2,7 @@ package com.customGTApp.data.implJpaRepo;
 
 import com.customGTApp.data.OrderOptionsContract;
 import com.customGTApp.model.OrderOptions;
-import com.customGTApp.repository.OrderOptionsRepo;
+import com.customGTApp.data.repository.OrderOptionsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

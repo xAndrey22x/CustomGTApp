@@ -1,4 +1,4 @@
-package com.customGTApp.repository;
+package com.customGTApp.data.repository;
 
 import com.customGTApp.model.OrderOptions;
 import org.springframework.data.jpa.repository.JpaRepository;
