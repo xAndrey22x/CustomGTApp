@@ -33,6 +33,38 @@ A deep understanding of our application's data model is essential to grasp the i
 
 ### Backend Development
 
+The following plan represents the structure of our backend application:
+
+<p align="center">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/808a80c4-bfc8-473c-a03b-4dd0b2ddad29" width="650">
+</p>
+
+The application utilizes a layered architecture approach, designed for separation of concerns and modularity. Below is a description of each layer:
+
+**HTTP API**
+- Serves as the application's entry point.
+- Handles HTTP requests and routes them to the appropriate controller.
+
+**Controller**
+- Acts as an intermediary between the HTTP API and service layer.
+- Processes incoming requests, validates them, and delegates actions to the service layer.
+- Returns HTTP responses after the execution of business logic.
+
+**Service**
+- Contains the core business logic of the application.
+- Coordinates the application's operations and manages the flow of data to and from the data layer.
+
+**Data**
+- Responsible for data persistence and retrieval operations.
+- Communicates with the database to perform CRUD (Create, Read, Update, Delete) operations on entities.
+- Mostly makes use of the JPA Repository to complete necessary tasks.
+
+**Model**
+- Defines the domain models or entities representing the database structure.
+- Used across the application to transport data between layers, with attributes matching the database schema.
+
+This structure follows the Spring MVC (Model-View-Controller) framework, ensuring maintainable, testable, and scalable code. The separation allows each layer to be independently managed and evolved.
+
 During this stage, we have only focused on developing the server-side logic by leveraging the powerful features of the Java Spring Framework. Establishing a strong foundation for the application was our main priority, and this includes:
 
 - **Database Management**: Establishing a secure and efficient database schema to handle the intricate relationships between products, services, and orders.
@@ -52,4 +84,4 @@ During this stage, we have only focused on developing the server-side logic by l
 
 ### Frontend Development
 
-By laying a robust foundation through backend development, we set the stage for a dynamic, responsive, and user-friendly frontend, promising an immersive experience for our users. Our backend's adaptability and strength ensure that as we transition to focusing on the frontend, we remain committed to delivering a product that is not only visually appealing but also functionally superior.
+We promised our users an immersive experience by building a strong foundation through backend development, which prepared the way for a dynamic, responsive, and user-friendly frontend. The flexibility and robustness of our backend guarantee that, even when we shift our attention to the frontend, we will stay firm in our commitment to producing a product that is both aesthetically pleasing and exceptionally functional.
