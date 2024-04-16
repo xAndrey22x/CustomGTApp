@@ -65,22 +65,73 @@ The application utilizes a layered architecture approach, designed for separatio
 
 This structure follows the Spring MVC (Model-View-Controller) framework, ensuring maintainable, testable, and scalable code. The separation allows each layer to be independently managed and evolved.
 
-During this stage, we have only focused on developing the server-side logic by leveraging the powerful features of the Java Spring Framework. Establishing a strong foundation for the application was our main priority, and this includes:
+During this stage, we have focused on developing the server-side logic by leveraging the powerful features of the Java Spring Framework. Establishing a strong foundation for our application was our main priority. Below is an outline of the key components of our application's architecture and features:
 
-- **Database Management**: Establishing a secure and efficient database schema to handle the intricate relationships between products, services, and orders.
-- **CRUD Operations**: Implementing Create, Read, Update, and Delete operations for each table, thereby enabling seamless data management. This allows for:
-  - Adding new products, services, and accessories to the application.
-  - Retrieving information about existing offerings for display and management purposes.
-  - Updating details of the offerings as needed, ensuring the information remains current and accurate.
-  - Deleting offerings that are no longer available or relevant.
-- **API Development**: Developing a comprehensive set of APIs to facilitate communication between the frontend and backend, ensuring data is transmitted securely and efficiently.
-- **New futures using the Observer Design Pattern**: Added a new table with the client's details, including whether or not the order has been confirmed and whether the client is registered to our newsletter. The Observer is used to implement all of this, and the clients will be informed via the appropriate actions in the DataBase.
+### Database Management
+- **Secure and Efficient Schema**: Our database schema is designed to handle intricate relationships between products, services, and orders securely and efficiently.
+
+### CRUD Operations
+- **Manage Data Seamlessly**: Our CRUD operations enable:
+  - **Additions**: New products, services, and accessories can be added to the application.
+  - **Retrievals**: Existing offerings are retrievable for display and management purposes.
+  - **Updates**: Offerings details are updated as needed to ensure they remain current and accurate.
+  - **Deletions**: Offerings that are no longer available or relevant can be deleted.
+
+### API Development
+- **Secure Data Transmission**: We have developed a comprehensive set of APIs to facilitate secure and efficient communication between the frontend and backend.
+  - ***Product Table***
+    - /product/all - list all the products. *GET*
+    - /product/{productId}/photos - list all the photos of a product based on the product id. *GET*
+    - /product/find/{id} - find a product based on the id provided. *GET*
+    - /product/add - add a product, the product will be received as a request body. *POST*
+    - /product/update - update a product, the product will be received as a request body. *PUT*
+    - /product/delete/{id} - delete a product based on the id provided. *DELETE*
+    - /product/updateQuantity/{productId} - update the quantity of a product, quantity as a request parameter, parameter name is 'quantity'. *PUT*
+    - /product/updatePrice/{productId} - update the price of a product, price as a request parameter, parameter name is 'price'. *PUT*
+  - ***Service Table***
+    - /service/all - list all the services. *GET*
+    - /service/find/{id} - find a service based on the id provided. *GET*
+    - /service/add - add a service, the service will be received as a request body. *POST*
+    - /service/update - update a service, the new service will be received as a request body. *PUT*
+    - /service/delete/{id} - delete a service based on the id provided. *DELETE* 
+    - /service/{serviceId}/photos - list all the photos of a service based on the service id. *GET*
+    - /service/updatePrice/{serviceId} - update the price of a service based on the service id, price as a request parameter, parameter name is 'price'. *PUT*
+  - ***Photo Table***
+    - /photo/all - list all the photos. *GET* 
+    - /photo/addProduct/{productId} - add a photo to a product based on his id, the photo will be received as a request body. *POST*
+    - /photo/addService/{serviceId} - add a photo to a service based on his id, the photo will be received as a request body. *POST*
+    - /photo/updateProduct - update photo of a product, the photo will be received as a request body. *PUT* 
+    - /photo/updateService - update photo of a service, the photo will be received as a request body. *PUT*
+    - /photo/delete/{photoId} - delete photo based on the photo id. *DELETE*
+  - ***OrderClient Table***
+    - /order/all - list all the orders. *GET*
+    - /order/add - add an order, the order will be received as a request body. *POST*
+    - /order/update - update an order, the order will be received as a request body. *PUT*
+    - /order/delete/{id} - delete an order based on the id provided. *DELETE*
+  - ***OrderItem Table***
+    - /addOrderProduct/{productId}/{orderId} - add a product to an order, the order item will be received as a request body. *POST*
+    - /addOrderService/{serviceId}/{orderId} - add a service to an order, the order item will be received as a request body. *POST*
+  - ***OrderOption Table***
+    - /addOrderOptions/{orderClientId} - add order options to an order, the order options will be received as a request body. *POST*
+    - /updateOrderNewsletter/{orderClientId} - update newsletter for an order, the newsletter will be received as a request parameter, parameter name is 'newsletter'. *PUT* 
+    - /updateOrderConfirmed/{orderClientId} - update order confirmation for an order, the order confirmation will be received as a request parameter, parameter name is 'orderConfirmed'. *PUT*
+
+### Observer Design Pattern Enhancements
+- **New Features**: We've added a new table for client details, which includes order confirmation status and newsletter registration.
+  - **Email Notifications**: Clients are now notified via email when a new product is added or an order is confirmed.
+  - **Observer Implementation**: These notifications are managed using the Observer design pattern, which ensures that clients receive timely updates based on the relevant actions in the database.
+ 
 <p align="left">
   <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/e9da2a4f-1672-4901-ab94-572ffd68cad1" width="250">
 </p>
 
-- **OrderOptions to OrderClient**: One-to-One. Every order of a client has the options for newsletter and order status.
+- **OrderOptions to OrderClient**: A one-to-one relationship exists where every order placed by a client is linked with options for newsletter subscription and order status.
 
+### Unit Testing
+- **Comprehensive Tests**: We have implemented unit testing across all layers:
+  - **Service Layer**: All business logic is thoroughly tested to ensure functionality and reliability.
+  - **Observer Layer**: The functionality of the Observer pattern is verified through various scenarios to ensure correct behavior.
+  - **Data Layer**: Database interactions are tested to confirm both the integrity and security of data operations.
 
 ### Frontend Development
 
