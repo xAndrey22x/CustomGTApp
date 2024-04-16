@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface OrderClientRepo extends JpaRepository<OrderClient, Long> {
     /**
-     * Find OrderClient by orderOptionsNewsletterTrue
-     * @return OrderClient
+     * Find all OrderClient which have the newsletter option set to true
+     * @return List of OrderClient
      */
-    List<OrderClient> findByOrderOptionsNewsletterTrue();
+    List<OrderClient> findByOrderOptionNewsletterTrue();
 
 }

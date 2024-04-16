@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     /**
-     * Method to get all the photos of a product based on the list of photos from a product and it calls the
+     * Method to get all the photos of a product based on the list of photos from a product, and it calls the
      * findPhotosByProductId method from the ProductService class
      * @param productId the product id
      * @return list of all photos of a product
@@ -70,7 +70,7 @@ public class ProductController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to find a product based on the id provided and it calls the findProductById method from the ProductService class
+     * Method to find a product based on the id provided, and it calls the findProductById method from the ProductService class
      * @param id the id of the product we want to find
      * @return the product found
      */
@@ -128,7 +128,7 @@ public class ProductController {
     }
 
     /**
-     * Method to update the price of a product with price as a request parameter and it calls the updatePrice method from the ProductService class
+     * Method to update the price of a product with price as a request parameter, and it calls the updatePrice method from the ProductService class
      * @param productId the id of the product we want to update the price
      * @param price the new price of the product
      * @return the product with the updated price

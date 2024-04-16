@@ -71,12 +71,12 @@ public class OrderClientData implements OrderClientContract {
     }
 
     /**
-     * Method to get an order client based on the email using the JPA Repository method
-     * @return the order client
+     * Method to get all the order clients based on the order option id using the JPA Repository method
+     * @return List of all the order clients based on the order option id
      */
 
     @Override
-    public List<OrderClient> findByOrderOptionsNewsletterTrue() {
-        return this.orderClientRepo.findByOrderOptionsNewsletterTrue();
+    public List<OrderClient> findByOrderOptionNewsletterTrue() {
+        return this.orderClientRepo.findByOrderOptionNewsletterTrue();
     }
 }

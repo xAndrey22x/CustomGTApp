@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @PostConstruct
     public void setupObservers(){
-        List<OrderClient> orderClients = this.orderClientContract.findByOrderOptionsNewsletterTrue();
+        List<OrderClient> orderClients = this.orderClientContract.findByOrderOptionNewsletterTrue();
         for(OrderClient orderClient : orderClients){
             ClientNotificationService clientNotificationService = new ClientNotificationService(orderClient.getId(),
                     orderClient.getEmail(), emailService);

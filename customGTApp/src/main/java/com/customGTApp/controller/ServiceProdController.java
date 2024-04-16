@@ -86,7 +86,7 @@ public class ServiceProdController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     /**
-     * Method to get all the photos of a service based on the list of photos from a service and it calls the
+     * Method to get all the photos of a service based on the list of photos from a service, and it calls the
      * findPhotosByServiceId method from the ServiceProdService class
      * @param serviceId the service id
      * @return list of all photos

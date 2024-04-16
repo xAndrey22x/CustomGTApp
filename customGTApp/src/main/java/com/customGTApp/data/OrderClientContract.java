@@ -33,8 +33,8 @@ public interface OrderClientContract {
      */
     void deleteById(Long id);
     /**
-     * Find an OrderClient entity by its email
-     * @return Optional<OrderClient> - The OrderClient entity wrapped in an Optional
+     * Find all OrderClient entities with the newsletter option set to true
+     * @return List<OrderClient> - List of all OrderClient entities with the newsletter option set to true
      */
-    List<OrderClient> findByOrderOptionsNewsletterTrue();
+    List<OrderClient> findByOrderOptionNewsletterTrue();
 }

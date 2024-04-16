@@ -2,7 +2,7 @@ package com.customGTApp.service.observermanagement;
 
 import com.customGTApp.observerservice.ClientOrderOptionObserver;
 
-public interface OrderOptionsManage {
+public interface OrderOptionManage {
     /**
      * Add an observer to the list of observers
      * @param observer the observer to be added

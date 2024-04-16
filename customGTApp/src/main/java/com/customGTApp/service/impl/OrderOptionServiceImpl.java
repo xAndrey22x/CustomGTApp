@@ -1,14 +1,14 @@
 package com.customGTApp.service.impl;
 
 import com.customGTApp.data.OrderClientContract;
-import com.customGTApp.data.OrderOptionsContract;
+import com.customGTApp.data.OrderOptionContract;
 import com.customGTApp.model.OrderClient;
-import com.customGTApp.model.OrderOptions;
+import com.customGTApp.model.OrderOption;
 import com.customGTApp.observerservice.ClientOrderOptionObserver;
 import com.customGTApp.observerservice.impl.ClientNotificationService;
 import com.customGTApp.observerservice.impl.EmailService;
-import com.customGTApp.service.OrderOptionsService;
-import com.customGTApp.service.observermanagement.OrderOptionsManage;
+import com.customGTApp.service.OrderOptionService;
+import com.customGTApp.service.observermanagement.OrderOptionManage;
 import com.customGTApp.service.observermanagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOptionsManage {
+public class OrderOptionServiceImpl implements OrderOptionService, OrderOptionManage {
 
-    private final OrderOptionsContract orderOptionsContract;
+    private final OrderOptionContract orderOptionContract;
     private final OrderClientContract orderClientContract;
 
     private final ProductObserverManage productService;
@@ -39,8 +39,8 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
     private final EmailService emailService;
 
     @Autowired
-    public OrderOptionsServiceImpl(OrderOptionsContract orderOptionsContract, OrderClientContract orderClientContract, ProductServiceImpl productService, EmailService emailService) {
-        this.orderOptionsContract = orderOptionsContract;
+    public OrderOptionServiceImpl(OrderOptionContract orderOptionContract, OrderClientContract orderClientContract, ProductServiceImpl productService, EmailService emailService) {
+        this.orderOptionContract = orderOptionContract;
         this.orderClientContract = orderClientContract;
         this.productService = productService;
         this.emailService = emailService;
@@ -55,21 +55,21 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
      * Method to add order options to an order and add the observer to the list of observers if the newsletter is true
      * using the data layer and the contract
      * @param orderClientId the order client id
-     * @param orderOptions the order options
+     * @param orderOption the order options
      * @return the order options
      */
     @Override
     @Transactional
-    public OrderOptions addOrderOptions(Long orderClientId, OrderOptions orderOptions) {
+    public OrderOption addOrderOptions(Long orderClientId, OrderOption orderOption) {
         Optional<OrderClient> orderClient = this.orderClientContract.findById(orderClientId);
         if(orderClient.isPresent()){
-            orderOptions.setOrderClient(orderClient.get());
-            if(orderOptions.isNewsletter()) {
+            orderOption.setOrderClient(orderClient.get());
+            if(orderOption.isNewsletter()) {
                 ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderClient.get().getId(),
                         orderClient.get().getEmail(), emailService);
                 this.productService.addObserver(clientNotificationService1);
             }
-            return this.orderOptionsContract.save(orderOptions);
+            return this.orderOptionContract.save(orderOption);
         }
         return null;
     }
@@ -84,8 +84,8 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
 
     @Override
     @Transactional
-    public OrderOptions updateNewsLetter(Long orderClientId, Boolean newsLetter) {
-        Optional<OrderOptions> orderOptions = this.orderOptionsContract.findByOrderClientId(orderClientId);
+    public OrderOption updateNewsLetter(Long orderClientId, Boolean newsLetter) {
+        Optional<OrderOption> orderOptions = this.orderOptionContract.findByOrderClientId(orderClientId);
         if(orderOptions.isPresent()){
             if(newsLetter){
                 ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderOptions.get().getOrderClient().getId(),
@@ -96,7 +96,7 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
                 this.productService.removeObserver(orderOptions.get().getOrderClient().getId());
             }
             orderOptions.get().setNewsletter(newsLetter);
-            return this.orderOptionsContract.save(orderOptions.get());
+            return this.orderOptionContract.save(orderOptions.get());
         }
         return null;
     }
@@ -110,15 +110,15 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
      */
     @Override
     @Transactional
-    public OrderOptions updateOrderConfirmation(Long orderClientId, Boolean orderConfirmed) {
-        Optional<OrderOptions> orderOptions = this.orderOptionsContract.findByOrderClientId(orderClientId);
+    public OrderOption updateOrderConfirmation(Long orderClientId, Boolean orderConfirmed) {
+        Optional<OrderOption> orderOptions = this.orderOptionContract.findByOrderClientId(orderClientId);
         if(orderOptions.isPresent()){
             orderOptions.get().setOrderConfirmed(orderConfirmed);
             if(orderConfirmed){
                 Optional<OrderClient> orderClient = this.orderClientContract.findById(orderClientId);
                 orderClient.ifPresent(client -> notifyObservers(client.getEmail()));
             }
-            return this.orderOptionsContract.save(orderOptions.get());
+            return this.orderOptionContract.save(orderOptions.get());
         }
         return null;
     }

@@ -48,7 +48,7 @@ public class OrderClient {
      * The options for an order
      */
     @OneToOne(mappedBy = "orderClient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private OrderOptions orderOptions;
+    private OrderOption orderOption;
 
 
     public OrderClient() {}
@@ -152,12 +152,12 @@ public class OrderClient {
         return orderItems;
     }
 
-    public OrderOptions getOrderOptions() {
-        return orderOptions;
+    public OrderOption getOrderOptions() {
+        return orderOption;
     }
 
-    public void setOrderOptions(OrderOptions orderOptions) {
-        this.orderOptions = orderOptions;
+    public void setOrderOptions(OrderOption orderOption) {
+        this.orderOption = orderOption;
     }
 
 }
