@@ -1,4 +1,4 @@
-package com.customGTApp.observerService;
+package com.customGTApp.observerservice;
 
 import com.customGTApp.model.Product;
 

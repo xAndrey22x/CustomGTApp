@@ -54,7 +54,8 @@ public class OrderClient {
     public OrderClient() {}
 
 
-    public OrderClient(String name, String email, String phoneNumber, String county, String city, String address, int postalCode, float totalPrice) {
+    public OrderClient(long id, String name, String email, String phoneNumber, String county, String city, String address, int postalCode, float totalPrice) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;

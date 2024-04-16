@@ -36,7 +36,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 
     /**
-     * Method to add a product to an order item in the database only if the product and the order exist.
+     * Method to add a product to an order item in the database only if the product and the order exist using
+     * the data layer and the contract.
      * @param productId the product id
      * @param orderId the order id
      * @param orderItem the order item
@@ -57,7 +58,8 @@ public class OrderItemServiceImpl implements OrderItemService {
         return null;
     }
     /**
-     * Method to add a service to an order item in the database only if the service and the order exist.
+     * Method to add a service to an order item in the database only if the service and the order exist using
+     * the data layer and the contract.
      * @param serviceId the service id
      * @param orderId the order id
      * @param orderItem the order item

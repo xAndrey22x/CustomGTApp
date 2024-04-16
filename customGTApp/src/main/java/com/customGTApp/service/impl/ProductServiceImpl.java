@@ -7,9 +7,10 @@ import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
-import com.customGTApp.observerService.ClientProductObserver;
-import com.customGTApp.observerService.impl.ClientNotificationService;
-import com.customGTApp.service.observerManagement.ProductObserverManage;
+import com.customGTApp.observerservice.ClientProductObserver;
+import com.customGTApp.observerservice.impl.ClientNotificationService;
+import com.customGTApp.observerservice.impl.EmailService;
+import com.customGTApp.service.observermanagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,22 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     private final OrderClientContract orderClientContract;
 
     /**
+     * Email Service to be able to send emails to the clients about the new products that were added to the database via
+     * the observer pattern
+     */
+    private final EmailService emailService;
+
+    /**
      * List of observers that will be notified when a new product is added
      */
     private final List<ClientProductObserver> observers = new ArrayList<>();
 
     @Autowired
-    public ProductServiceImpl(ProductContract productContract, OrderItemContract orderItemContract, OrderClientContract orderClientContract) {
+    public ProductServiceImpl(ProductContract productContract, OrderItemContract orderItemContract, OrderClientContract orderClientContract, EmailService emailService) {
         this.productContract = productContract;
         this.orderItemContract = orderItemContract;
         this.orderClientContract = orderClientContract;
+        this.emailService = emailService;
     }
 
 
@@ -53,15 +61,14 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     public void setupObservers(){
         List<OrderClient> orderClients = this.orderClientContract.findByOrderOptionsNewsletterTrue();
         for(OrderClient orderClient : orderClients){
-            ClientNotificationService clientNotificationService = new ClientNotificationService(null);
-            clientNotificationService.setEmail(orderClient.getEmail());
-            clientNotificationService.setClientId(orderClient.getId());
+            ClientNotificationService clientNotificationService = new ClientNotificationService(orderClient.getId(),
+                    orderClient.getEmail(), emailService);
             addObserver(clientNotificationService);
         }
     }
 
     /**
-     * Method to get all the products
+     * Method to get all the products from the database using our data layer with the help of the contract.
      * @return list of all products
      */
     @Override
@@ -69,7 +76,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
         return this.productContract.findAll();
     }
     /**
-     * Method to get a product based on the id
+     * Method to get a product based on the id from the database using our data layer with the help of the contract.
      * @param id the product id
      * @return the product
      */
@@ -79,7 +86,8 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     }
 
     /**
-     * Method to add a new product
+     * Method to add a new product to the database using our data layer with the help of the contract and
+     * notify all the observers about the new added product
      * @param p the product we want to add
      * @return the added product
      */
@@ -90,7 +98,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     }
 
     /**
-     * Updates the project only if it already exists in the database
+     * Updates the project only if it already exists in the database.
      * @param p the product with the fields updated
      * @return the updated product or null
      */
@@ -116,7 +124,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
         this.productContract.deleteById(id);
     }
     /**
-     * Method to get all the photos of a product
+     * Method to get all the photos of a product from the database using our data layer with the help of the contract.
      * @param productId the product id
      * @return list of all photos of the product
      */
@@ -128,7 +136,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     }
 
     /**
-     * Method to update the quantity of a product
+     * Method to update the quantity of a product in the database using our data layer with the help of the contract.
      * @param productId the product id
      * @param quantity the new quantity
      * @return the product with the updated quantity
@@ -146,7 +154,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     }
 
     /**
-     * Method to update the price of a product
+     * Method to update the price of a product in the database using our data layer with the help of the contract.
      * @param productId the product id
      * @param price the new price
      * @return the product with the updated price
@@ -169,6 +177,13 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @Override
     public void addObserver(ClientProductObserver observer) {
+        for(ClientProductObserver obs : observers){
+            if(obs instanceof ClientNotificationService && observer instanceof ClientNotificationService){
+                if(((ClientNotificationService) obs).getEmail().equals(((ClientNotificationService) observer).getEmail())){
+                    return;
+                }
+            }
+        }
         this.observers.add(observer);
     }
 

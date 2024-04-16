@@ -17,6 +17,12 @@ public interface PhotoService {
      * @return returns the added photo
      */
     Photo addPhotoToProduct(Long productId, Photo photo);
+    /**
+     * Method to add a photo to service based on the id
+     * @param serviceProdId id of the service we want to add the photo
+     * @param photo the photo we want to add
+     * @return returns the added photo
+     */
     Photo addPhotoToService(Long serviceProdId, Photo photo);
 
     /**
@@ -26,5 +32,9 @@ public interface PhotoService {
      * @return the photo updated
      */
     Photo updatePhoto(Photo p, boolean isProduct);
+    /**
+     * Method to delete a photo based on the id
+     * @param id id of the photo we want to delete
+     */
     void deletePhoto(Long id);
 }

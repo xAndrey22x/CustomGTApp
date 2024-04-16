@@ -25,7 +25,7 @@ public class OrderOptionsController {
     }
 
     /**
-     * Method to add order options to an order
+     * Method to add order options to an order and return it. Also calls the addOrderOptions method from the service layer
      * @param orderClientId the order client id
      * @param orderOptions the order options
      * @return the order options
@@ -40,7 +40,7 @@ public class OrderOptionsController {
     }
 
     /**
-     * Method to update newsletter for an order
+     * Method to update newsletter for an order and return it. Also calls the updateNewsLetter method from the service layer
      * @param orderClientId the order client id
      * @param newsletter the newsletter
      * @return the order options
@@ -55,7 +55,7 @@ public class OrderOptionsController {
     }
 
     /**
-     * Method to update order confirmation for an order
+     * Method to update order confirmation for an order and return it. Also calls the updateOrderConfirmation method from the service layer
      * @param orderClientId the order client id
      * @param orderConfirmed the order confirmation
      * @return the order options

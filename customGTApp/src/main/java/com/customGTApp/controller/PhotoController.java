@@ -31,7 +31,7 @@ public class PhotoController {
         this.photoService = photoService;
     }
     /**
-     * Method to get all the photos
+     * Method to get all the photos from the database and return them as a list. Also calls the findAllPhotos method from the service layer
      * @return list of all photos
      */
     @GetMapping("/all")
@@ -40,7 +40,7 @@ public class PhotoController {
         return new ResponseEntity<>(photos, HttpStatus.OK);
     }
     /**
-     * Method to add a photo to a product
+     * Method to add a photo to a product based on the product id and return it. Also calls the addPhotoToProduct method from the service layer
      * @param productId the product id
      * @param photo the photo we want to add
      * @return the added photo
@@ -54,7 +54,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to add a photo to a service
+     * Method to add a photo to a service based on the service id and return it. Also calls the addPhotoToService method from the service layer
      * @param photo the photo we want to add
      * @return the added photo
      */
@@ -67,7 +67,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to update the photo of a product
+     * Method to update the photo of a product based on the product id and return it. Also calls the updatePhoto method from the service layer
      * @param photo the photo we want to update
      * @return the updated photo
      */
@@ -80,7 +80,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to update the photo of a service
+     * Method to update the photo of a service based on the service id and return it. Also calls the updatePhoto method from the service layer
      * @param photo the photo we want to update
      * @return the updated photo
      */
@@ -93,7 +93,7 @@ public class PhotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to delete a photo
+     * Method to delete a photo based on the photo id. Also calls the deletePhoto method from the service layer
      * @param photoId the photo id
      * @return status of the operation
      */

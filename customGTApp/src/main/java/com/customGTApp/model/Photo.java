@@ -36,7 +36,9 @@ public class Photo {
 
     }
 
-    public Photo(String url) {
+
+    public Photo(long id, String url) {
+        this.id = id;
         this.url = url;
     }
 

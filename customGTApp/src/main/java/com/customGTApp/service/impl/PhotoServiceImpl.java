@@ -60,7 +60,11 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     /**
-     * Same as the method for adding to Product
+     * Implementation of the method to add a photo to the service. Firstly it checks if the service where we want to add
+     * the photo already exists and if exists it adds the photo to his list.
+     * @param serviceProdId id of the service we want to add the photo
+     * @param photo the photo we want to add
+     * @return the added photo
      */
     @Override
     @Transactional
@@ -77,6 +81,9 @@ public class PhotoServiceImpl implements PhotoService {
     /**
      * Update the photo information only if the photo already exists in dataBase and also don't forget the reference
      * for product or service id.
+     * @param photo new photo information
+     * @param isProduct if it's for a product or for a service
+     * @return the photo updated
      */
     @Override
     @Transactional

@@ -1,7 +1,6 @@
-package com.customGTApp.service.observerManagement;
+package com.customGTApp.service.observermanagement;
 
-import com.customGTApp.model.OrderOptions;
-import com.customGTApp.observerService.ClientOrderOptionObserver;
+import com.customGTApp.observerservice.ClientOrderOptionObserver;
 
 public interface OrderOptionsManage {
     /**

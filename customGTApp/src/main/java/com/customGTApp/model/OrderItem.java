@@ -43,7 +43,8 @@ public class OrderItem {
 
     public OrderItem(){ }
 
-    public OrderItem(int quantity, float price) {
+    public OrderItem(long id, int quantity, float price) {
+        this.id = id;
         this.quantity = quantity;
         this.price = price;
     }

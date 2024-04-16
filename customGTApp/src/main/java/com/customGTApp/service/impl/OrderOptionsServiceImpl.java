@@ -4,11 +4,12 @@ import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.data.OrderOptionsContract;
 import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.OrderOptions;
-import com.customGTApp.observerService.ClientOrderOptionObserver;
-import com.customGTApp.observerService.impl.ClientNotificationService;
+import com.customGTApp.observerservice.ClientOrderOptionObserver;
+import com.customGTApp.observerservice.impl.ClientNotificationService;
+import com.customGTApp.observerservice.impl.EmailService;
 import com.customGTApp.service.OrderOptionsService;
-import com.customGTApp.service.observerManagement.OrderOptionsManage;
-import com.customGTApp.service.observerManagement.ProductObserverManage;
+import com.customGTApp.service.observermanagement.OrderOptionsManage;
+import com.customGTApp.service.observermanagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +31,29 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
      * List of observers that will be notified when a new order option is added
      */
     private final List<ClientOrderOptionObserver> observers = new ArrayList<>();
+
     /**
-     * ClientNotificationService object to handle the observer operations and to be able to use the methods in
-     * the service layer
+     * Email Service to be able to send emails to the clients about the new products that were added to the database via
+     * the observer pattern.
      */
-    private final ClientNotificationService clientNotificationService;
+    private final EmailService emailService;
 
     @Autowired
-    public OrderOptionsServiceImpl(OrderOptionsContract orderOptionsContract, OrderClientContract orderClientContract, ProductServiceImpl productService, ClientNotificationService clientNotificationService) {
+    public OrderOptionsServiceImpl(OrderOptionsContract orderOptionsContract, OrderClientContract orderClientContract, ProductServiceImpl productService, EmailService emailService) {
         this.orderOptionsContract = orderOptionsContract;
         this.orderClientContract = orderClientContract;
         this.productService = productService;
-        this.clientNotificationService = clientNotificationService;
+        this.emailService = emailService;
     }
 
     @PostConstruct
     public void setupObservers(){
-        addObserver(clientNotificationService);
+        addObserver(new ClientNotificationService(emailService));
     }
 
     /**
      * Method to add order options to an order and add the observer to the list of observers if the newsletter is true
+     * using the data layer and the contract
      * @param orderClientId the order client id
      * @param orderOptions the order options
      * @return the order options
@@ -62,9 +65,8 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
         if(orderClient.isPresent()){
             orderOptions.setOrderClient(orderClient.get());
             if(orderOptions.isNewsletter()) {
-                ClientNotificationService clientNotificationService1 = new ClientNotificationService(null);
-                clientNotificationService1.setEmail(orderClient.get().getEmail());
-                clientNotificationService1.setClientId(orderClient.get().getId());
+                ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderClient.get().getId(),
+                        orderClient.get().getEmail(), emailService);
                 this.productService.addObserver(clientNotificationService1);
             }
             return this.orderOptionsContract.save(orderOptions);
@@ -74,7 +76,7 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
 
     /**
      * Method to update newsletter for an order and add the observer to the list of observers if the newsletter is true,
-     * otherwise remove the observer from the list of observers
+     * otherwise remove the observer from the list of observers using the data layer and the contract.
      * @param orderClientId the order client id
      * @param newsLetter the newsletter
      * @return the order options
@@ -86,9 +88,8 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
         Optional<OrderOptions> orderOptions = this.orderOptionsContract.findByOrderClientId(orderClientId);
         if(orderOptions.isPresent()){
             if(newsLetter){
-                ClientNotificationService clientNotificationService1 = new ClientNotificationService(null);
-                clientNotificationService1.setEmail(orderOptions.get().getOrderClient().getEmail());
-                clientNotificationService1.setClientId(orderOptions.get().getOrderClient().getId());
+                ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderOptions.get().getOrderClient().getId(),
+                        orderOptions.get().getOrderClient().getEmail(), emailService);
                 this.productService.addObserver(clientNotificationService1);
             }
             else{
@@ -102,6 +103,7 @@ public class OrderOptionsServiceImpl implements OrderOptionsService, OrderOption
 
     /**
      * Method to update order confirmation for an order and notify the observers if the order is confirmed
+     * using the data layer and the contract.
      * @param orderClientId the order client id
      * @param orderConfirmed the order confirmation
      * @return the order options

@@ -25,6 +25,10 @@ public class ServiceProd {
     @Column(nullable = false)
     private float price;
 
+    /**
+     * OneToMany connection between the service and photos. In the photos list we will hold all the photos connected
+     * between the primary key of a service 'id' and the foreign key of photo 'serviceId'.
+     */
     @OneToMany(mappedBy = "serviceProd", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 
@@ -32,7 +36,8 @@ public class ServiceProd {
 
     }
 
-    public ServiceProd(String name, String description, float price) {
+    public ServiceProd(long id, String name, String description, float price) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;

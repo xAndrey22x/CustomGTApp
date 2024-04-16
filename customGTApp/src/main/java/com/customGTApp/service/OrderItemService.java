@@ -8,7 +8,21 @@ import com.customGTApp.model.OrderItem;
  */
 public interface OrderItemService {
 
+    /**
+     * Method to add a product to an order
+     * @param productId the id of the product that will be added
+     * @param orderId the id of the order that the product will be added to
+     * @param orderItem the order item details that will be added
+     * @return the order item that was added
+     */
     OrderItem addProductToOrder(Long productId, Long orderId, OrderItem orderItem);
+    /**
+     * Method to add a service to an order
+     * @param serviceId the id of the service that will be added
+     * @param orderId the id of the order that the service will be added to
+     * @param orderItem the order item details that will be added
+     * @return the order item that was added
+     */
     OrderItem addServiceToOrder(Long serviceId, Long orderId, OrderItem orderItem);
 
 }

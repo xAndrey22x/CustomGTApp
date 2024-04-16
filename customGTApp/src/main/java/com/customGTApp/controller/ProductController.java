@@ -57,7 +57,10 @@ public class ProductController {
     }
 
     /**
-     * Method to get all the photos of a product based on the list of photos from a product
+     * Method to get all the photos of a product based on the list of photos from a product and it calls the
+     * findPhotosByProductId method from the ProductService class
+     * @param productId the product id
+     * @return list of all photos of a product
      */
     @GetMapping("/{productId}/photos")
     public ResponseEntity<List<Photo>> getAllPhotosByProductId(@PathVariable("productId") Long productId) {
@@ -67,7 +70,9 @@ public class ProductController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to find a product based on the id provided
+     * Method to find a product based on the id provided and it calls the findProductById method from the ProductService class
+     * @param id the id of the product we want to find
+     * @return the product found
      */
     @GetMapping("/find/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
@@ -77,7 +82,9 @@ public class ProductController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to add a product
+     * Method to add a product, and it calls the addProduct method from the ProductService class
+     * @param productReceived the product we want to add
+     * @return the added product
      */
     @PostMapping("/add")
     public ResponseEntity<Product> addProduct(@RequestBody Product productReceived) {
@@ -85,7 +92,9 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
     /**
-     * Method to update a product
+     * Method to update a product, and it calls the updateProduct method from the ProductService class
+     * @param productReceived the product with the fields updated
+     * @return the updated product
      */
     @PutMapping("/update")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productReceived) {
@@ -95,7 +104,8 @@ public class ProductController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to delete a product based on the id provided
+     * Method to delete a product based on the id provided, and it calls the deleteProductById method from the ProductService class
+     * @param id the id of the product we want to delete
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable("id") Long id) {
@@ -104,7 +114,10 @@ public class ProductController {
     }
 
     /**
-     * Method to update the quantity of a product with quantity as a request parameter
+     * Method to update the quantity of a product with quantity as a request parameter, and it calls the updateQuantity method from the ProductService class
+     * @param productId the id of the product we want to update the quantity
+     * @param quantity the new quantity of the product
+     * @return the product with the updated quantity
      */
     @PutMapping("/updateQuantity/{productId}")
     public ResponseEntity<Product> updateQuantity(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity) {
@@ -115,7 +128,10 @@ public class ProductController {
     }
 
     /**
-     * Method to update the price of a product with price as a request parameter
+     * Method to update the price of a product with price as a request parameter and it calls the updatePrice method from the ProductService class
+     * @param productId the id of the product we want to update the price
+     * @param price the new price of the product
+     * @return the product with the updated price
      */
     @PutMapping("/updatePrice/{productId}")
     public ResponseEntity<Product> updatePrice(@PathVariable("productId") Long productId, @RequestParam("price") float price) {

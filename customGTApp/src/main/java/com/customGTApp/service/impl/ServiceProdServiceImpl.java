@@ -30,7 +30,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
 
 
     /**
-     * Method to get all the services
+     * Method to get all the services from the database using our data layer with the help of the contract.
      * @return list of all services
      */
     @Override
@@ -38,7 +38,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return serviceProdContract.findAll();
     }
     /**
-     * Method to get a service based on the id
+     * Method to get a service based on the id from the database using our data layer with the help of the contract.
      * @param id the service id
      * @return the service
      */
@@ -47,7 +47,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return serviceProdContract.findById(id).orElse(null);
     }
     /**
-     * Method to add a new service
+     * Method to add a new service to the database using our data layer with the help of the contract.
      * @param serviceProd the service we want to add
      * @return the added service
      */
@@ -56,7 +56,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return serviceProdContract.save(serviceProd);
     }
     /**
-     * Method to update a service only if it already exists in the database
+     * Method to update a service only if it already exists in the database using our data layer with the help of the contract.
      * @param serviceProd the service we want to update
      * @return the updated service
      */
@@ -69,7 +69,8 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         return null;
     }
     /**
-     * Method to delete a service based on the id and all the order items that contain this service
+     * Method to delete a service based on the id and all the order items that contain this service using
+     * the data layer and the contract.
      * @param id the service id
      */
     @Override
@@ -79,7 +80,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
         this.serviceProdContract.deleteById(id);
     }
     /**
-     * Method to get all the photos of a service
+     * Method to get all the photos of a service from the database using our data layer with the help of the contract.
      * @param serviceId the service id
      * @return list of all photos
      */
@@ -91,7 +92,7 @@ public class ServiceProdServiceImpl implements ServiceProdService {
     }
 
     /**
-     * Method to update the price of a service
+     * Method to update the price of a service only if it already exists in the database using our data layer with the help of the contract.
      * @param serviceId the service id
      * @param price the new price
      * @return the updated service

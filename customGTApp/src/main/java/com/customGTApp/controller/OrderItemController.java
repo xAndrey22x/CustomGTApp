@@ -25,7 +25,7 @@ public class OrderItemController {
         this.orderItemService = orderItemService;
     }
     /**
-     * Method to add a product to an order
+     * Method to add a product to an order and return it. Also calls the addProductToOrder method from the service layer
      * @param productId the product id
      * @param orderId the order id
      * @param orderItem the order item
@@ -40,7 +40,7 @@ public class OrderItemController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to add a service to an order
+     * Method to add a service to an order and return it. Also calls the addServiceToOrder method from the service layer
      * @param serviceId the service id
      * @param orderId the order id
      * @param orderItem the order item

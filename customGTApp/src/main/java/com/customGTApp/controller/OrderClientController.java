@@ -31,7 +31,7 @@ public class OrderClientController {
     }
 
     /**
-     * Method to get all the orders
+     * Method to get all the orders from the database and return them as a list. Also calls the findAllOrders method from the service layer
      * @return list of all orders
      */
     @GetMapping("/all")
@@ -40,7 +40,7 @@ public class OrderClientController {
     }
 
     /**
-     * Method to add a new order
+     * Method to add a new order to the database and return it. Also calls the addOrder method from the service layer
      * @param orderClient the order we want to add
      * @return the added order
      */
@@ -50,7 +50,7 @@ public class OrderClientController {
     }
 
     /**
-     * Method to update an order
+     * Method to update an order in the database and return it. Also calls the updateOrder method from the service layer
      * @param orderClient the order we want to update
      * @return the updated order
      */
@@ -62,7 +62,7 @@ public class OrderClientController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to delete an order
+     * Method to delete an order from the database. Also calls the deleteOrder method from the service layer
      * @param id the id of the order we want to delete
      * @return status of the operation
      */

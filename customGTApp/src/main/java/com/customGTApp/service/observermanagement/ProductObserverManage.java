@@ -1,7 +1,7 @@
-package com.customGTApp.service.observerManagement;
+package com.customGTApp.service.observermanagement;
 
 import com.customGTApp.model.Product;
-import com.customGTApp.observerService.ClientProductObserver;
+import com.customGTApp.observerservice.ClientProductObserver;
 
 public interface ProductObserverManage {
     /**

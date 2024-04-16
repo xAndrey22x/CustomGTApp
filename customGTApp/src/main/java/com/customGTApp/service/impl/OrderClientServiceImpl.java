@@ -23,7 +23,7 @@ public class OrderClientServiceImpl implements OrderClientService {
     }
 
     /**
-     * Method to get all the orders
+     * Method to get all the orders from the database using our data layer with the help of the contract.
      * @return list of all orders
      */
     @Override
@@ -32,7 +32,7 @@ public class OrderClientServiceImpl implements OrderClientService {
     }
 
     /**
-     * Method to add a new order
+     * Method to add a new order to the database using our data layer with the help of the contract.
      * @param orderClient the order we want to add
      * @return the added order
      */
@@ -41,7 +41,7 @@ public class OrderClientServiceImpl implements OrderClientService {
         return this.orderClientContract.save(orderClient);
     }
     /**
-     * Method to update an order
+     * Method to update an order in the database using our data layer and check if the order exists.
      * @param orderClient the order we want to update
      * @return the updated order
      */
@@ -54,7 +54,7 @@ public class OrderClientServiceImpl implements OrderClientService {
         return null;
     }
     /**
-     * Method to delete an order
+     * Method to delete an order from the database using our data layer with the help of the contract.
      * @param orderId the order id
      */
     @Override

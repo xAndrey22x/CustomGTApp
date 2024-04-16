@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+/**
+ * OrderOptions model of our database who will hold information about the options of an order.
+ */
+
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OrderOptions {
@@ -16,6 +20,9 @@ public class OrderOptions {
     @Column(nullable = false)
     private boolean orderConfirmed;
 
+    /**
+     * Relation between the order client table and this table to keep the options of an order
+     */
     @OneToOne
     @JoinColumn(name = "orderId", referencedColumnName = "id")
     private OrderClient orderClient;
@@ -23,7 +30,8 @@ public class OrderOptions {
     public OrderOptions() {
     }
 
-    public OrderOptions(boolean newsletter, boolean orderConfirmed) {
+    public OrderOptions(long id, boolean newsletter, boolean orderConfirmed) {
+        this.id = id;
         this.newsletter = newsletter;
         this.orderConfirmed = orderConfirmed;
     }

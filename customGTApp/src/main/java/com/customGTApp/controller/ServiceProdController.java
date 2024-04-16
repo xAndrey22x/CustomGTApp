@@ -35,7 +35,7 @@ public class ServiceProdController {
         this.serviceProdService = serviceProdService;
     }
     /**
-     * Method to get all the services
+     * Method to get all the services from the database and return them as a list. Also calls the getAllServices method from the service layer
      * @return list of all services
      */
     @GetMapping("/all")
@@ -43,7 +43,7 @@ public class ServiceProdController {
         return new ResponseEntity<>(this.serviceProdService.getAllServices(), HttpStatus.OK);
     }
     /**
-     * Method to get a service based on the id
+     * Method to get a service based on the id provided and return it. Also calls the getServiceById method from the service layer
      * @param id the service id
      * @return the service
      */
@@ -55,7 +55,7 @@ public class ServiceProdController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to add a new service
+     * Method to add a new service to the database and return it. Also calls the addService method from the service layer
      * @param serviceProd the service we want to add
      * @return the added service
      */
@@ -64,7 +64,7 @@ public class ServiceProdController {
         return new ResponseEntity<>(serviceProdService.addService(serviceProd),HttpStatus.OK);
     }
     /**
-     * Method to update a service
+     * Method to update a service in the database and return it. Also calls the updateService method from the service layer
      * @param serviceProd the service we want to update
      * @return the updated service
      */
@@ -76,7 +76,7 @@ public class ServiceProdController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     /**
-     * Method to delete a service
+     * Method to delete a service from the database. Also calls the deleteServiceById method from
      * @param id the id of the service we want to delete
      * @return status of the operation
      */
@@ -86,7 +86,8 @@ public class ServiceProdController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     /**
-     * Method to get all the photos of a service based on the list of photos from a service
+     * Method to get all the photos of a service based on the list of photos from a service and it calls the
+     * findPhotosByServiceId method from the ServiceProdService class
      * @param serviceId the service id
      * @return list of all photos
      */
@@ -99,7 +100,7 @@ public class ServiceProdController {
     }
 
     /**
-     * Method to update the price of a service
+     * Method to update the price of a service based on the service id provided and return it. Also calls the updatePrice method from the service layer
      * @param serviceId the service id
      * @param price the new price
      * @return the updated service

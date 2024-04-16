@@ -1,28 +1,42 @@
-package com.customGTApp.observerService.impl;
+package com.customGTApp.observerservice.impl;
 
 import com.customGTApp.model.Product;
-import com.customGTApp.observerService.ClientOrderOptionObserver;
-import com.customGTApp.observerService.ClientProductObserver;
+import com.customGTApp.observerservice.ClientOrderOptionObserver;
+import com.customGTApp.observerservice.ClientProductObserver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-
-@Service
+/**
+ * The ClientNotificationService class is an observer service that sends emails to the clients
+ * about the new products that were added to the database and if an order has been confirmed
+ */
 public class ClientNotificationService implements ClientProductObserver, ClientOrderOptionObserver {
 
     private Long clientId;
     private String email;
 
-    private final JavaMailSender emailSender;
+    /**
+     * Email Service to be able to send emails to the clients.
+     */
+    private final EmailService emailService;
 
+    /**
+     * The email address from which the email will be sent set in the application.properties file
+     */
 
-    @Autowired
-    public ClientNotificationService(JavaMailSender emailSender) {
-        this.emailSender = emailSender;
+    public ClientNotificationService(EmailService emailService){
+        this.emailService = emailService;
+    }
+
+    public ClientNotificationService(Long clientId, String email, EmailService emailService) {
+        this.clientId = clientId;
+        this.email = email;
+        this.emailService = emailService;
     }
 
     public String getEmail() {
@@ -50,25 +64,24 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
         System.out.println("###################################################################################");
         System.out.println("Sending email to: " + this.email + " about the new product: " + product.getName());
         System.out.println("###################################################################################\n");
-    }
-
-    private void sendEmail(String to, Product product) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("email.com");
-        message.setTo(to);
-        message.setSubject("New Product Alert!");
-        message.setText("Dear Customer,\n\nCheck out our new product: " + product.getName() + "!\n\nBest,\nCustomGTApp Team");
-        emailSender.send(message);
+        emailService.sendEmailProductAdded(this.email, product);
+        System.out.println("###################################################################################");
+        System.out.println("Email was sent");
+        System.out.println("###################################################################################\n");
     }
 
     /**
-     * Update the observer about the order confirmation option
+     * Update the observer about the order that has been confirmed
      * @param email the email of the client that has the order confirmed
      */
     @Override
     public void update(String email) {
         System.out.println("###################################################################################");
         System.out.println("Sending email to: " + email + " that the order has been confirmed!");
+        System.out.println("###################################################################################\n");
+        emailService.sendEmailOrderConfirmed(this.email);
+        System.out.println("###################################################################################");
+        System.out.println("Email was sent");
         System.out.println("###################################################################################\n");
     }
 
