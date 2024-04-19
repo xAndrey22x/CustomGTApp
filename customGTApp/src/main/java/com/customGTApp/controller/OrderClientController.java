@@ -15,6 +15,8 @@ import java.util.List;
  * /order/add - add an order, the order will be received as a request body
  * /order/update - update an order, the order will be received as a request body
  * /order/delete/{id} - delete an order based on the id provided
+ * /order/confirmed - list all the orders that have been confirmed
+ * /order/notConfirmed - list all the orders that have not been confirmed
  */
 @RestController
 @RequestMapping("/order")
@@ -72,4 +74,21 @@ public class OrderClientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Method to get all the orders that have been confirmed from the database and return them as a list. Also calls the findAllOrderConfirmed method from the service layer
+     * @return list of all orders that have been confirmed
+     */
+    @GetMapping("/confirmed")
+    public ResponseEntity<List<OrderClient>> findAllOrderConfirmed(){
+        return new ResponseEntity<>(this.orderClientService.findAllOrderConfirmed(), HttpStatus.OK);
+    }
+
+    /**
+     * Method to get all the orders that have not been confirmed from the database and return them as a list. Also calls the findAllOrderNotConfirmed method from the service layer
+     * @return list of all orders that have not been confirmed
+     */
+    @GetMapping("/notConfirmed")
+    public ResponseEntity<List<OrderClient>> findAllOrderNotConfirmed(){
+        return new ResponseEntity<>(this.orderClientService.findAllOrderNotConfirmed(), HttpStatus.OK);
+    }
 }

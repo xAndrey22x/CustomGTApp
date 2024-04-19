@@ -33,4 +33,16 @@ public interface OrderClientService {
      */
     void deleteOrder(Long orderId);
 
+    /**
+     * Method to find all orders that have been confirmed
+     * @return a list of all orders that have been confirmed
+     */
+    List<OrderClient> findAllOrderConfirmed();
+
+    /**
+     * Method to find all orders that have not been confirmed
+     * @return a list of all orders that have not been confirmed
+     */
+    List<OrderClient> findAllOrderNotConfirmed();
+
 }

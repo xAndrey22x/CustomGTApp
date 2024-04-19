@@ -56,6 +56,8 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
 
     /**
      * Method to set up the observer for notifications about a product when it's added, when the class is created
+     * using the data layer and the contract with the method 'findByOrderOptionNewsletterTrue' which returns a list of
+     * order clients that have the newsletter option set to true.
      */
     @PostConstruct
     public void setupObservers(){

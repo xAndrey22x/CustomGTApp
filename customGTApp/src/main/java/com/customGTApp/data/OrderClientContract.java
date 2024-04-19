@@ -37,4 +37,16 @@ public interface OrderClientContract {
      * @return List<OrderClient> - List of all OrderClient entities with the newsletter option set to true
      */
     List<OrderClient> findByOrderOptionNewsletterTrue();
+
+    /**
+     * Find all OrderClient entities with the orderConfirmed option set to true
+     * @return List<OrderClient> - List of all OrderClient entities with the orderConfirmed option set to true
+     */
+    List<OrderClient> findByOrderOptionOrderConfirmedTrue();
+
+    /**
+     * Find all OrderClient entities with the orderConfirmed option set to false
+     * @return List<OrderClient> - List of all OrderClient entities with the orderConfirmed option set to false
+     */
+    List<OrderClient> findByOrderOptionOrderConfirmedFalse();
 }

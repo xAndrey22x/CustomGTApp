@@ -61,4 +61,22 @@ public class OrderClientServiceImpl implements OrderClientService {
     public void deleteOrder(Long orderId) {
         this.orderClientContract.deleteById(orderId);
     }
+
+    /**
+     * Method to find all orders that have been confirmed using our data layer with the help of the contract.
+     * @return list of all orders that have been confirmed
+     */
+    @Override
+    public List<OrderClient> findAllOrderConfirmed() {
+        return this.orderClientContract.findByOrderOptionOrderConfirmedTrue();
+    }
+
+    /**
+     * Method to find all orders that have not been confirmed using our data layer with the help of the contract.
+     * @return list of all orders that have not been confirmed
+     */
+    @Override
+    public List<OrderClient> findAllOrderNotConfirmed() {
+        return this.orderClientContract.findByOrderOptionOrderConfirmedFalse();
+    }
 }

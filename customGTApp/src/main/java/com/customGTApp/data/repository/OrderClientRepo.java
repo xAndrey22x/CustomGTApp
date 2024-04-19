@@ -15,4 +15,16 @@ public interface OrderClientRepo extends JpaRepository<OrderClient, Long> {
      */
     List<OrderClient> findByOrderOptionNewsletterTrue();
 
+    /**
+     * Find all OrderClient which have the orderConfirmed option set to true
+     * @return List of OrderClient
+     */
+    List<OrderClient> findByOrderOptionOrderConfirmedTrue();
+
+    /**
+     * Find all OrderClient which have the orderConfirmed option set to false
+     * @return List of OrderClient
+     */
+    List<OrderClient> findByOrderOptionOrderConfirmedFalse();
+
 }

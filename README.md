@@ -108,6 +108,8 @@ During this stage, we have focused on developing the server-side logic by levera
     - /order/add - add an order, the order will be received as a request body. *POST*
     - /order/update - update an order, the order will be received as a request body. *PUT*
     - /order/delete/{id} - delete an order based on the id provided. *DELETE*
+    - /order/confirmed - list all the orders that have been confirmed *GET*
+    - /order/notConfirmed - list all the orders that have not been confirmed *GET*
   - ***OrderItem Table***
     - /addOrderProduct/{productId}/{orderId} - add a product to an order, the order item will be received as a request body. *POST*
     - /addOrderService/{serviceId}/{orderId} - add a service to an order, the order item will be received as a request body. *POST*

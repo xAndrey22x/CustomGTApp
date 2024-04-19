@@ -3,11 +3,7 @@ package com.customGTApp.observerservice.impl;
 import com.customGTApp.model.Product;
 import com.customGTApp.observerservice.ClientOrderOptionObserver;
 import com.customGTApp.observerservice.ClientProductObserver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
+import jakarta.mail.MessagingException;
 
 import java.util.Objects;
 
@@ -56,7 +52,7 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
     }
 
     /**
-     * Update the observer about the new added product
+     * Update the observer about the new added product and email the client
      * @param product the product that was added
      */
     @Override
@@ -64,14 +60,18 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
         System.out.println("###################################################################################");
         System.out.println("Sending email to: " + this.email + " about the new product: " + product.getName());
         System.out.println("###################################################################################\n");
-        emailService.sendEmailProductAdded(this.email, product);
+        try {
+            emailService.sendEmailProductAdded(this.email, product);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("###################################################################################");
         System.out.println("Email was sent");
         System.out.println("###################################################################################\n");
     }
 
     /**
-     * Update the observer about the order that has been confirmed
+     * Update the observer about the order that has been confirmed and email the client
      * @param email the email of the client that has the order confirmed
      */
     @Override
@@ -79,7 +79,11 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
         System.out.println("###################################################################################");
         System.out.println("Sending email to: " + email + " that the order has been confirmed!");
         System.out.println("###################################################################################\n");
-        emailService.sendEmailOrderConfirmed(this.email);
+        try {
+            emailService.sendEmailOrderConfirmed(email);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("###################################################################################");
         System.out.println("Email was sent");
         System.out.println("###################################################################################\n");
