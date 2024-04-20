@@ -3,6 +3,12 @@ package com.customGTApp.service.observermanagement;
 import com.customGTApp.observerservice.ClientOrderOptionObserver;
 
 public interface OrderOptionManage {
+
+    /**
+     * Method to set up the observers for the notifications about an order option when it's added
+     */
+    void setupObservers();
+
     /**
      * Add an observer to the list of observers
      * @param observer the observer to be added

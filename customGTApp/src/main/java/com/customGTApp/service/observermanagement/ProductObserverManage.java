@@ -4,6 +4,12 @@ import com.customGTApp.model.Product;
 import com.customGTApp.observerservice.ClientProductObserver;
 
 public interface ProductObserverManage {
+
+    /**
+     * Method to set up the observers for the notifications about a product when it's added
+     */
+    void setupObservers();
+
     /**
      * Add an observer to the list of observers
      * @param observer the observer to be added
