@@ -47,7 +47,7 @@ public class ProductServiceTest {
      */
     @Before
     public void setUp(){
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         this.productService = new ProductServiceImpl(productContract, orderItemContract, orderClientContract, emailService);
     }
 

@@ -39,7 +39,7 @@ public class ProductObserverTest {
      */
     @Before
     public void setUp(){
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         this.productObserverManage = new ProductServiceImpl(productContract, orderItemContract, orderClientContract, emailService);
     }
 

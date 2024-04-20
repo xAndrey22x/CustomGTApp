@@ -39,7 +39,7 @@ public class ServiceProdTest {
      */
     @Before
     public void setUp(){
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         this.serviceProd = new ServiceProdServiceImpl(serviceProdContract, orderItemContract);
     }
 
