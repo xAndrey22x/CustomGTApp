@@ -8,7 +8,7 @@ import com.customGTApp.model.OrderItem;
 import com.customGTApp.model.Photo;
 import com.customGTApp.model.Product;
 import com.customGTApp.observerservice.ClientProductObserver;
-import com.customGTApp.observerservice.impl.ClientNotificationService;
+import com.customGTApp.observerservice.impl.ClientNotification;
 import com.customGTApp.observerservice.impl.EmailService;
 import com.customGTApp.service.observermanagement.ProductObserverManage;
 import jakarta.annotation.PostConstruct;
@@ -63,9 +63,9 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     public void setupObservers(){
         List<OrderClient> orderClients = this.orderClientContract.findByOrderOptionNewsletterTrue();
         for(OrderClient orderClient : orderClients){
-            ClientNotificationService clientNotificationService = new ClientNotificationService(orderClient.getId(),
+            ClientNotification clientNotification = new ClientNotification(orderClient.getId(),
                     orderClient.getEmail(), emailService);
-            addObserver(clientNotificationService);
+            addObserver(clientNotification);
         }
     }
 
@@ -180,8 +180,8 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
     @Override
     public void addObserver(ClientProductObserver observer) {
         for(ClientProductObserver obs : observers){
-            if(obs instanceof ClientNotificationService && observer instanceof ClientNotificationService){
-                if(((ClientNotificationService) obs).getEmail().equals(((ClientNotificationService) observer).getEmail())){
+            if(obs instanceof ClientNotification && observer instanceof ClientNotification){
+                if(((ClientNotification) obs).getEmail().equals(((ClientNotification) observer).getEmail())){
                     return;
                 }
             }
@@ -195,7 +195,7 @@ public class ProductServiceImpl implements ProductService, ProductObserverManage
      */
     @Override
     public void removeObserver(Long id) {
-        this.observers.removeIf(observer -> observer instanceof ClientNotificationService && ((ClientNotificationService) observer).getClientId().equals(id));
+        this.observers.removeIf(observer -> observer instanceof ClientNotification && ((ClientNotification) observer).getClientId().equals(id));
     }
 
     /**

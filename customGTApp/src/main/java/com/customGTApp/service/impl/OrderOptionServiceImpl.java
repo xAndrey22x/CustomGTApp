@@ -5,7 +5,7 @@ import com.customGTApp.data.OrderOptionContract;
 import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.OrderOption;
 import com.customGTApp.observerservice.ClientOrderOptionObserver;
-import com.customGTApp.observerservice.impl.ClientNotificationService;
+import com.customGTApp.observerservice.impl.ClientNotification;
 import com.customGTApp.observerservice.impl.EmailService;
 import com.customGTApp.service.OrderOptionService;
 import com.customGTApp.service.observermanagement.OrderOptionManage;
@@ -39,7 +39,7 @@ public class OrderOptionServiceImpl implements OrderOptionService, OrderOptionMa
     private final EmailService emailService;
 
     @Autowired
-    public OrderOptionServiceImpl(OrderOptionContract orderOptionContract, OrderClientContract orderClientContract, ProductServiceImpl productService, EmailService emailService) {
+    public OrderOptionServiceImpl(OrderOptionContract orderOptionContract, OrderClientContract orderClientContract, ProductObserverManage productService, EmailService emailService) {
         this.orderOptionContract = orderOptionContract;
         this.orderClientContract = orderClientContract;
         this.productService = productService;
@@ -48,7 +48,7 @@ public class OrderOptionServiceImpl implements OrderOptionService, OrderOptionMa
 
     @PostConstruct
     public void setupObservers(){
-        addObserver(new ClientNotificationService(emailService));
+        addObserver(new ClientNotification(emailService));
     }
 
     /**
@@ -65,9 +65,9 @@ public class OrderOptionServiceImpl implements OrderOptionService, OrderOptionMa
         if(orderClient.isPresent()){
             orderOption.setOrderClient(orderClient.get());
             if(orderOption.isNewsletter()) {
-                ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderClient.get().getId(),
+                ClientNotification clientNotification1 = new ClientNotification(orderClient.get().getId(),
                         orderClient.get().getEmail(), emailService);
-                this.productService.addObserver(clientNotificationService1);
+                this.productService.addObserver(clientNotification1);
             }
             return this.orderOptionContract.save(orderOption);
         }
@@ -88,9 +88,9 @@ public class OrderOptionServiceImpl implements OrderOptionService, OrderOptionMa
         Optional<OrderOption> orderOptions = this.orderOptionContract.findByOrderClientId(orderClientId);
         if(orderOptions.isPresent()){
             if(newsLetter){
-                ClientNotificationService clientNotificationService1 = new ClientNotificationService(orderOptions.get().getOrderClient().getId(),
+                ClientNotification clientNotification1 = new ClientNotification(orderOptions.get().getOrderClient().getId(),
                         orderOptions.get().getOrderClient().getEmail(), emailService);
-                this.productService.addObserver(clientNotificationService1);
+                this.productService.addObserver(clientNotification1);
             }
             else{
                 this.productService.removeObserver(orderOptions.get().getOrderClient().getId());

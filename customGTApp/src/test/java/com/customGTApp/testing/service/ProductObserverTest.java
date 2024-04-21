@@ -1,10 +1,11 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.data.OrderItemContract;
 import com.customGTApp.data.ProductContract;
+import com.customGTApp.model.OrderClient;
 import com.customGTApp.model.Product;
-import com.customGTApp.observerservice.impl.ClientNotificationService;
+import com.customGTApp.observerservice.impl.ClientNotification;
 import com.customGTApp.observerservice.impl.EmailService;
 import com.customGTApp.service.impl.ProductServiceImpl;
 import com.customGTApp.service.observermanagement.ProductObserverManage;
@@ -13,6 +14,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -48,7 +51,7 @@ public class ProductObserverTest {
      */
     @Test
     public void testAddObserverNewObserverShouldAdd() {
-        ClientNotificationService observer = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer = Mockito.mock(ClientNotification.class);
         when(observer.getEmail()).thenReturn("example@example.com");
 
         Product product = new Product(1, "name", "description", 10, "carModel", 1);
@@ -65,11 +68,11 @@ public class ProductObserverTest {
      */
     @Test
     public void testAddObserverExistingObserverShouldNotAdd() {
-        ClientNotificationService observer1 = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer1 = Mockito.mock(ClientNotification.class);
         when(observer1.getEmail()).thenReturn("duplicate@example.com");
         this.productObserverManage.addObserver(observer1);
 
-        ClientNotificationService observer2 = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer2 = Mockito.mock(ClientNotification.class);
         when(observer2.getEmail()).thenReturn("duplicate@example.com");
         this.productObserverManage.addObserver(observer2);
 
@@ -85,7 +88,7 @@ public class ProductObserverTest {
      */
     @Test
     public void testRemoveObserverExistingObserverShouldRemove() {
-        ClientNotificationService observer = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer = Mockito.mock(ClientNotification.class);
         when(observer.getClientId()).thenReturn(1L);
         this.productObserverManage.addObserver(observer);
 
@@ -104,7 +107,7 @@ public class ProductObserverTest {
      */
     @Test
     public void testRemoveObserverNotExistingObserverShouldNotRemove() {
-        ClientNotificationService observer = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer = Mockito.mock(ClientNotification.class);
         when(observer.getClientId()).thenReturn(1L);
         this.productObserverManage.addObserver(observer);
 
@@ -122,7 +125,7 @@ public class ProductObserverTest {
      */
     @Test
     public void testNotifyObservers() {
-        ClientNotificationService observer1 = Mockito.mock(ClientNotificationService.class);
+        ClientNotification observer1 = Mockito.mock(ClientNotification.class);
 
         when(observer1.getEmail()).thenReturn("email1@email.com");
 
@@ -140,6 +143,9 @@ public class ProductObserverTest {
      */
     @Test
     public void testSetupObserversFindByNewsletter() {
+        OrderClient orderClient = new OrderClient(1, "name", "email", "phoneNumber", "county", "city", "address", 1, 10);
+        OrderClient orderClient1 = new OrderClient(2, "name2", "email2", "phoneNumber2", "county2", "city2", "address2", 2, 20);
+        when(this.orderClientContract.findByOrderOptionNewsletterTrue()).thenReturn(List.of(orderClient, orderClient1));
         this.productObserverManage.setupObservers();
         Mockito.verify(this.orderClientContract).findByOrderOptionNewsletterTrue();
     }

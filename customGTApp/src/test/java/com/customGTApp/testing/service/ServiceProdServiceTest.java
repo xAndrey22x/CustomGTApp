@@ -1,4 +1,4 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.OrderItemContract;
 import com.customGTApp.data.ServiceProdContract;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class ServiceProdTest {
+public class ServiceProdServiceTest {
     /**
      * The ServiceProdService object to be tested.
      */

@@ -1,4 +1,4 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.PhotoContract;
 import com.customGTApp.data.ProductContract;

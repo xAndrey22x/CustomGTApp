@@ -1,4 +1,4 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.model.OrderClient;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
-public class OrderClientTest {
+public class OrderClientServiceTest {
 
     /**
      * The service to be tested
@@ -82,13 +82,14 @@ public class OrderClientTest {
     @Test
     public void testUpdateOrder() {
         OrderClient orderClient = new OrderClient(1, "name", "email", "phoneNumber", "county", "city", "address", 1, 10);
+        OrderClient orderClient1 = new OrderClient(1, "name2", "email2", "phoneNumber2", "county2", "city", "address", 1, 10);
         when(orderClientContract.findById(1L)).thenReturn(java.util.Optional.of(orderClient));
-        when(orderClientContract.save(orderClient)).thenReturn(orderClient);
+        when(orderClientContract.save(orderClient1)).thenReturn(orderClient1);
 
-        OrderClient result = this.orderClientService.updateOrder(orderClient);
+        OrderClient result = this.orderClientService.updateOrder(orderClient1);
 
-        verify(orderClientContract).save(orderClient);
-        assertEquals(orderClient, result);
+        verify(orderClientContract).save(orderClient1);
+        assertEquals(orderClient1, result);
     }
 
     /**
@@ -119,7 +120,10 @@ public class OrderClientTest {
      */
     @Test
     public void testFindAllOrderConfirmed() {
+        when(orderClientContract.findByOrderOptionOrderConfirmedTrue()).thenReturn(java.util.List.of(new OrderClient(), new OrderClient()));
+
         this.orderClientService.findAllOrderConfirmed();
+
         verify(orderClientContract).findByOrderOptionOrderConfirmedTrue();
     }
 
@@ -128,7 +132,10 @@ public class OrderClientTest {
      */
     @Test
     public void testFindAllOrderNotConfirmed() {
+        when(orderClientContract.findByOrderOptionOrderConfirmedFalse()).thenReturn(java.util.List.of(new OrderClient(), new OrderClient()));
+
         this.orderClientService.findAllOrderNotConfirmed();
+
         verify(orderClientContract).findByOrderOptionOrderConfirmedFalse();
     }
 

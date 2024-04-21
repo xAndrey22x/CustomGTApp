@@ -1,4 +1,4 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.data.OrderItemContract;

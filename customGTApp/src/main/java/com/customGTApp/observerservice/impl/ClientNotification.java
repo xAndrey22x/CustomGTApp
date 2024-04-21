@@ -8,10 +8,10 @@ import jakarta.mail.MessagingException;
 import java.util.Objects;
 
 /**
- * The ClientNotificationService class is an observer service that sends emails to the clients
+ * The ClientNotification class is an observer service that sends emails to the clients
  * about the new products that were added to the database and if an order has been confirmed
  */
-public class ClientNotificationService implements ClientProductObserver, ClientOrderOptionObserver {
+public class ClientNotification implements ClientProductObserver, ClientOrderOptionObserver {
 
     private Long clientId;
     private String email;
@@ -25,11 +25,11 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
      * The email address from which the email will be sent set in the application.properties file
      */
 
-    public ClientNotificationService(EmailService emailService){
+    public ClientNotification(EmailService emailService){
         this.emailService = emailService;
     }
 
-    public ClientNotificationService(Long clientId, String email, EmailService emailService) {
+    public ClientNotification(Long clientId, String email, EmailService emailService) {
         this.clientId = clientId;
         this.email = email;
         this.emailService = emailService;
@@ -90,19 +90,19 @@ public class ClientNotificationService implements ClientProductObserver, ClientO
     }
 
     /**
-     * Method to check if two ClientNotificationService objects are equal
+     * Method to check if two ClientNotification objects are equal
      * @param o the object to compare
      * @return true if the objects are equal, false otherwise
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ClientNotificationService that)) return false;
+        if (!(o instanceof ClientNotification that)) return false;
         return Objects.equals(clientId, that.clientId);
     }
 
     /**
-     * Method to get the hash code of the ClientNotificationService object
+     * Method to get the hash code of the ClientNotification object
      * @return the hash code of the object
      */
     @Override

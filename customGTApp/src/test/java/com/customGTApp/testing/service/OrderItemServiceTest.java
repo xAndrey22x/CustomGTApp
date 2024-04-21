@@ -1,4 +1,4 @@
-package com.customGTApp.testing.servicetest;
+package com.customGTApp.testing.service;
 
 import com.customGTApp.data.OrderClientContract;
 import com.customGTApp.data.OrderItemContract;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-public class OrderItemTest {
+public class OrderItemServiceTest {
 
     /**
      * The service to be tested
