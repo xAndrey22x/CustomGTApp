@@ -57,6 +57,7 @@ public class ProductServiceTest {
     @Test
     public void testAddProduct(){
         Product product = new Product(1, "name", "description", 10, "carModel", 1);
+        when(this.productContract.save(product)).thenReturn(product);
         this.productService.addProduct(product);
         Mockito.verify(this.productContract).save(product);
     }
@@ -107,6 +108,19 @@ public class ProductServiceTest {
         assertNull(result);
     }
 
+    /**
+     * Method to test the updateProduct method if the find by id is called.
+     */
+    @Test
+    public void testUpdateProductFindBy(){
+        Product product = new Product(1, "name", "description", 10, "carModel", 1);
+        when(this.productContract.findById(1L)).thenReturn(java.util.Optional.of(product));
+
+        this.productService.updateProduct(product);
+
+        Mockito.verify(this.productContract).findById(1L);
+    }
+
 
     /**
      * Method to test the updateProduct method.
@@ -114,14 +128,15 @@ public class ProductServiceTest {
     @Test
     public void testUpdateProduct(){
         Product product = new Product(1, "name", "description", 10, "carModel", 1);
+        Product product2 = new Product(1, "name2", "description2", 20, "carModel2", 2);
         when(this.productContract.findById(1L)).thenReturn(java.util.Optional.of(product));
-        when(this.productContract.save(product)).thenReturn(product);
+        when(this.productContract.save(product2)).thenReturn(product2);
 
-        Product result = this.productService.updateProduct(product);
+        Product result = this.productService.updateProduct(product2);
 
-        Mockito.verify(this.productContract).save(product);
+        Mockito.verify(this.productContract).save(product2);
 
-        assertNotNull(result);
+        assertEquals(product2, result);
 
     }
 
@@ -201,13 +216,15 @@ public class ProductServiceTest {
     @Test
     public void testFindPhotosByProductId(){
         Product product = new Product(1, "name", "description", 10, "carModel", 1);
+        Photo photo = new Photo(1, "url");
+        product.addPhoto(photo);
         when(this.productContract.findById(1L)).thenReturn(java.util.Optional.of(product));
 
         List<Photo> result = this.productService.findPhotosByProductId(1L);
 
         Mockito.verify(this.productContract).findById(1L);
 
-        assertNotNull(result);
+        assertEquals(product.getPhotos(), result);
     }
 
     /**
