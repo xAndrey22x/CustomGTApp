@@ -11,19 +11,19 @@ import java.util.Optional;
 public interface OrderOptionContract {
     /**
      * Find all OrderOption entities
-     * @return List<OrderOption> - List of all OrderOption entities
+     * @return List of all OrderOption entities
      */
     List<OrderOption> findAll();
     /**
      * Find an OrderOption entity by its id
      * @param id The id of the OrderOption entity
-     * @return Optional<OrderOption> - The OrderOption entity wrapped in an Optional
+     * @return The OrderOption entity wrapped in an Optional
      */
     Optional<OrderOption> findById(Long id);
     /**
      * Save an OrderOption entity
      * @param orderOption The OrderOption entity to be saved
-     * @return OrderOption - The saved OrderOption entity
+     * @return The saved OrderOption entity
      */
     OrderOption save(OrderOption orderOption);
     /**
@@ -34,7 +34,7 @@ public interface OrderOptionContract {
     /**
      * Find an OrderOption entity by its orderClientId
      * @param orderClientId The orderClientId of the OrderOption entity
-     * @return Optional<OrderOption> - The OrderOption entity wrapped in an Optional
+     * @return The OrderOption entity wrapped in an Optional
      */
     Optional<OrderOption> findByOrderClientId(Long orderClientId);
 }

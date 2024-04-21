@@ -11,13 +11,13 @@ import java.util.Optional;
 public interface PhotoContract {
     /**
      * Find all Photo entities
-     * @return List<Photo> - List of all Photo entities
+     * @return List of all Photo entities
      */
     List<Photo> findAll();
     /**
      * Find a Photo entity by its id
      * @param id The id of the Photo entity
-     * @return Optional<Photo> - The Photo entity wrapped in an Optional
+     * @return The Photo entity wrapped in an Optional
      */
     Optional<Photo> findById(Long id);
     /**

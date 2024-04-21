@@ -9,6 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class to send emails to the clients
+ */
 @Service
 public class EmailService {
 
@@ -39,6 +42,7 @@ public class EmailService {
      * application.properties file.
      * @param to the email of the client
      * @param product the product that was added
+     * @throws MessagingException if the email could not be sent
      */
     public void sendEmailProductAdded(String to, Product product) throws MessagingException {
         if ("youremail@email.com".equals(fromEmail)) {
@@ -89,6 +93,7 @@ public class EmailService {
      * Method to email the client about the order that was confirmed using java mail sender with mime message
      * which allows to send html content in the email. Also checks if the email is set up in the application.properties file.
      * @param to the email of the client
+     * @throws MessagingException if the email could not be sent
      */
     public void sendEmailOrderConfirmed(String to) throws MessagingException {
         if (fromEmail.equals("youremail@email.com")) {

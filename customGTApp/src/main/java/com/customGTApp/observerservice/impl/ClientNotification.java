@@ -21,10 +21,6 @@ public class ClientNotification implements ClientProductObserver, ClientOrderOpt
      */
     private final EmailService emailService;
 
-    /**
-     * The email address from which the email will be sent set in the application.properties file
-     */
-
     public ClientNotification(EmailService emailService){
         this.emailService = emailService;
     }

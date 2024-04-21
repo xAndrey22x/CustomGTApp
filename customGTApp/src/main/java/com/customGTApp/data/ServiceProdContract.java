@@ -11,13 +11,13 @@ import java.util.Optional;
 public interface ServiceProdContract {
     /**
      * Find all ServiceProd entities
-     * @return List<ServiceProd> - List of all ServiceProd entities
+     * @return The list of ServiceProd entities
      */
     List<ServiceProd> findAll();
     /**
      * Find a ServiceProd entity by its id
      * @param id The id of the ServiceProd entity
-     * @return Optional<ServiceProd> - The ServiceProd entity wrapped in an Optional
+     * @return The ServiceProd entity wrapped in an Optional
      */
     Optional<ServiceProd> findById(Long id);
     /**

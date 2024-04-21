@@ -12,13 +12,13 @@ import java.util.Optional;
 public interface OrderClientContract {
     /**
      * Find all OrderClient entities
-     * @return List<OrderClient> - List of all OrderClient entities
+     * @return List of all OrderClient entities
      */
     List<OrderClient> findAll();
     /**
      * Find an OrderClient entity by its id
      * @param id The id of the OrderClient entity
-     * @return Optional<OrderClient> - The OrderClient entity wrapped in an Optional
+     * @return The OrderClient entity wrapped in an Optional
      */
     Optional<OrderClient> findById(Long id);
     /**
@@ -34,19 +34,19 @@ public interface OrderClientContract {
     void deleteById(Long id);
     /**
      * Find all OrderClient entities with the newsletter option set to true
-     * @return List<OrderClient> - List of all OrderClient entities with the newsletter option set to true
+     * @return List of all OrderClient entities with the newsletter option set to true
      */
     List<OrderClient> findByOrderOptionNewsletterTrue();
 
     /**
      * Find all OrderClient entities with the orderConfirmed option set to true
-     * @return List<OrderClient> - List of all OrderClient entities with the orderConfirmed option set to true
+     * @return List of all OrderClient entities with the orderConfirmed option set to true
      */
     List<OrderClient> findByOrderOptionOrderConfirmedTrue();
 
     /**
      * Find all OrderClient entities with the orderConfirmed option set to false
-     * @return List<OrderClient> - List of all OrderClient entities with the orderConfirmed option set to false
+     * @return List of all OrderClient entities with the orderConfirmed option set to false
      */
     List<OrderClient> findByOrderOptionOrderConfirmedFalse();
 }
