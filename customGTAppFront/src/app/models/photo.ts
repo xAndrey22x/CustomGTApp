@@ -4,6 +4,6 @@ import { ServiceProd } from "./serviceProd";
 export interface Photo {
     id: number;
     url: string;
-    product: Product;
-    serviceProd: ServiceProd;
+    product: Product | null;
+    serviceProd: ServiceProd | null;
 }

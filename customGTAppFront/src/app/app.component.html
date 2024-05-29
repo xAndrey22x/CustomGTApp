@@ -1,11 +1,3 @@
-<div class="container">
-  <h1>{{ title }}</h1>
-  <div *ngIf="Photos.length > 0; else noPhotos">
-    <div *ngFor="let photo of Photos" class="photo">
-      <img [src]="photo.url" alt="Photo {{photo.id}}" />
-    </div>
-  </div>
-  <ng-template #noPhotos>
-    <p>No photos available.</p>
-  </ng-template>
+<div>
+  <router-outlet></router-outlet>
 </div>

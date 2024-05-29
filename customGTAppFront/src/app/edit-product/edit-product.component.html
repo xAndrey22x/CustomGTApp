@@ -1,0 +1,58 @@
+<div class="page-background">
+  <div class="container mt-4">
+    <h2>Edit Product</h2>
+    <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="carModel" class="form-label">Car Model</label>
+        <input type="text" id="carModel" formControlName="carModel" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Photos</label>
+        <div formArrayName="photos">
+          <div *ngFor="let photoControl of photos.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center">
+            <div class="input-group mb-2">
+              <input type="text" formControlName="url" class="form-control" />
+              <button type="button" class="btn btn-danger" (click)="removePhoto(i)">Remove</button>
+            </div>
+            <img [src]="photoControl.get('url')?.value" alt="Photo Preview" class="img-thumbnail ms-2" width="50" height="50">
+          </div>
+        </div>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" placeholder="New photo URL" [(ngModel)]="newPhotoUrl" name="newPhotoUrl" [ngModelOptions]="{standalone: true}" />
+          <button type="button" class="btn btn-primary" (click)="addPhoto()">Add Photo</button>
+        </div>
+      </div>
+    </form>
+
+    <form [formGroup]="priceForm" (ngSubmit)="updatePrice()" class="mt-4">
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" formControlName="price" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="priceForm.invalid">Update Price</button>
+      <div *ngIf="priceUpdateMessage" class="alert alert-success mt-2">{{ priceUpdateMessage }}</div>
+    </form>
+
+    <form [formGroup]="quantityForm" (ngSubmit)="updateQuantity()" class="mt-4">
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" id="quantity" formControlName="quantity" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="quantityForm.invalid">Update Quantity</button>
+      <div *ngIf="quantityUpdateMessage" class="alert alert-success mt-2">{{ quantityUpdateMessage }}</div>
+    </form>
+
+    <div class="text-center mt-4">
+      <button (click)="onSubmit()" class="btn btn-submit btn-primary" [disabled]="editProductForm.invalid">Save Changes</button>
+      <div *ngIf="editProductForm.invalid" class="validation-message">One or more fields are incomplete</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="page-background">
+  <div class="container mt-4">
+    <h1>Admin Panel</h1>
+
+    <!-- Dropdown to select table -->
+    <div class="dropdown mb-4">
+      <button class="btn btn-custom-color btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Select Table
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><button class="dropdown-item" (click)="selectTable('products')">Products</button></li>
+        <li><button class="dropdown-item" (click)="selectTable('serviceProds')">Services</button></li>
+        <li><button class="dropdown-item" (click)="selectTable('orders')">Orders</button></li>
+      </ul>
+    </div>
+
+    <!-- Products Table -->
+    <div *ngIf="selectedTable === 'products'" class="mb-4">
+      <h2>Products</h2>
+      <button class="btn btn-primary mb-2" (click)="addProduct()">Add Product</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Car Model</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.carModel }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editProduct(product)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="confirmDeleteProduct(product.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Service Products Table -->
+    <div *ngIf="selectedTable === 'serviceProds'" class="mb-4">
+      <h2>Services</h2>
+      <button class="btn btn-primary mb-2" (click)="addServiceProd()">Add Service</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let serviceProd of serviceProds">
+            <td>{{ serviceProd.id }}</td>
+            <td>{{ serviceProd.name }}</td>
+            <td>{{ serviceProd.description }}</td>
+            <td>{{ serviceProd.price }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editServiceProd(serviceProd)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="confirmDeleteServiceProd(serviceProd.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Orders Table -->
+    <div *ngIf="selectedTable === 'orders'">
+      <h2>Orders</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.name }}</td>
+            <td>{{ order.email }}</td>
+            <td>{{ order.phoneNumber }}</td>
+            <td>{{ order.totalPrice }}</td>
+            <td>
+              <button class="btn btn-info btn-sm" (click)="viewOrder(order)">View</button>
+              <button class="btn btn-danger btn-sm" (click)="confirmDeleteOrder(order.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
