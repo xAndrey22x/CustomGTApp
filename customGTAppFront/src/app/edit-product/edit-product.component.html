@@ -32,12 +32,18 @@
       </div>
     </form>
 
+    <div class="text-center mt-4">
+      <button (click)="onSubmit()" class="btn btn-submit btn-primary" [disabled]="editProductForm.invalid">Save Changes</button>
+      <div *ngIf="editProductForm.invalid" class="validation-message">One or more fields are incomplete</div>
+      <div *ngIf="saveUpdateMessage" class="alert alert-success mt-2 alert-update">{{ saveUpdateMessage }}</div>
+    </div>
+
     <form [formGroup]="priceForm" (ngSubmit)="updatePrice()" class="mt-4">
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
         <input type="number" id="price" formControlName="price" class="form-control" />
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="priceForm.invalid">Update Price</button>
+      <button type="submit" class="btn btn-primary btn-submit" [disabled]="priceForm.invalid">Update Price</button>
       <div *ngIf="priceUpdateMessage" class="alert alert-success mt-2">{{ priceUpdateMessage }}</div>
     </form>
 
@@ -46,13 +52,12 @@
         <label for="quantity" class="form-label">Quantity</label>
         <input type="number" id="quantity" formControlName="quantity" class="form-control" />
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="quantityForm.invalid">Update Quantity</button>
+      <button type="submit" class="btn btn-primary btn-submit" [disabled]="quantityForm.invalid">Update Quantity</button>
       <div *ngIf="quantityUpdateMessage" class="alert alert-success mt-2">{{ quantityUpdateMessage }}</div>
     </form>
 
     <div class="text-center mt-4">
-      <button (click)="onSubmit()" class="btn btn-submit btn-primary" [disabled]="editProductForm.invalid">Save Changes</button>
-      <div *ngIf="editProductForm.invalid" class="validation-message">One or more fields are incomplete</div>
+      <button (click)="adminBack()" class="btn btn-primary btn-back-admin">Admin Panel</button>
     </div>
   </div>
 </div>

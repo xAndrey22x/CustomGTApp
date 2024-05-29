@@ -9,6 +9,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { EditServiceProdComponent } from './edit-service-prod/edit-service-prod.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { AddServiceProdComponent } from './add-service-prod/add-service-prod.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { EditServiceProdComponent } from './edit-service-prod/edit-service-prod.
     AdminComponent,
     AdminPanelComponent,
     EditProductComponent,
-    EditServiceProdComponent
+    EditServiceProdComponent,
+    AddProductComponent,
+    AddServiceProdComponent
   ],
   imports: [
     BrowserModule,

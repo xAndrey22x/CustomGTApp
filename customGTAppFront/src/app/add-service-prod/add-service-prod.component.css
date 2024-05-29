@@ -85,7 +85,6 @@
   
   .text-center {
     text-align: center;
-    margin-bottom: -20px;
   }
   
   .alert {
@@ -103,15 +102,17 @@
   
   .img-thumbnail {
     margin-left: 10px;
-    border: 1px solid #ddd;
-    padding: 0px;
-    border-radius: 5px;
+    border: none;  /* Remove the border */
+    padding: 0;    /* Ensure no padding */
+    border-radius: 5px;  /* Keep border radius if needed */
   }
   
   .btn-submit {
     background-color: #ffeb3b;
     color: #000000;
     border: none;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
   
   .btn-submit:hover {
@@ -119,8 +120,8 @@
     color: #000000;
   }
   
-  .btn-back-admin{
-    float: right;
+  .btn-back-admin {
+    float: left;
   }
   
   .validation-message {

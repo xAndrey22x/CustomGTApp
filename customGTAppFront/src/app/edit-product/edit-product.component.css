@@ -41,6 +41,15 @@ h2 {
   box-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
 }
 
+.form-control:-webkit-autofill,
+  .form-control:-webkit-autofill:hover,
+  .form-control:-webkit-autofill:focus,
+  .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #333333 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+}
+
 .btn-custom-color {
   background-color: #ffeb3b;
   color: #000000;
@@ -76,6 +85,7 @@ h2 {
 
 .text-center {
   text-align: center;
+  margin-bottom: -20px;
 }
 
 .alert {
@@ -84,11 +94,16 @@ h2 {
   border-radius: 5px;
   background-color: #333333;
   color: #ffffff;
+  max-width: 250px;
+}
+.alert-update {
+  margin: auto;
 }
 
 .img-thumbnail {
   margin-left: 10px;
   border: 1px solid #ddd;
+  padding: 0px;
   border-radius: 5px;
 }
 
@@ -101,6 +116,10 @@ h2 {
 .btn-submit:hover {
   background-color: #fdd835;
   color: #000000;
+}
+
+.btn-back-admin{
+  float: right;
 }
 
 .validation-message {

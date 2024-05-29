@@ -19,6 +19,7 @@ export class EditProductComponent implements OnInit {
   productId!: number;
   priceUpdateMessage: string = '';
   quantityUpdateMessage: string = '';
+  saveUpdateMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -140,8 +141,15 @@ export class EditProductComponent implements OnInit {
       };
 
       this.productService.updateProduct(updatedProduct).subscribe(() => {
-        this.router.navigate(['/admin-panel']);
+        console.log('Product updated successfully');
+        this.saveUpdateMessage = 'Product updated successfully';
+        setTimeout(() => this.saveUpdateMessage = '', 3000);
       });
     }
   }
+
+  adminBack(): void {
+    this.router.navigate(['/admin-panel']);
+  }
+
 }

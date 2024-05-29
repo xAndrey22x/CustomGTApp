@@ -5,30 +5,40 @@ import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { ServiceProdService } from '../services/service-prod.service';
 import { OrderClientService } from '../services/order-client.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TableStateService } from '../services/table-state.service';
 
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
-  styleUrl: './admin-panel.component.css'
+  styleUrls: ['./admin-panel.component.css']
 })
-export class AdminPanelComponent implements OnInit{
+export class AdminPanelComponent implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   serviceProds: ServiceProd[] = [];
+  filteredServiceProds: ServiceProd[] = [];
   orders: OrderClient[] = [];
-  selectedTable: string = 'products';
+  filteredOrders: OrderClient[] = [];
+  selectedTable: string = '';
+  searchQuery: string = '';
 
-  constructor(private productService: ProductService
-    , private serviceProdService: ServiceProdService
-    , private orderService: OrderClientService
-    , private router: Router
+  constructor(
+    private productService: ProductService,
+    private serviceProdService: ServiceProdService,
+    private orderService: OrderClientService,
+    private router: Router,
+    private tableStateService: TableStateService
   ) {}
 
   selectTable(tab: string) {
     this.selectedTable = tab;
+    this.tableStateService.setSelectedTable(tab);
+    this.onSearch();
   }
 
   ngOnInit(): void {
+    this.selectedTable = this.tableStateService.getSelectedTable();
     this.loadProducts();
     this.loadServiceProds();
     this.loadOrders();
@@ -38,6 +48,7 @@ export class AdminPanelComponent implements OnInit{
     this.productService.getAllProducts().subscribe({
       next: (products) => {
         this.products = products;
+        this.filteredProducts = products;
       },
       error: (err) => {
         console.error('Error loading products', err);
@@ -52,6 +63,7 @@ export class AdminPanelComponent implements OnInit{
     this.serviceProdService.getAllServices().subscribe({
       next: (serviceProds) => {
         this.serviceProds = serviceProds;
+        this.filteredServiceProds = serviceProds;
       },
       error: (err) => {
         console.error('Error loading service products', err);
@@ -64,8 +76,9 @@ export class AdminPanelComponent implements OnInit{
 
   loadOrders(): void {
     this.orderService.getAllOrders().subscribe({
-      next: (order) => {
-        this.orders = order;
+      next: (orders) => {
+        this.orders = orders;
+        this.filteredOrders = orders;
       },
       error: (err) => {
         console.log('Error loading orders', err);
@@ -73,37 +86,38 @@ export class AdminPanelComponent implements OnInit{
       complete: () => {
         console.log('Orders loading completed');
       }
-    })
+    });
   }
 
-    addProduct() {
-      // Implement add product logic here
-    }
+  addProduct() {
+    this.router.navigate(['/add-product']);
+  }
 
-    editProduct(product: Product) {
-      this.router.navigate(['/edit-product', product.id]);
-    }
+  editProduct(product: Product) {
+    this.router.navigate(['/edit-product', product.id]);
+  }
 
-    deleteProduct(productId: number): void {
-      this.productService.deleteProductById(productId).subscribe({
-        next: () => {
-          this.products = this.products.filter(product => product.id !== productId);
-          console.log('Product deleted successfully');
-        },
-        error: (err) => {
-          console.error('Error deleting product', err);
-        }
-      });
-    }
-
-    confirmDeleteProduct(productId: number): void {
-      if (window.confirm('Are you sure you want to delete this product?')) {
-        this.deleteProduct(productId);
+  deleteProduct(productId: number): void {
+    this.productService.deleteProductById(productId).subscribe({
+      next: () => {
+        this.products = this.products.filter(product => product.id !== productId);
+        this.filteredProducts = this.filteredProducts.filter(product => product.id !== productId);
+        console.log('Product deleted successfully');
+      },
+      error: (err) => {
+        console.error('Error deleting product', err);
       }
+    });
+  }
+
+  confirmDeleteProduct(productId: number): void {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      this.deleteProduct(productId);
     }
+  }
 
   addServiceProd() {
-    // Implement add service product logic here
+    this.router.navigate(['/add-service-prod']);
   }
 
   editServiceProd(serviceProd: ServiceProd) {
@@ -111,10 +125,22 @@ export class AdminPanelComponent implements OnInit{
   }
 
   deleteServiceProd(serviceProdId: number) {
-    // Implement delete service product logic here
+    this.serviceProdService.deleteServiceById(serviceProdId).subscribe({
+      next: () => {
+        this.serviceProds = this.serviceProds.filter(serviceProd => serviceProd.id !== serviceProdId);
+        this.filteredServiceProds = this.filteredServiceProds.filter(serviceProd => serviceProd.id !== serviceProdId);
+        console.log('Service product deleted successfully');
+      },
+      error: (err) => {
+        console.error('Error deleting service product', err);
+      }
+    });
   }
 
   confirmDeleteServiceProd(serviceProdId: number): void {
+    if (window.confirm('Are you sure you want to delete this service product?')) {
+      this.deleteServiceProd(serviceProdId);
+    }
   }
 
   viewOrder(order: OrderClient) {
@@ -122,11 +148,38 @@ export class AdminPanelComponent implements OnInit{
   }
 
   deleteOrder(orderId: number) {
-    // Implement delete order logic here
+    this.orderService.deleteOrderById(orderId).subscribe({
+      next: () => {
+        this.orders = this.orders.filter(order => order.id !== orderId);
+        this.filteredOrders = this.filteredOrders.filter(order => order.id !== orderId);
+        console.log('Order deleted successfully');
+      },
+      error: (err) => {
+        console.error('Error deleting order', err);
+      }
+    });
   }
 
   confirmDeleteOrder(orderId: number): void {
-
+    if (window.confirm('Are you sure you want to delete this order?')) {
+      this.deleteOrder(orderId);
+    }
   }
 
+  onSearch(): void {
+    const query = this.searchQuery.toLowerCase();
+    if (this.selectedTable === 'products') {
+      this.filteredProducts = this.products.filter(product =>
+        product.name.toLowerCase().includes(query)
+      );
+    } else if (this.selectedTable === 'serviceProds') {
+      this.filteredServiceProds = this.serviceProds.filter(serviceProd =>
+        serviceProd.name.toLowerCase().includes(query)
+      );
+    } else if (this.selectedTable === 'orders') {
+      this.filteredOrders = this.orders.filter(order =>
+        order.email.toLowerCase().includes(query)
+      );
+    }
+  }
 }

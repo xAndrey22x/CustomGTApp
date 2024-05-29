@@ -45,6 +45,21 @@ h1, h2 {
   background-color: #fdd835;
 }
 
+.search-box {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  width: 200px;
+  float: right;
+}
+
+.search-box::placeholder {
+  color: #ffffff;
+}
+
 .table thead th {
   background-color: #000000;
   color: #ffeb3b;

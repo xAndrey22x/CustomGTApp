@@ -17,16 +17,16 @@
   }
   
   h2 {
-    color: #ffeb3b; /* Yellow color for heading */
+    color: #ffeb3b;
     text-align: center;
   }
   
   .form-label {
-    color: #ffeb3b; /* Yellow color for labels */
+    color: #ffeb3b;
   }
   
   .form-control {
-    background-color: #333333; /* Darker input background */
+    background-color: #333333;
     color: #ffffff;
     border: 1px solid #555555;
     border-radius: 5px;
@@ -40,15 +40,15 @@
     border-color: #ffeb3b;
     box-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
   }
-  
+
   .form-control:-webkit-autofill,
-    .form-control:-webkit-autofill:hover,
-    .form-control:-webkit-autofill:focus,
-    .form-control:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px #333333 inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-    caret-color: #ffffff !important;
-  }
+  .form-control:-webkit-autofill:hover,
+  .form-control:-webkit-autofill:focus,
+  .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #333333 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+}
   
   .btn-custom-color {
     background-color: #ffeb3b;
@@ -85,7 +85,6 @@
   
   .text-center {
     text-align: center;
-    margin-bottom: -20px;
   }
   
   .alert {
@@ -96,7 +95,6 @@
     color: #ffffff;
     max-width: 250px;
   }
-  
   .alert-update {
     margin: auto;
   }
@@ -112,15 +110,17 @@
     background-color: #ffeb3b;
     color: #000000;
     border: none;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
   
   .btn-submit:hover {
     background-color: #fdd835;
     color: #000000;
   }
-  
+
   .btn-back-admin{
-    float: right;
+    float: left;
   }
   
   .validation-message {

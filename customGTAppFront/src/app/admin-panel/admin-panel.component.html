@@ -3,7 +3,7 @@
     <h1>Admin Panel</h1>
 
     <!-- Dropdown to select table -->
-    <div class="dropdown mb-4">
+    <div class="dropdown mb-4 drop-checkbox">
       <button class="btn btn-custom-color btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Select Table
       </button>
@@ -14,9 +14,28 @@
       </ul>
     </div>
 
-    <!-- Products Table -->
     <div *ngIf="selectedTable === 'products'" class="mb-4">
       <h2>Products</h2>
+    </div>
+
+    <div *ngIf="selectedTable === 'serviceProds'" class="mb-4">
+      <h2>Services</h2>
+    </div>
+
+    <div *ngIf="selectedTable === 'orders'" class="mb-4">
+      <h2>Orders</h2>
+    </div>
+
+    <!-- Search Input -->
+    <div *ngIf="selectedTable === 'products' || selectedTable === 'serviceProds'" class="mb-4">
+      <input type="text" class="form-control search-box" placeholder="Search by name" [(ngModel)]="searchQuery" (input)="onSearch()">
+    </div>
+    <div *ngIf="selectedTable === 'orders'" class="mb-4">
+      <input type="text" class="form-control search-box" placeholder="Search by email" [(ngModel)]="searchQuery" (input)="onSearch()">
+    </div>
+
+    <!-- Products Table -->
+    <div *ngIf="selectedTable === 'products'" class="mb-4">
       <button class="btn btn-primary mb-2" (click)="addProduct()">Add Product</button>
       <table class="table table-striped">
         <thead>
@@ -31,7 +50,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of filteredProducts">
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.description }}</td>
@@ -49,7 +68,6 @@
 
     <!-- Service Products Table -->
     <div *ngIf="selectedTable === 'serviceProds'" class="mb-4">
-      <h2>Services</h2>
       <button class="btn btn-primary mb-2" (click)="addServiceProd()">Add Service</button>
       <table class="table table-striped">
         <thead>
@@ -62,7 +80,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let serviceProd of serviceProds">
+          <tr *ngFor="let serviceProd of filteredServiceProds">
             <td>{{ serviceProd.id }}</td>
             <td>{{ serviceProd.name }}</td>
             <td>{{ serviceProd.description }}</td>
@@ -78,7 +96,6 @@
 
     <!-- Orders Table -->
     <div *ngIf="selectedTable === 'orders'">
-      <h2>Orders</h2>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -91,7 +108,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of orders">
+          <tr *ngFor="let order of filteredOrders">
             <td>{{ order.id }}</td>
             <td>{{ order.name }}</td>
             <td>{{ order.email }}</td>
