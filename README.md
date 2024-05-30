@@ -110,6 +110,7 @@ During this stage, we have focused on developing the server-side logic by levera
     - /order/delete/{id} - delete an order based on the id provided. *DELETE*
     - /order/confirmed - list all the orders that have been confirmed *GET*
     - /order/notConfirmed - list all the orders that have not been confirmed *GET*
+    - /order/newsletterStatus/{id} - find the newsletter status of an order using the id of the order *GET*
   - ***OrderItem Table***
     - /addOrderProduct/{productId}/{orderId} - add a product to an order, the order item will be received as a request body. *POST*
     - /addOrderService/{serviceId}/{orderId} - add a service to an order, the order item will be received as a request body. *POST*
