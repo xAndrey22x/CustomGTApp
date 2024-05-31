@@ -105,6 +105,7 @@ During this stage, we have focused on developing the server-side logic by levera
     - /photo/delete/{photoId} - delete photo based on the photo id. *DELETE*
   - ***OrderClient Table***
     - /order/all - list all the orders. *GET*
+    - /order/find/{id} - find an order based on the id provided. *GET*
     - /order/add - add an order, the order will be received as a request body. *POST*
     - /order/update - update an order, the order will be received as a request body. *PUT*
     - /order/delete/{id} - delete an order based on the id provided. *DELETE*
@@ -112,8 +113,8 @@ During this stage, we have focused on developing the server-side logic by levera
     - /order/notConfirmed - list all the orders that have not been confirmed *GET*
     - /order/newsletterStatus/{id} - find the newsletter status of an order using the id of the order *GET*
   - ***OrderItem Table***
-    - /addOrderProduct/{productId}/{orderId} - add a product to an order, the order item will be received as a request body. *POST*
-    - /addOrderService/{serviceId}/{orderId} - add a service to an order, the order item will be received as a request body. *POST*
+    - /addOrderProduct/{productId}/{orderId} - add a product to an order, only the quantity will be received as a request parameter. *POST*
+    - /addOrderService/{serviceId}/{orderId} - add a service to an order, only the quantity will be received as a request parameter. *POST*
   - ***OrderOption Table***
     - /addOrderOptions/{orderClientId} - add order options to an order, the order options will be received as a request body. *POST*
     - /updateOrderNewsletter/{orderClientId} - update newsletter for an order, the newsletter will be received as a request parameter, parameter name is 'newsletter'. *PUT* 
