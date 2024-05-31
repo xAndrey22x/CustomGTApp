@@ -37,20 +37,25 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     /**
      * Method to add a product to an order item in the database only if the product and the order exist using
-     * the data layer and the contract.
+     * the data layer and the contract. The price will be calculated based on the product price and also the
+     * total price of the order will be updated.
      * @param productId the product id
      * @param orderId the order id
-     * @param orderItem the order item
+     * @param quantity the quantity of item, price will be calculated based on the product price
      * @return the order item
      */
     @Override
     @Transactional
-    public OrderItem addProductToOrder(Long productId, Long orderId, OrderItem orderItem) {
+    public OrderItem addProductToOrder(Long productId, Long orderId, int quantity) {
         Optional<Product> product = this.productContract.findById(productId);
         if(product.isPresent()){
             Optional<OrderClient> orderClient = this.orderClientContract.findById(orderId);
             if (orderClient.isPresent()){
+                OrderItem orderItem = new OrderItem();
+                orderItem.setQuantity(quantity);
+                orderItem.setPrice(product.get().getPrice() * quantity);
                 orderItem.setOrder(orderClient.get());
+                orderClient.get().setTotalPrice(orderClient.get().getTotalPrice() + orderItem.getPrice());
                 orderItem.setProduct(product.get());
                 return this.orderItemContract.save(orderItem);
             }
@@ -59,20 +64,25 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
     /**
      * Method to add a service to an order item in the database only if the service and the order exist using
-     * the data layer and the contract.
+     * the data layer and the contract. The price will be calculated based on the service price and also the
+     * total price of the order will be updated.
      * @param serviceId the service id
      * @param orderId the order id
-     * @param orderItem the order item
+     * @param quantity the quantity of item, price will be calculated based on the service price
      * @return the order item
      */
     @Override
     @Transactional
-    public OrderItem addServiceToOrder(Long serviceId, Long orderId, OrderItem orderItem) {
+    public OrderItem addServiceToOrder(Long serviceId, Long orderId, int quantity) {
         Optional<ServiceProd> serviceProd = this.serviceProdContract.findById(serviceId);
         if(serviceProd.isPresent()){
             Optional<OrderClient> orderClient = this.orderClientContract.findById(orderId);
             if (orderClient.isPresent()){
+                OrderItem orderItem = new OrderItem();
+                orderItem.setQuantity(quantity);
+                orderItem.setPrice(serviceProd.get().getPrice() * quantity);
                 orderItem.setOrder(orderClient.get());
+                orderClient.get().setTotalPrice(orderClient.get().getTotalPrice() + orderItem.getPrice());
                 orderItem.setServiceProd(serviceProd.get());
                 return this.orderItemContract.save(orderItem);
             }

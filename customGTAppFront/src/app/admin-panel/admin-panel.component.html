@@ -22,8 +22,17 @@
       <h2>Services</h2>
     </div>
 
+    <!-- Orders Table Header -->
     <div *ngIf="selectedTable === 'orders'" class="mb-4">
-      <h2>Orders</h2>
+      <div *ngIf="orderType === 'all'">
+        <h2>Orders</h2>
+      </div>
+      <div *ngIf="orderType === 'confirmed'">
+        <h2>Confirmed Orders</h2>
+      </div>
+      <div *ngIf="orderType === 'notConfirmed'">
+        <h2>Not Confirmed Orders</h2>
+      </div>
     </div>
 
     <!-- Search Input -->
@@ -54,7 +63,7 @@
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.description }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ product.price | currency: 'EUR' }}</td>
             <td>{{ product.carModel }}</td>
             <td>{{ product.quantity }}</td>
             <td>
@@ -84,7 +93,7 @@
             <td>{{ serviceProd.id }}</td>
             <td>{{ serviceProd.name }}</td>
             <td>{{ serviceProd.description }}</td>
-            <td>{{ serviceProd.price }}</td>
+            <td>{{ serviceProd.price | currency: 'EUR' }}</td>
             <td>
               <button class="btn btn-warning btn-sm" (click)="editServiceProd(serviceProd)">Edit</button>
               <button class="btn btn-danger btn-sm" (click)="confirmDeleteServiceProd(serviceProd.id)">Delete</button>
@@ -96,6 +105,9 @@
 
     <!-- Orders Table -->
     <div *ngIf="selectedTable === 'orders'">
+      <button class="btn btn-primary mb-2 order-btn" (click)="selectOrderType('all')">All Orders</button>
+      <button class="btn btn-primary mb-2 order-btn" (click)="selectOrderType('confirmed')">Confirmed Orders</button>
+      <button class="btn btn-primary mb-2 order-btn" (click)="selectOrderType('notConfirmed')">Not Confirmed Orders</button>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -104,6 +116,7 @@
             <th>Email</th>
             <th>Phone Number</th>
             <th>Total Price</th>
+            <th>Newsletter</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -113,7 +126,11 @@
             <td>{{ order.name }}</td>
             <td>{{ order.email }}</td>
             <td>{{ order.phoneNumber }}</td>
-            <td>{{ order.totalPrice }}</td>
+            <td>{{ order.totalPrice | currency: 'EUR' }}</td>
+            <td>
+              <i *ngIf="newsletterStatus(order.id)" class="fas fa-check" style="color: green;"></i>
+              <i *ngIf="!newsletterStatus(order.id)" class="fas fa-times" style="color: red;"></i>
+            </td>
             <td>
               <button class="btn btn-info btn-sm" (click)="viewOrder(order)">View</button>
               <button class="btn btn-danger btn-sm" (click)="confirmDeleteOrder(order.id)">Delete</button>

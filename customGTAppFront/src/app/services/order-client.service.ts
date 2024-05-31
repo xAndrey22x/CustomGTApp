@@ -17,6 +17,10 @@ export class OrderClientService {
     return this.http.get<OrderClient[]>(this.apiUrl + '/all');
   }
 
+  public getOrderById(id: number): Observable<OrderClient> {
+    return this.http.get<OrderClient>(this.apiUrl + '/find/' + id);
+  }
+
   public addOrder(order: OrderClient): Observable<OrderClient> {
     return this.http.post<OrderClient>(this.apiUrl + '/add', order);
   }
@@ -35,6 +39,10 @@ export class OrderClientService {
 
   public findAllOrderNotConfirmed(): Observable<OrderClient[]> {
     return this.http.get<OrderClient[]>(this.apiUrl + '/notConfirmed');
+  }
+
+  public findNewsletterStatus(id: number): Observable<number> {
+    return this.http.get<number>(this.apiUrl + '/newsletterStatus/' + id);
   }
 
 }

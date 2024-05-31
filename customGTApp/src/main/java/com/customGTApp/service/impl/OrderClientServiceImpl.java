@@ -32,12 +32,24 @@ public class OrderClientServiceImpl implements OrderClientService {
     }
 
     /**
+     * Method to find an order by its id using our data layer with the help of the contract.
+     * @param id the id of the order
+     * @return the order that was found
+     */
+    @Override
+    public OrderClient findById(Long id) {
+        Optional<OrderClient> orderClient = this.orderClientContract.findById(id);
+        return orderClient.orElse(null);
+    }
+
+    /**
      * Method to add a new order to the database using our data layer with the help of the contract.
      * @param orderClient the order we want to add
      * @return the added order
      */
     @Override
     public OrderClient addOrder(OrderClient orderClient) {
+        orderClient.setTotalPrice(0);
         return this.orderClientContract.save(orderClient);
     }
     /**
@@ -79,4 +91,14 @@ public class OrderClientServiceImpl implements OrderClientService {
     public List<OrderClient> findAllOrderNotConfirmed() {
         return this.orderClientContract.findByOrderOptionOrderConfirmedFalse();
     }
+
+    /**
+     * Method to find the newsletter status of an order using the id of the order.
+     * @param id the order id
+     * @return the newsletter status
+     */
+    public boolean newsletterStatus(Long id) {
+        return this.orderClientContract.findById(id).get().getOrderOptions().isNewsletter();
+    }
+
 }

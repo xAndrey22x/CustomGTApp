@@ -12,5 +12,5 @@ export interface OrderClient {
     postalCode: string;
     totalPrice: number;
     orderItems: OrderItem[];
-    orderOption: OrderOption;
+    orderOptions: OrderOption;
 }

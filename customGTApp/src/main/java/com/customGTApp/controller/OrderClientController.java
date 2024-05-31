@@ -12,11 +12,13 @@ import java.util.List;
 
 /**
  * /order/all - list all the orders.
+ * /order/find/{id} - find an order based on the id provided
  * /order/add - add an order, the order will be received as a request body
  * /order/update - update an order, the order will be received as a request body
  * /order/delete/{id} - delete an order based on the id provided
  * /order/confirmed - list all the orders that have been confirmed
  * /order/notConfirmed - list all the orders that have not been confirmed
+ * /order/newsletterStatus/{id} - find the newsletter status of an order using the id of the order
  */
 @RestController
 @RequestMapping("/order")
@@ -39,6 +41,19 @@ public class OrderClientController {
     @GetMapping("/all")
     public ResponseEntity<List<OrderClient>> findAllOrder(){
         return new ResponseEntity<>(this.orderClientService.findAllOrders(), HttpStatus.OK);
+    }
+
+    /**
+     * Method to get an order by its id from the database and return it. Also calls the findById method from the service layer
+     * @param id the id of the order we want to find
+     * @return the order that was found
+     */
+    @GetMapping("/find/{id}")
+    public ResponseEntity<OrderClient> findOrder(@PathVariable("id") Long id){
+        OrderClient orderClient = this.orderClientService.findById(id);
+        if (orderClient != null)
+            return new ResponseEntity<>(orderClient, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -91,4 +106,15 @@ public class OrderClientController {
     public ResponseEntity<List<OrderClient>> findAllOrderNotConfirmed(){
         return new ResponseEntity<>(this.orderClientService.findAllOrderNotConfirmed(), HttpStatus.OK);
     }
+
+    /**
+     * Method to find the newsletter status of an order using the id of the order.
+     * @param id the id of the order
+     * @return the newsletter status
+     */
+    @GetMapping("/newsletterStatus/{id}")
+    public ResponseEntity<Boolean> findNewsletterStatus(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.orderClientService.newsletterStatus(id), HttpStatus.OK);
+    }
+
 }

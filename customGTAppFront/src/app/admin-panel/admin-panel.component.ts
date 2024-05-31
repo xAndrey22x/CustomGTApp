@@ -7,6 +7,10 @@ import { ServiceProdService } from '../services/service-prod.service';
 import { OrderClientService } from '../services/order-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableStateService } from '../services/table-state.service';
+import { OrderOptionService } from '../services/order-option.service';
+import { OrderItemService } from '../services/order-item.service';
+import { OrderOption } from '../models/orderOption';
+import { forkJoin, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-panel',
@@ -22,11 +26,16 @@ export class AdminPanelComponent implements OnInit {
   filteredOrders: OrderClient[] = [];
   selectedTable: string = '';
   searchQuery: string = '';
+  orderType: string = 'all';
+  orderOptions: OrderOption[] = [];
+  newsletterStatuses: { [key: number]: boolean } = {};
 
   constructor(
     private productService: ProductService,
     private serviceProdService: ServiceProdService,
     private orderService: OrderClientService,
+    private orderOptionService: OrderOptionService,
+    private orderItemService: OrderItemService,
     private router: Router,
     private tableStateService: TableStateService
   ) {}
@@ -37,11 +46,58 @@ export class AdminPanelComponent implements OnInit {
     this.onSearch();
   }
 
+  selectOrderType(type: string) {
+    this.orderType = type;
+    switch (type) {
+      case 'all':
+        this.filteredOrders = this.orders;
+        break;
+      case 'confirmed':
+        this.orderService.findAllOrderConfirmed().subscribe({
+          next: (orders) => {
+            this.filteredOrders = orders;
+          },
+          error: (err) => {
+            console.error('Error loading confirmed orders', err);
+          }
+        });
+        break;
+      case 'notConfirmed':
+        this.orderService.findAllOrderNotConfirmed().subscribe({
+          next: (orders) => {
+            this.filteredOrders = orders;
+          },
+          error: (err) => {
+            console.error('Error loading not confirmed orders', err);
+          }
+        });
+        break;
+  }
+}
+
   ngOnInit(): void {
     this.selectedTable = this.tableStateService.getSelectedTable();
     this.loadProducts();
     this.loadServiceProds();
     this.loadOrders();
+  }
+
+  loadNewsletterStatuses(): void {
+    const statusRequests: Observable<any>[] = this.filteredOrders.map(order => 
+      this.orderService.findNewsletterStatus(order.id).pipe(
+        map(status => ({ id: order.id, status }))
+      )
+    );
+
+    forkJoin(statusRequests).subscribe(results => {
+      results.forEach(result => {
+        this.newsletterStatuses[result.id] = result.status;
+      });
+    });
+  }
+
+  newsletterStatus(id: number): boolean {
+    return this.newsletterStatuses[id];
   }
 
   loadProducts(): void {
@@ -79,6 +135,7 @@ export class AdminPanelComponent implements OnInit {
       next: (orders) => {
         this.orders = orders;
         this.filteredOrders = orders;
+        this.loadNewsletterStatuses();
       },
       error: (err) => {
         console.log('Error loading orders', err);
@@ -144,7 +201,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   viewOrder(order: OrderClient) {
-    // Implement view order details logic here
+    this.router.navigate(['/view-order', order.id]);
   }
 
   deleteOrder(orderId: number) {

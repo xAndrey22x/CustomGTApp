@@ -1,0 +1,117 @@
+.page-background {
+    background: linear-gradient(135deg, #000000, #434343, #8b8b8b);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+  }
+  
+  h2 {
+    color: #ffeb3b;
+    text-align: center;
+  }
+  
+  .form-label {
+    color: #ffeb3b;
+  }
+  
+  .form-control {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+  
+  .alert {
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #28a745;
+    max-width: 250px;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+    color: #ffffff;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    color: #ffffff;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .me-auto {
+    margin-right: auto;
+  }
+  
+  .ms-2 {
+    margin-left: 0.5rem;
+  }
+  .order-status-badge {
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .order-status-badge.confirmed {
+    background-color: #28a745;
+    color: #ffffff;
+  }
+  
+  .order-status-badge.not-confirmed {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+  
+  .btn-confirmation{
+    background-color: #ffeb3b;
+    color: #000000;
+    border: none;
+    float: right;
+  }
+  .btn-confirmation:hover {
+    background-color: #fdd835;
+    color: #000000;
+  }

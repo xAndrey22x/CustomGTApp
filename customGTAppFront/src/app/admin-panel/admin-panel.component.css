@@ -25,6 +25,7 @@ h1, h2 {
   background-color: #ffeb3b;
   color: #000000;
   border: none;
+  margin-bottom: -25px;
 }
 
 .btn-custom-color:hover {
@@ -129,7 +130,6 @@ h1, h2 {
   background-color: #333333;
   color: #ffffff;
 }
-/* Custom table styles */
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
   background-color: #2c2c2c;
@@ -140,4 +140,12 @@ h1, h2 {
 .table-striped>tbody>tr:nth-child(even)>th {
   background-color: #3a3a3a;
   color: #ffffff;
+}
+
+.order-btn{
+  margin-right: 5px;
+}
+
+.fas{
+  margin-left: 25%;
 }

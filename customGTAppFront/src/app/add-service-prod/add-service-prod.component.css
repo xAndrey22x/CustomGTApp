@@ -102,9 +102,9 @@
   
   .img-thumbnail {
     margin-left: 10px;
-    border: none;  /* Remove the border */
-    padding: 0;    /* Ensure no padding */
-    border-radius: 5px;  /* Keep border radius if needed */
+    border: none; 
+    padding: 0; 
+    border-radius: 5px;
   }
   
   .btn-submit {

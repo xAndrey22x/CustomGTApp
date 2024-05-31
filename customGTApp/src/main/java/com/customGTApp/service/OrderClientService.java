@@ -16,6 +16,13 @@ public interface OrderClientService {
     List<OrderClient> findAllOrders();
 
     /**
+     * Method to find an order by its id
+     * @param id the id of the order
+     * @return the order that was found
+     */
+    OrderClient findById(Long id);
+
+    /**
      * Method to add a new order to the database
      * @param orderClient the order that will be added
      * @return the order that was added
@@ -44,5 +51,13 @@ public interface OrderClientService {
      * @return a list of all orders that have not been confirmed
      */
     List<OrderClient> findAllOrderNotConfirmed();
+
+    /**
+     * Method to find the newsletter status of an order using the id of the order
+     * @param id the id of the order
+     * @return the newsletter status
+     */
+    boolean newsletterStatus(Long id);
+
 
 }
