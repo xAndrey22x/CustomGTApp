@@ -1,0 +1,232 @@
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background-color: #1a1a1a;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0px;
+}
+
+.header .logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc107;
+}
+
+.header .nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header .nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1em;
+}
+
+.header .nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  background: url('/assets/M4.png') no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.hero .cta {
+  display: none;
+}
+
+/* Features Section */
+.features {
+  background-color: #2a2a2a;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: white; 
+}
+
+.feature-item {
+  display: inline-block;
+  width: 30%;
+  margin: 0 10px;
+  margin-bottom: 30px;
+  vertical-align: top;
+}
+
+.feature-item i {
+  font-size: 3em;
+  color: #ffc107;
+  margin-bottom: 10px;
+}
+
+.feature-item h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.feature-item p, .feature-item ul {
+  font-size: 1em;
+  color: #cccccc;
+  text-align: left;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+/* About Us Section */
+.about {
+  background-color: #1a1a1a;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.about p {
+  font-size: 1em;
+  color: #cccccc;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Newsletter Section */
+.newsletter {
+  background-color: #2a2a2a;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.newsletter h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.newsletter form {
+  margin: 0 auto;
+  max-width: 400px;
+  text-align: left;
+}
+
+.newsletter input,
+.newsletter button,
+.newsletter .unsubscribe {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.newsletter button,
+.newsletter .unsubscribe {
+  background-color: #ffc107;
+  color: #343a40;
+  border: none;
+  cursor: pointer;
+  max-width: 195px;
+  margin: auto;
+  margin-right: 5px;
+}
+
+.newsletter button:hover,
+.newsletter .unsubscribe:hover {
+  background-color: #e0a800;
+}
+
+/* Contact Section */
+.contact {
+  background-color: #1a1a1a;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: white;
+}
+
+
+.contact button {
+  background-color: #ffc107;
+  color: #343a40;
+  border: none;
+  cursor: pointer;
+}
+
+.contact button:hover {
+  background-color: #e0a800;
+}
+
+.contact .contact-info p {
+  font-size: 1em;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+.contact .contact-info i {
+  margin-right: 10px;
+  color: #ffc107;
+}
+
+/* Footer Section */
+.footer {
+  background-color: #1a1a1a;
+  padding: 20px 0;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: -100px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer .social-icons a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+  color: #ffc107;
+}

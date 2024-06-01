@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <button class="btn btn-home" (click)="goToHome()">
+        <i class="fas fa-home"></i>
+      </button>
+      <input
+        type="text"
+        class="form-control search-bar"
+        placeholder="Search by name or car model"
+        [(ngModel)]="searchTerm"
+        (input)="searchProducts()"
+      />
+    </div>
+  </div>
+    <div class="row">
+      <div *ngFor="let product of filteredProducts" class="col-md-3 mb-3">
+        <div class="card product-card" (click)="onProductClick(product.id)">
+          <img
+            [src]="getFirstPhoto(product)"
+            class="card-img-top product-img"
+            [alt]="product.name"
+          />
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">Car Model: {{ product.carModel }}</p>
+            <p class="card-text">Price: {{ product.price | currency:'EUR' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

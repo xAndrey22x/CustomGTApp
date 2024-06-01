@@ -2,6 +2,7 @@ package com.customGTApp.data;
 
 
 import com.customGTApp.model.OrderClient;
+import org.hibernate.query.Order;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,4 +50,11 @@ public interface OrderClientContract {
      * @return List of all OrderClient entities with the orderConfirmed option set to false
      */
     List<OrderClient> findByOrderOptionOrderConfirmedFalse();
+
+    /**
+     * Find all order clients entities by its email
+     * @param email The email of the OrderClient entity
+     * @return List of OrderClient entities with the email
+     */
+    List<OrderClient> findByEmail(String email);
 }

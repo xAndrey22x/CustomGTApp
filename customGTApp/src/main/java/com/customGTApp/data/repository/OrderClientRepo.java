@@ -27,4 +27,11 @@ public interface OrderClientRepo extends JpaRepository<OrderClient, Long> {
      */
     List<OrderClient> findByOrderOptionOrderConfirmedFalse();
 
+    /**
+     * Find all order clients entities by its email
+     * @param email The email of the OrderClient
+     * @return The list of clients with the email
+     */
+    List<OrderClient> findByEmail(String email);
+
 }

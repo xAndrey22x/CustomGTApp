@@ -1,0 +1,137 @@
+:host {
+    display: block;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .btn-home {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-home:hover {
+    background-color: #e0a800;
+  }
+  
+  .product-details {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .product-details h2 {
+    color: #ffc107;
+    margin-bottom: 20px;
+  }
+  
+  .product-details p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+  
+  .slideshow-image {
+    max-height: 350px;
+    object-fit: contain;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .mySlides {
+    display: none;
+  }
+  
+  .mySlides.active {
+    display: block;
+  }
+  
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 12px;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 20px;
+    user-select: none;
+    transform: translateY(-50%);
+    background-color: #ffc107;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .prev {
+    left: -42px;
+  }
+  
+  .next {
+    right: -42px;
+  }
+  
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .btn-quantity {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 0 10px;
+  }
+  
+  .btn-quantity:hover {
+    background-color: #e0a800;
+  }
+  
+  .quantity-selector label {
+    background-color: white;
+    width: 30px;
+    color: black;
+    text-align: center;
+    border-radius: 10px;
+    padding: 2px 0;
+  }
+  
+  .btn-primary {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.2rem;
+    max-width: 300px;
+    margin: 20px auto;
+    display: block;
+  }
+  
+  .btn-primary:hover {
+    background-color: #e0a800;
+  }
+  

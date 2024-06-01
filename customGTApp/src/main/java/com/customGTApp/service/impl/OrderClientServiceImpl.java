@@ -101,4 +101,14 @@ public class OrderClientServiceImpl implements OrderClientService {
         return this.orderClientContract.findById(id).get().getOrderOptions().isNewsletter();
     }
 
+    /**
+     * Method to find all orders by its email using our data layer with the help of the contract.
+     * @param email the email of the order
+     * @return the list of order clients by that email
+     */
+    @Override
+    public List<OrderClient> findByEmail(String email) {
+        return this.orderClientContract.findByEmail(email);
+    }
+
 }

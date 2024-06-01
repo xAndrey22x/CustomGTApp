@@ -100,4 +100,15 @@ public class OrderClientData implements OrderClientContract {
     public List<OrderClient> findByOrderOptionOrderConfirmedFalse() {
         return this.orderClientRepo.findByOrderOptionOrderConfirmedFalse();
     }
+
+    /**
+     * Method to get an order client based on the email using the JPA Repository method
+     * @param email the order client email
+     * @return the list of order clients with the email
+     */
+    @Override
+    public List<OrderClient> findByEmail(String email) {
+        return this.orderClientRepo.findByEmail(email);
+    }
+
 }

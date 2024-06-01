@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <button class="btn btn-home" (click)="goToHome()">
+        <i class="fas fa-home"></i>
+      </button>
+      <input
+        type="text"
+        class="form-control search-bar"
+        placeholder="Search by name"
+        [(ngModel)]="searchTerm"
+        (input)="searchServices()"
+      />
+    </div>
+  </div>
+    <div class="row">
+      <div *ngFor="let service of filteredServices" class="col-md-3 mb-3">
+        <div class="card service-card" (click)="onServiceClick(service.id)">
+          <img
+            [src]="getFirstPhoto(service)"
+            class="card-img-top service-img"
+            [alt]="service.name"
+          />
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <p class="card-text">Price: {{ service.price | currency:'EUR' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

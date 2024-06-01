@@ -59,5 +59,12 @@ public interface OrderClientService {
      */
     boolean newsletterStatus(Long id);
 
+    /**
+     * Method to find all orders by its email
+     * @param email the email of the order
+     * @return a list of all orders with the email
+     */
+    List<OrderClient> findByEmail(String email);
+
 
 }

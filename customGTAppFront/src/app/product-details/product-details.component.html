@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <button class="btn btn-home" (click)="goToProducts()">
+          <i class="fas fa-arrow-left"></i> Back to Products
+        </button>
+      </div>
+    </div>
+    <div class="row d-flex align-items-stretch">
+      <div class="col-md-6">
+        <div *ngIf="product" class="product-details h-100">
+          <div class="slideshow-container h-100">
+            <div class="mySlides" *ngFor="let photo of product.photos; let i = index" [class.active]="i === currentSlide">
+              <img [src]="photo.url" class="d-block w-100 slideshow-image">
+            </div>
+            <i class="fa-solid fa-chevron-left prev" (click)="changeSlide(-1)" ></i>
+            <i class="fa-solid fa-chevron-right next" (click)="changeSlide(1)"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="product" class="product-details h-100">
+          <h2>{{ product.name }}</h2>
+          <p>{{ product.description }}</p>
+          <p><strong>Model:</strong> {{ product.carModel }}</p>
+          <p><strong>Price:</strong> {{ product.price | currency:'EUR' }}</p>
+          <div class="quantity-selector">
+            <button class="btn btn-quantity" (click)="decreaseQuantity()">-</button>
+            <label>{{ quantity }}</label>
+            <button class="btn btn-quantity" (click)="increaseQuantity()">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-block" (click)="addToCart()">Add to Cart</button>
+  </div>
+  

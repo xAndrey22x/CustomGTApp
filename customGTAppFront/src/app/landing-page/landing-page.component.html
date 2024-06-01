@@ -1,1 +1,93 @@
-<p>landing-page works!</p>
+<div class="landing-page">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="container">
+        <div class="logo">CustomGT</div>
+        <nav class="nav">
+          <a href="#hero">Home</a>
+          <a href="#about">About Us</a>
+          <a routerLink="/products">Products</a>
+          <a routerLink="/services">Services</a>
+          <a href="#newsletter">Newsletter</a>
+          <a href="#contact">Contact Us</a>
+        </nav>
+      </div>
+    </header>
+  
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1>Welcome to CustomGT</h1>
+        <p>Your trusted partner in success.</p>
+      </div>
+    </section>
+  
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Our Features</h2>
+        <div class="feature-item">
+          <i class="fas fa-cog"></i>
+          <h3>Custom Parts</h3>
+          <p>We provide an extensive array of custom parts suitable for a wide range of car models, ensuring the perfect fit and enhancement for your vehicle.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-star"></i>
+          <h3>Exclusive Services</h3>
+          <p>Our unique services include:</p>
+          <ul>
+            <li><strong>Car Wrap:</strong> Premium quality vinyl wrapping services designed to either rejuvenate your car's appearance or safeguard its original paintwork.</li>
+            <li><strong>Detailing:</strong> Meticulous detailing services covering both the interior and exterior, employing only the finest materials for an impeccable finish.</li>
+            <li><strong>Custom Lights:</strong> State-of-the-art custom lighting solutions to not only boost your car's aesthetic appeal but also enhance its visibility.</li>
+          </ul>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-heart"></i>
+          <h3>Additional Accessories</h3>
+          <p>Explore a wealth of extra accessories to further personalize and highlight your car's originality.</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- About Us Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>The Custom GT serves as an innovative web application designed for automotive enthusiasts and professionals alike. By offering a diverse array of customization services and parts for various car models, we aim to be the quintessential one-stop solution for all your car customization needs. Our objective is to bring together high-quality components plus outstanding services to transform your vehicle into a masterpiece of your choosing.</p>
+      </div>
+    </section>
+  
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter">
+      <div class="container">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form (ngSubmit)="subscribeToNewsletter()">
+          <input type="email" placeholder="Your email" [(ngModel)]="newsletterEmail" name="email" required>
+          <button type="submit">Subscribe</button>
+          <button class="unsubscribe" (click)="unsubscribeFromNewsletter()">Unsubscribe</button>
+        </form>
+      </div>
+    </section>
+  
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+          <p><i class="fas fa-envelope"></i> email&#64;example.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Street Name, City, Country</p>
+        </div>
+    </div>
+  
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 CustomGT. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </footer>

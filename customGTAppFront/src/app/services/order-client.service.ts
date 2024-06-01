@@ -45,4 +45,9 @@ export class OrderClientService {
     return this.http.get<number>(this.apiUrl + '/newsletterStatus/' + id);
   }
 
+  public getOrdersByEmail(email: string): Observable<OrderClient[]> {
+    const url = `${this.apiUrl}/findByEmail?email=${email}`;
+    return this.http.get<OrderClient[]>(url);
+  }
+
 }

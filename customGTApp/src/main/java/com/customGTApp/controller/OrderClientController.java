@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * /order/all - list all the orders.
  * /order/find/{id} - find an order based on the id provided
+ * /order/findByEmail - find all orders based on the email provided as a request parameter
  * /order/add - add an order, the order will be received as a request body
  * /order/update - update an order, the order will be received as a request body
  * /order/delete/{id} - delete an order based on the id provided
@@ -115,6 +116,19 @@ public class OrderClientController {
     @GetMapping("/newsletterStatus/{id}")
     public ResponseEntity<Boolean> findNewsletterStatus(@PathVariable("id") Long id){
         return new ResponseEntity<>(this.orderClientService.newsletterStatus(id), HttpStatus.OK);
+    }
+
+    /**
+     * Method to get all orders by its email from the database and return it. Also calls the findByEmail method from the service layer
+     * @param email the email of the order we want to find
+     * @return the orders that were found
+     */
+    @GetMapping("/findByEmail")
+    public ResponseEntity<List<OrderClient>> findOrderByEmail(@RequestParam("email") String email){
+        List<OrderClient> orderClients = this.orderClientService.findByEmail(email);
+        if (orderClients != null && !orderClients.isEmpty())
+            return new ResponseEntity<>(orderClients, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

@@ -13,6 +13,10 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddServiceProdComponent } from './add-service-prod/add-service-prod.component';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ServiceProdsComponent } from './service-prods/service-prods.component';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     AddProductComponent,
     AddServiceProdComponent,
     ViewOrderComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ProductsComponent,
+    ProductDetailsComponent,
+    ServiceProdsComponent,
+    ServiceDetailsComponent
   ],
   imports: [
     BrowserModule,

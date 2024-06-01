@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AuthGuard } from './authentification/auth.guard';
@@ -10,6 +9,11 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddServiceProdComponent } from './add-service-prod/add-service-prod.component';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ServiceProdService } from './services/service-prod.service';
+import { ServiceProdsComponent } from './service-prods/service-prods.component';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full'},
@@ -21,7 +25,11 @@ const routes: Routes = [
   { path: 'edit-service-prod/:id', component: EditServiceProdComponent, canActivate: [AuthGuard] },
   { path: 'add-service-prod', component: AddServiceProdComponent, canActivate: [AuthGuard] },
   { path: 'view-order/:id', component: ViewOrderComponent, canActivate: [AuthGuard] },
-  { path: 'landing-page', component: LandingPageComponent }
+  { path: 'landing-page', component: LandingPageComponent },
+  { path: 'products', component: ProductsComponent},
+  { path: 'services', component: ServiceProdsComponent},
+  { path: 'product/:id', component: ProductDetailsComponent},
+  { path: 'service/:id', component: ServiceDetailsComponent},
 ];
 
 @NgModule({

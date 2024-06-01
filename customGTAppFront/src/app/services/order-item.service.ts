@@ -13,11 +13,13 @@ export class OrderItemService {
 
   constructor(private http: HttpClient) { }
 
-  public addProductToOrder(orderItem: OrderItem, productId: number, orderId: number): Observable<OrderItem> {
-    return this.http.post<OrderItem>(this.apiUrl + '/addOrderProduct/' + productId + '/' + orderId, orderItem);
+  public addProductToOrder(quantity: number, productId: number, orderId: number): Observable<OrderItem> {
+    const url = `${this.apiUrl}/addOrderProduct/${productId}/${orderId}?quantity=${quantity}`;
+    return this.http.post<OrderItem>(url, null);
   }
 
-  public addServiceToOrder(orderItem: OrderItem, serviceId: number, orderId: number): Observable<OrderItem> {
-    return this.http.post<OrderItem>(this.apiUrl + '/addOrderService/' + serviceId + '/' + orderId, orderItem);
+  public addServiceToOrder(quantity: number, serviceId: number, orderId: number): Observable<OrderItem> {
+    const url = `${this.apiUrl}/addOrderService/${serviceId}/${orderId}?quantity=${quantity}`;
+    return this.http.post<OrderItem>(url, null);
   }
 }
