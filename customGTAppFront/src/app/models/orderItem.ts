@@ -6,7 +6,7 @@ export interface OrderItem {
     id: number;
     quantity: number;
     price: number;
-    product: Product | null;
+    product: Product;
     serviceProd: ServiceProd | null;
-    orderClient: OrderClient;
+    orderClient: OrderClient | null;
 }

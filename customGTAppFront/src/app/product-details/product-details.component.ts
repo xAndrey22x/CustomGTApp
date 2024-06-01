@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service'; 
+import { ShoppingCartService } from '../services/shopping-cart.service';
+import { OrderItem } from '../models/orderItem';
 
 @Component({
   selector: 'app-product-details',
@@ -12,11 +14,13 @@ export class ProductDetailsComponent {
   product: Product | undefined;
   quantity: number = 1;
   currentSlide: number = 0;
+  cartItemCount: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private shoppingCartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +31,7 @@ export class ProductDetailsComponent {
         if (this.product.photos.length > 0) {
           this.currentSlide = 0;
         }
+        this.updateCartItemCount();
       },
       error: (error) => {
         console.error('Failed to load product', error);
@@ -51,14 +56,36 @@ export class ProductDetailsComponent {
   }
 
   addToCart(): void {
-    console.log(`Added ${this.quantity} of ${this.product?.name} to the cart.`);
-    // Implement add to cart functionality later
+    if (this.product) {
+      const orderItem: OrderItem = {
+        id: 0,
+        quantity: this.quantity,
+        price: this.product.price * this.quantity,
+        product: this.product,
+        serviceProd: null,
+        orderClient: null
+      };
+      this.shoppingCartService.addCartItem(orderItem);
+      this.updateCartItemCount();
+    }
   }
 
   changeSlide(n: number): void {
     if (this.product && this.product.photos.length > 0) {
       this.currentSlide = (this.currentSlide + n + this.product.photos.length) % this.product.photos.length;
     }
+  }
+
+  photoSize(): number {
+    return this.product ? this.product.photos.length : 0;
+  }
+
+  updateCartItemCount(): void {
+    this.cartItemCount = this.shoppingCartService.getCartItemCount();
+  }
+
+  goToCart(): void {
+    this.router.navigate(['/cart']);
   }
 
 }

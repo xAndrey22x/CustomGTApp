@@ -1,0 +1,81 @@
+:host {
+    display: block;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .btn-home, .btn-primary {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .btn-home:hover, .btn-primary:hover {
+    background-color: #e0a800;
+    color: white;
+  }
+  
+  .form-control {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #ffc107;
+  }
+  
+  .form-control :focus {
+    background-color: #444;
+    border-color: #ffc107;
+    box-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+    outline: none;
+  }
+  
+  .list-group-item {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #333;
+  }
+  
+  .list-group-item .text-muted {
+    color: #ccc !important;
+  }
+  
+  h3 {
+    color: #ffc107;
+  }
+  
+  .summary-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: -10px;
+  }
+  
+  .form-control:-webkit-autofill,
+  .form-control:-webkit-autofill:hover,
+  .form-control:-webkit-autofill:focus,
+  .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #333333 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+}
+
+.form-check-input:focus {
+    border-color: #fdd835;
+    box-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+}
+
+.form-check-input:checked {
+    background-color: #ffc107;
+}
+
+.validation-message {
+  color: #ffeb3b;
+  font-size: 12px;
+  margin-top: 5px;
+}

@@ -17,16 +17,16 @@
 }
 
 h2 {
-  color: #ffeb3b; /* Yellow color for heading */
+  color: #ffeb3b;
   text-align: center;
 }
 
 .form-label {
-  color: #ffeb3b; /* Yellow color for labels */
+  color: #ffeb3b;
 }
 
 .form-control {
-  background-color: #333333; /* Darker input background */
+  background-color: #333333;
   color: #ffffff;
   border: 1px solid #555555;
   border-radius: 5px;

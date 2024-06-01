@@ -16,6 +16,7 @@
 
   .btn-home:hover {
     background-color: #e0a800;
+    color:white;
   }
   
   .search-bar {
@@ -44,7 +45,7 @@
   }
   
   .service-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
   }
   

@@ -230,3 +230,17 @@
 .footer .social-icons a:hover {
   color: #ffc107;
 }
+
+.alert {
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  background-color: #333333;
+  color: #ffffff;
+  max-width: 350px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.alert-update {
+  margin: auto;
+}

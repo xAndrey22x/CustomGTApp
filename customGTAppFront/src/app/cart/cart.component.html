@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-12 d-flex justify-content-between">
+        <button class="btn btn-home" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button class="btn btn-primary" (click)="proceedToCheckout()">Proceed to Checkout</button>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of cartItems; let i = index" class="col-12 mb-3">
+        <div class="card product-card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img [src]="getFirstPhoto(item)" class="card-img" [alt]="item.product.name">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.product.name }}</h5>
+                <p class="card-text"><strong>Price:</strong> {{ item.product.price | currency:'EUR' }}</p>
+                <p class="card-text"><strong>Total price:</strong> {{ item.price | currency: 'EUR' }}</p>
+                <div class="quantity-selector">
+                  <button class="btn btn-quantity" (click)="decreaseQuantity(i)">-</button>
+                  <label>{{ item.quantity }}</label>
+                  <button class="btn btn-quantity" (click)="increaseQuantity(i)">+</button>
+                </div>
+                <button class="btn btn-danger" (click)="removeFromCart(i)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-right">
+        <h3>Total: {{ getTotalPrice() | currency:'EUR' }}</h3>
+      </div>
+    </div>
+  </div>
+  

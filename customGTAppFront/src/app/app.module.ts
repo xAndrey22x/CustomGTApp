@@ -17,6 +17,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ServiceProdsComponent } from './service-prods/service-prods.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
     ProductsComponent,
     ProductDetailsComponent,
     ServiceProdsComponent,
-    ServiceDetailsComponent
+    ServiceDetailsComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

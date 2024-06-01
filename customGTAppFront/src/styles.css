@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-cart {
+  background-color: #ffc107;
+  color: #1c1c1c;
+  border: none;
+  font-size: 1.0rem;
+  cursor: pointer;
+}
+
+.btn-cart:hover {
+  background-color: #e0a800 !important;
+  color: white !important;
+}
+
+.btn-cart:hover .badge {
+  background-color: #d39f00 !important;
+  color: white;
+}
+
+.btn-cart .badge {
+  background-color: #e0a800;
+  color: #1c1c1c;
+  margin-left: 5px;
+}
+
+.btn-cart .badge:hover {
+  background-color: #d39f00 !important;
+  color: white;
+}

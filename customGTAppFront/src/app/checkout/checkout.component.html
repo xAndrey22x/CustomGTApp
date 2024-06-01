@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between">
+      <button class="btn btn-home" (click)="goHome()">
+        <i class="fas fa-home"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Checkout</h3>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="county">County</label>
+          <input type="text" id="county" formControlName="county" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" formControlName="city" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" formControlName="address" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="postalCode">Postal Code</label>
+          <input type="text" id="postalCode" formControlName="postalCode" class="form-control" required />
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" id="newsletter" formControlName="newsletter" class="form-check-input" />
+          <label for="newsletter" class="form-check-label">Subscribe to Newsletter</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Order</button>
+        <div *ngIf="checkoutForm.invalid" class="validation-message">One or more fields are incomplete</div>
+        <div *ngIf="this.cartItems.length === 0" class="validation-message">Cart is empty</div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h3>Order Summary</h3>
+      <ul class="list-group mb-3">
+        <li *ngFor="let item of cartItems" class="list-group-item d-flex justify-content-between lh-condensed">
+          <img [src]="getFirstPhoto(item)" alt="Product Image" class="img-thumbnail summary-img">
+          <div class="flex-grow-1 ml-3">
+            <h6 class="my-0">{{ item.product.name || item.serviceProd?.name }}</h6>
+            <small class="text-muted">Quantity: {{ item.quantity }}</small>
+          </div>
+          <span class="text-muted">{{ item.price | currency:'EUR'}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (EUR)</span>
+          <strong>{{ getTotalPrice() |currency:'EUR' }}</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

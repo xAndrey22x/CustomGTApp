@@ -1,18 +1,27 @@
 <div class="container mt-4">
-    <div class="row">
-      <div class="col-12 mb-4">
-        <button class="btn btn-home" (click)="goToProducts()">
-          <i class="fas fa-arrow-left"></i> Back to Products
-        </button>
-      </div>
+  <div class="row">
+    <div class="col-12 mb-4 d-flex justify-content-between">
+      <button class="btn btn-home" (click)="goToProducts()">
+        <i class="fas fa-arrow-left"></i> Back to Products
+      </button>
+      <button class="btn btn-cart" (click)="goToCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge">{{ cartItemCount }}</span>
+      </button>
     </div>
+  </div>
     <div class="row d-flex align-items-stretch">
       <div class="col-md-6">
         <div *ngIf="product" class="product-details h-100">
           <div class="slideshow-container h-100">
+            <div *ngIf="photoSize() !== 0; else noPhoto">
             <div class="mySlides" *ngFor="let photo of product.photos; let i = index" [class.active]="i === currentSlide">
-              <img [src]="photo.url" class="d-block w-100 slideshow-image">
+                <img [src]="photo.url" class="d-block w-100 slideshow-image">
+              </div>
             </div>
+              <ng-template #noPhoto>
+                <img src="/assets/placeholder.png" class="d-block w-100 slideshow-image">
+              </ng-template>
             <i class="fa-solid fa-chevron-left prev" (click)="changeSlide(-1)" ></i>
             <i class="fa-solid fa-chevron-right next" (click)="changeSlide(1)"></i>
           </div>

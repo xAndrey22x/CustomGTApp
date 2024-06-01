@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceProd } from '../models/serviceProd'; // Adjust the path as needed
-import { ServiceProdService } from '../services/service-prod.service'; // Adjust the path as needed
+import { ServiceProd } from '../models/serviceProd';
+import { ServiceProdService } from '../services/service-prod.service';
 
 
 @Component({

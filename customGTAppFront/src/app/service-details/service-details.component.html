@@ -1,1 +1,23 @@
-<p>service-details works!</p>
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <button class="btn btn-home" (click)="goToServices()">
+          <i class="fas fa-arrow-left"></i> Back to Services
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div *ngIf="service" class="service-details">
+          <h2>{{ service.name }}</h2>
+          <p>{{ service.description }}</p>
+          <p><strong>Price:</strong> {{ service.price | currency:'EUR' }}</p>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex align-items-start justify-content-center">
+        <div *ngIf="service">
+          <img [src]="getSecondPhoto(service)" class="service-image" [alt]="service.name">
+        </div>
+      </div>
+    </div>
+  </div>  

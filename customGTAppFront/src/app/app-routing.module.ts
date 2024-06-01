@@ -14,6 +14,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ServiceProdService } from './services/service-prod.service';
 import { ServiceProdsComponent } from './service-prods/service-prods.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full'},
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'services', component: ServiceProdsComponent},
   { path: 'product/:id', component: ProductDetailsComponent},
   { path: 'service/:id', component: ServiceDetailsComponent},
+  { path: 'cart', component: CartComponent},
+  { path: 'checkout', component: CheckoutComponent}
 ];
 
 @NgModule({

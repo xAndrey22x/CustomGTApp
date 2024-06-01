@@ -1,0 +1,95 @@
+:host {
+    display: block;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .btn-home, .btn-primary, .btn-danger {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .btn-home:hover, .btn-primary:hover, .btn-danger:hover {
+    background-color: #e0a800;
+    color: white;
+  }
+  
+  .product-card {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 10px;
+    display: flex;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .product-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  }
+  
+  .card-img {
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffc107;
+  }
+  
+  .card-text {
+    margin-bottom: 0.5rem;
+    color: #ccc;
+  }
+  
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .btn-quantity {
+    background-color: #ffc107;
+    color: #1c1c1c;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0px 12px;
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 0 10px;
+  }
+  
+  .btn-quantity:hover {
+    background-color: #e0a800;
+  }
+  
+  .btn-danger {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .quantity-selector label {
+    background-color: white;
+    width: 30px;
+    color: black;
+    text-align: center;
+    border-radius: 10px;
+    padding: 2px 0;
+  }
