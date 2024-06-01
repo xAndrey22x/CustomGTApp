@@ -136,7 +136,68 @@ During this stage, we have focused on developing the server-side logic by levera
   - **Service Layer**: All business logic is thoroughly tested to ensure functionality and reliability.
   - **Observer Layer**: The functionality of the Observer pattern is verified through various scenarios to ensure correct behavior.
   - **Data Layer**: Database interactions are tested to confirm both the integrity and security of data operations.
+ 
+## Class Diagram
+
+The class diagrams illustrate the relationships and interactions between various components of the Custom GT Application. These diagrams provide a high-level view of the structure and organization of our system.
+
+### Controller-Service Class Diagram
+
+![Controller-Service Class Diagram](https://github.com/xAndrey22x/CustomGTApp/assets/126805939/65b4ca36-3675-4392-ba3b-995f28e1782d)
+
+### Service-Observer-Data Class Diagram
+
+![Service-Observer-Data Class Diagram](https://github.com/xAndrey22x/CustomGTApp/assets/126805939/83fc4d5a-4f92-41f8-ab47-6736f133b64f)
+
+### Model Class Diagram
+
+![Model Class Diagram](https://github.com/xAndrey22x/CustomGTApp/assets/126805939/c336f1a8-25fb-4421-ab42-eb9358435220)
+
+## Use Case Diagram
+
+### Use Case Description
+
+The use case diagram outlines the various interactions that users will have with the Custom GT Application. It identifies the key actors and their interactions with the system's main functionalities.
+
+#### Actors
+
+- **Customer**: A user who browses and purchases custom parts and services.
+- **Admin**: A user who manages the products, services, and orders within the application.
+
+#### Use Cases
+
+1. **Browse Products and Services**:
+   - **Customer** browses through the available custom parts and services offered by the application.
+
+2. **View Product/Service Details**:
+   - **Customer** views detailed information, including photos and descriptions, of specific products or services.
+
+3. **Add to Cart**:
+   - **Customer** adds desired products to their shopping cart.
+
+4. **Place Order**:
+   - **Customer** completes the purchase by placing an order for the selected items in the cart.
+
+5. **Manage Orders**:
+   - **Admin** views and manages all orders placed by customers, including updating order statuses.
+
+6. **Manage Products/Services**:
+   - **Admin** adds, updates, or deletes products and services in the system.
+
+7. **Receive Notifications**:
+   - **Customer** receives notifications for order confirmations and new product additions.
+
+8. **Subscribe to Newsletter**:
+   - **Customer** opts in to receive newsletters for updates and promotions.
+
+### Use Case Diagram
+
+<p align="center">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/418ab907-d086-4a39-a42b-b06b9f2c8bc0" width="400" height="400">
+  <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/d41a2aed-2d9f-40ca-a891-6ee452c89f75" width="400" height="400">
+</p>
 
 ### Frontend Development
 
 We promised our users an immersive experience by building a strong foundation through backend development, which prepared the way for a dynamic, responsive, and user-friendly frontend. The flexibility and robustness of our backend guarantee that, even when we shift our attention to the frontend, we will stay firm in our commitment to producing a product that is both aesthetically pleasing and exceptionally functional.
+
