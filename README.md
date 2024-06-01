@@ -199,5 +199,91 @@ The use case diagram outlines the various interactions that users will have with
 
 ### Frontend Development
 
-We promised our users an immersive experience by building a strong foundation through backend development, which prepared the way for a dynamic, responsive, and user-friendly frontend. The flexibility and robustness of our backend guarantee that, even when we shift our attention to the frontend, we will stay firm in our commitment to producing a product that is both aesthetically pleasing and exceptionally functional.
+The front-end of the Custom GT Application is designed to provide an intuitive and visually appealing interface for users to interact with. The following sections outline the key components and features of the front-end.
+
+### Home Page
+
+The home page serves as the entry point for users, showcasing the main features and services offered by the Custom GT Application.
+
+### About Us Section
+
+The About Us section provides an overview of the Custom GT Application, its purpose, and the services it offers.
+
+### Subscribe to Our Newsletter
+
+The subscription section allows users to subscribe or unsubscribe from the newsletter to receive updates and promotions.
+
+### Contact Us
+
+The contact section provides contact details for users to get in touch with the Custom GT team.
+
+### Shopping List
+
+Customers can view and manage the list of available products, including details such as name, description, price, and car model.
+
+### Service Management
+
+Customers can view and manage the list of services offered by the application.
+
+### Product Details
+
+The product details page provides detailed information about a product, including photos and descriptions.
+
+### Checkout Page
+
+The checkout page allows customers to review their order summary and enter their contact details to place an order.
+
+### Cart Page
+
+The cart page allows customers to review the items they have added to their cart and proceed to checkout.
+
+### Admin Panel
+
+The admin panel allows administrators to manage products, services, and orders. It includes functionalities for adding, updating, and deleting entries.
+
+### Order Details
+
+The order details page allows administrators to view and manage specific customer orders, including updating order status and viewing order items.
+
+### Orders Overview
+
+The orders overview page in the admin panel allows administrators to view all orders, filter by confirmed or not confirmed, and search them by email.
+
+### Technology Stack
+
+The front-end of the Custom GT Application is built using the following technologies:
+
+- **HTML**: For structuring the content and layout of the web pages.
+- **CSS**: For styling the web pages and ensuring a responsive design.
+- **TypeScript**: A superset of JavaScript that adds static types and other features for large-scale application development.
+- **Angular CLI**: A command-line interface tool to initialize, develop, scaffold, and maintain Angular applications.
+- **Bootstrap**: A front-end framework used to create a responsive and mobile-first design.
+
+### Front-End Features
+
+- **Responsive Design**: The application is designed to be fully responsive, providing an optimal viewing experience across a wide range of devices.
+- **Intuitive Navigation**: Easy-to-use navigation menus and clear call-to-action buttons ensure a seamless user experience.
+- **Dynamic Content**: The use of Angular enables dynamic content updates without requiring page reloads, enhancing the user experience.
+- **Form Validation**: Input forms include validation to ensure that users provide the required information in the correct format.
+- **Interactive Elements**: Features such as modals, tooltips, and accordions are used to enhance interactivity and provide additional information to users.
+
+### Conclusion
+
+The front-end of the Custom GT Application provides a user-friendly and visually appealing interface for both customers and administrators. By leveraging modern web technologies and design principles, we have created an application that meets the needs of automotive enthusiasts and professionals alike.
+
+### Screenshots
+
+![Home Page](webimg/Screenshot%20(3070).png)
+![About Us](webimg/Screenshot%20(3071).png)
+![Subscribe to Our Newsletter](webimg/Screenshot%20(3072).png)
+![Contact Us](webimg/Screenshot%20(3073).png)
+![Product Details](webimg/Screenshot%20(3074).png)
+![Shopping List](webimg/Screenshot%20(3075).png)
+![Service Management](webimg/Screenshot%20(3076).png)
+![Checkout Page](webimg/Screenshot%20(3078).png)
+![Cart Page](webimg/Screenshot%20(3080).png)
+![Order Details](webimg/Screenshot%20(3081).png)
+![Orders Overview](webimg/Screenshot%20(3082).png)
+![Admin Panel](webimg/Screenshot%20(3083).png)
+
 
