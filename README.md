@@ -197,7 +197,7 @@ The use case diagram outlines the various interactions that users will have with
   <img src="https://github.com/xAndrey22x/CustomGTApp/assets/126805939/d41a2aed-2d9f-40ca-a891-6ee452c89f75" width="400" height="400">
 </p>
 
-### Frontend Development
+## Front-End Documentation
 
 The front-end of the Custom GT Application is designed to provide an intuitive and visually appealing interface for users to interact with. The following sections outline the key components and features of the front-end.
 
@@ -239,7 +239,7 @@ The cart page allows customers to review the items they have added to their cart
 
 ### Admin Panel
 
-The admin panel allows administrators to manage products, services, and orders. It includes functionalities for adding, updating, and deleting entries.
+The admin panel allows administrators to manage products, services, and orders. It includes functionalities for adding, updating, and deleting entries. For better security, the admin panel is protected using an authentication service and guard to ensure only authorized users can access and manage the application data.
 
 ### Order Details
 
@@ -266,6 +266,8 @@ The front-end of the Custom GT Application is built using the following technolo
 - **Dynamic Content**: The use of Angular enables dynamic content updates without requiring page reloads, enhancing the user experience.
 - **Form Validation**: Input forms include validation to ensure that users provide the required information in the correct format.
 - **Interactive Elements**: Features such as modals, tooltips, and accordions are used to enhance interactivity and provide additional information to users.
+- **Secure Admin Panel**: The admin panel is protected with an authentication service and guard to ensure secure access for administrators.
+- **Efficient API Usage**: The application makes use of all the endpoints as efficiently as possible to ensure seamless data retrieval and submission.
 
 ### Conclusion
 
